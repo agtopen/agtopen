@@ -1,0 +1,65 @@
+{
+  "name": "@agtopen/sdk",
+  "version": "0.1.0",
+  "description": "Official TypeScript SDK for AgtOpen — Decentralized AI Network",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./agent": {
+      "import": "./dist/agent.js",
+      "types": "./dist/agent.d.ts"
+    },
+    "./provider": {
+      "import": "./dist/provider.js",
+      "types": "./dist/provider.d.ts"
+    },
+    "./tool": {
+      "import": "./dist/tool.js",
+      "types": "./dist/tool.d.ts"
+    },
+    "./node": {
+      "import": "./dist/node.js",
+      "types": "./dist/node.d.ts"
+    },
+    "./validator": {
+      "import": "./dist/validator.js",
+      "types": "./dist/validator.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "bun test src/__tests__/",
+    "prepublishOnly": "bun run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": ["agtopen", "ai", "agent", "decentralized", "sdk", "web3", "oracle", "prediction", "zero-knowledge", "zk", "validator", "multi-agent"],
+  "author": "AgtOpen <hello@agtopen.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/agtopen/agtopen/tree/main/packages/sdk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agtopen/agtopen.git",
+    "directory": "packages/sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/agtopen/agtopen/issues"
+  },
+  "files": ["dist", "README.md", "LICENSE"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/bun": "^1.1.0",
+    "bun-types": "^1.3.11",
+    "typescript": "^5.4.5"
+  }
+}

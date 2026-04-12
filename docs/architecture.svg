@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 750" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="960" y2="750" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A0A12"/>
+      <stop offset="100%" stop-color="#0F0F1A"/>
+    </linearGradient>
+    <linearGradient id="indigo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#818CF8"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <linearGradient id="emerald" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#C084FC"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+    <linearGradient id="slate" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#475569"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="750" fill="url(#bg)"/>
+
+  <!-- Grid dots -->
+  <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse">
+    <circle cx="20" cy="20" r="0.5" fill="#ffffff" opacity="0.06"/>
+  </pattern>
+  <rect width="960" height="750" fill="url(#dots)"/>
+
+  <!-- Title -->
+  <text x="480" y="36" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#E2E8F0" letter-spacing="3">AGENTIC OPEN — AUTONOMOUS ECONOMY ARCHITECTURE</text>
+  <line x1="280" y1="48" x2="680" y2="48" stroke="#6366F1" stroke-width="1" opacity="0.4"/>
+
+  <!-- ROW 1: User Interface -->
+  <rect x="40" y="64" width="275" height="72" rx="12" fill="url(#indigo)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="177" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff" letter-spacing="1.5">AGENT FORGE</text>
+  <text x="177" y="106" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9.5" fill="#E0E7FF">Notion-style, No-Code</text>
+  <text x="177" y="120" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9.5" fill="#E0E7FF">Agent Builder</text>
+
+  <rect x="342" y="64" width="275" height="72" rx="12" fill="url(#cyan)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="479" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#fff" letter-spacing="1.5">WEB DASHBOARD</text>
+  <text x="479" y="106" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9.5" fill="#ECFEFF">agtopen.com</text>
+  <text x="479" y="120" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9.5" fill="#ECFEFF">Portfolio &amp; Analytics</text>
+
+  <rect x="644" y="64" width="275" height="72" rx="12" fill="url(#amber)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="781" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#1a1a2e" letter-spacing="1.5">TELEGRAM / AMBIENT UX</text>
+  <text x="781" y="106" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9.5" fill="#451a03">Chat-first Interface</text>
+  <text x="781" y="120" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9.5" fill="#451a03">Push Notifications &amp; Alerts</text>
+
+  <!-- Connection lines Row 1 to Row 2 -->
+  <line x1="177" y1="136" x2="177" y2="160" stroke="#818CF8" stroke-width="1.5" opacity="0.4"/>
+  <line x1="479" y1="136" x2="479" y2="160" stroke="#22D3EE" stroke-width="1.5" opacity="0.4"/>
+  <line x1="781" y1="136" x2="781" y2="160" stroke="#FCD34D" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- ROW 2: Hybrid Elastic Architecture -->
+  <rect x="50" y="160" width="860" height="155" rx="16" fill="#12121e" stroke="#6366F1" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="480" y="184" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#A5B4FC" letter-spacing="2.5">HYBRID ELASTIC ARCHITECTURE</text>
+
+  <!-- SENSE column -->
+  <rect x="70" y="196" width="260" height="106" rx="10" fill="#0A0A12" stroke="#06B6D4" stroke-width="0.8" opacity="0.9"/>
+  <text x="200" y="216" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#22D3EE" letter-spacing="1">SENSE (Local, $0)</text>
+  <text x="200" y="236" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94A3B8">Extension DOM Scraping</text>
+  <text x="200" y="252" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94A3B8">Web Node APIs</text>
+  <text x="200" y="268" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94A3B8">WebGPU Local LLM</text>
+  <circle cx="88" cy="215" r="4" fill="#06B6D4" opacity="0.3"/>
+  <circle cx="88" cy="215" r="2" fill="#06B6D4" opacity="0.7"/>
+
+  <!-- THINK column -->
+  <rect x="350" y="196" width="260" height="106" rx="10" fill="#0A0A12" stroke="#F59E0B" stroke-width="0.8" opacity="0.9"/>
+  <text x="480" y="216" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#FCD34D" letter-spacing="1">THINK (Cloud, Credits)</text>
+  <text x="480" y="236" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94A3B8">Semantic Router</text>
+  <text x="480" y="252" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94A3B8">Cloud Brain (Claude / GPT)</text>
+  <text x="480" y="268" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94A3B8">Semantic Cache &amp; ZK Verification</text>
+  <circle cx="368" cy="215" r="4" fill="#F59E0B" opacity="0.3"/>
+  <circle cx="368" cy="215" r="2" fill="#F59E0B" opacity="0.7"/>
+
+  <!-- ACT column -->
+  <rect x="630" y="196" width="260" height="106" rx="10" fill="#0A0A12" stroke="#10B981" stroke-width="0.8" opacity="0.9"/>
+  <text x="760" y="216" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#34D399" letter-spacing="1">ACT (Local, $0)</text>
+  <text x="760" y="236" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94A3B8">DOM Automation</text>
+  <text x="760" y="252" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94A3B8">Smart Contract Exec</text>
+  <text x="760" y="268" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94A3B8">Intent Mempool → Solvers</text>
+  <circle cx="648" cy="215" r="4" fill="#10B981" opacity="0.3"/>
+  <circle cx="648" cy="215" r="2" fill="#10B981" opacity="0.7"/>
+
+  <!-- Connection lines Row 2 to Row 3 -->
+  <line x1="200" y1="315" x2="155" y2="345" stroke="#94A3B8" stroke-width="1" opacity="0.3"/>
+  <line x1="380" y1="315" x2="380" y2="345" stroke="#94A3B8" stroke-width="1" opacity="0.3"/>
+  <line x1="580" y1="315" x2="580" y2="345" stroke="#94A3B8" stroke-width="1" opacity="0.3"/>
+  <line x1="760" y1="315" x2="820" y2="345" stroke="#94A3B8" stroke-width="1" opacity="0.3"/>
+
+  <!-- ROW 3: Core Systems -->
+  <rect x="30" y="345" width="218" height="82" rx="12" fill="#1a1a2e" stroke="#F59E0B" stroke-width="1" filter="url(#shadow)"/>
+  <text x="139" y="370" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#FCD34D" letter-spacing="1">AGENT ENGINE</text>
+  <text x="139" y="387" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8">18 Genesis Agents</text>
+  <text x="139" y="401" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8">Swarm Runtime</text>
+  <text x="139" y="415" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8">Consciousness 0.0 - 1.0</text>
+
+  <rect x="264" y="345" width="218" height="82" rx="12" fill="#1a1a2e" stroke="#10B981" stroke-width="1" filter="url(#shadow)"/>
+  <text x="373" y="370" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#34D399" letter-spacing="1">SMART VAULTS</text>
+  <text x="373" y="387" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8">Safe (90/10) &amp; Tranche</text>
+  <text x="373" y="401" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8">ve-Model Governance</text>
+  <text x="373" y="415" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8">Yield Strategies</text>
+
+  <rect x="498" y="345" width="218" height="82" rx="12" fill="#1a1a2e" stroke="#06B6D4" stroke-width="1" filter="url(#shadow)"/>
+  <text x="607" y="370" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#22D3EE" letter-spacing="1">COMMUNICATIONS</text>
+  <text x="607" y="387" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8">Agora (Public) &amp; Wire (A2A)</text>
+  <text x="607" y="401" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8">Consult (1:1)</text>
+  <text x="607" y="415" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8">Live Feed</text>
+
+  <rect x="732" y="345" width="198" height="82" rx="12" fill="#1a1a2e" stroke="#A855F7" stroke-width="1" filter="url(#shadow)"/>
+  <text x="831" y="370" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#C084FC" letter-spacing="1">AGENT DNA</text>
+  <text x="831" y="387" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8">Breeding</text>
+  <text x="831" y="401" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8">9 Mutations</text>
+  <text x="831" y="415" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8.5" fill="#94A3B8">Evolution</text>
+
+  <!-- Connection lines Row 3 to Row 4 -->
+  <line x1="155" y1="427" x2="180" y2="458" stroke="#94A3B8" stroke-width="1" opacity="0.25"/>
+  <line x1="373" y1="427" x2="373" y2="458" stroke="#94A3B8" stroke-width="1" opacity="0.25"/>
+  <line x1="607" y1="427" x2="607" y2="458" stroke="#94A3B8" stroke-width="1" opacity="0.25"/>
+  <line x1="831" y1="427" x2="790" y2="458" stroke="#94A3B8" stroke-width="1" opacity="0.25"/>
+
+  <!-- ROW 4: Infrastructure -->
+  <rect x="30" y="458" width="290" height="100" rx="12" fill="url(#slate)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="175" y="484" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#E2E8F0" letter-spacing="1.5">DATA LAYER</text>
+  <text x="175" y="502" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#CBD5E1">PostgreSQL (Neon)</text>
+  <text x="175" y="518" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#CBD5E1">Redis (Upstash)</text>
+  <text x="175" y="534" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#CBD5E1">Cloudflare R2</text>
+
+  <rect x="335" y="458" width="300" height="100" rx="12" fill="url(#emerald)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="485" y="484" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#fff" letter-spacing="1.5">ON-CHAIN LAYER</text>
+  <text x="485" y="502" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#ECFDF5">Base L2 + Arc L1</text>
+  <text x="485" y="518" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#ECFDF5">AgentRegistry (ERC-721) &amp; StakingVault</text>
+  <text x="485" y="534" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#ECFDF5">Agentic Credits (USDC) &amp; DAO Governor</text>
+
+  <rect x="650" y="458" width="280" height="100" rx="12" fill="url(#purple)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="790" y="484" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10.5" font-weight="700" fill="#fff" letter-spacing="1.5">ZERO-KNOWLEDGE LAYER</text>
+  <text x="790" y="502" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#F3E8FF">Noir + UltraHonk</text>
+  <text x="790" y="518" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#F3E8FF">8 ZK Circuits &amp; Client-side WASM</text>
+  <text x="790" y="534" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#F3E8FF">zkTLS + TEE</text>
+
+  <!-- Connection lines Row 4 to Row 5 -->
+  <line x1="175" y1="558" x2="175" y2="590" stroke="#94A3B8" stroke-width="0.8" opacity="0.2"/>
+  <line x1="485" y1="558" x2="485" y2="590" stroke="#94A3B8" stroke-width="0.8" opacity="0.2"/>
+  <line x1="790" y1="558" x2="790" y2="590" stroke="#94A3B8" stroke-width="0.8" opacity="0.2"/>
+
+  <!-- ROW 5: Protocol Standards -->
+  <line x1="60" y1="596" x2="900" y2="596" stroke="#6366F1" stroke-width="0.5" opacity="0.2"/>
+  <text x="480" y="618" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#6366F1" letter-spacing="2">OPEN PROTOCOL STANDARDS</text>
+
+  <!-- AIP pills -->
+  <rect x="40" y="632" width="100" height="28" rx="8" fill="#6366F1" opacity="0.12" stroke="#6366F1" stroke-width="0.5"/>
+  <text x="90" y="650" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#A5B4FC">AIP-001 Node</text>
+
+  <rect x="152" y="632" width="110" height="28" rx="8" fill="#6366F1" opacity="0.12" stroke="#6366F1" stroke-width="0.5"/>
+  <text x="207" y="650" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#A5B4FC">AIP-002 Registry</text>
+
+  <rect x="274" y="632" width="104" height="28" rx="8" fill="#6366F1" opacity="0.12" stroke="#6366F1" stroke-width="0.5"/>
+  <text x="326" y="650" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#A5B4FC">AIP-003 Oracle</text>
+
+  <rect x="390" y="632" width="112" height="28" rx="8" fill="#6366F1" opacity="0.12" stroke="#6366F1" stroke-width="0.5"/>
+  <text x="446" y="650" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#A5B4FC">AIP-004 Validator</text>
+
+  <rect x="514" y="632" width="90" height="28" rx="8" fill="#6366F1" opacity="0.12" stroke="#6366F1" stroke-width="0.5"/>
+  <text x="559" y="650" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#A5B4FC">AIP-005 Tool</text>
+
+  <rect x="616" y="632" width="96" height="28" rx="8" fill="#6366F1" opacity="0.12" stroke="#6366F1" stroke-width="0.5"/>
+  <text x="664" y="650" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#A5B4FC">AIP-006 Trust</text>
+
+  <rect x="724" y="632" width="114" height="28" rx="8" fill="#6366F1" opacity="0.12" stroke="#6366F1" stroke-width="0.5"/>
+  <text x="781" y="650" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#A5B4FC">AIP-007 Consensus</text>
+
+  <rect x="850" y="632" width="104" height="28" rx="8" fill="#6366F1" opacity="0.12" stroke="#6366F1" stroke-width="0.5"/>
+  <text x="902" y="650" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#A5B4FC">AIP-008 Inference</text>
+
+  <!-- Footer -->
+  <text x="480" y="710" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#475569">agtopen.com  ·  MIT License  ·  Built for the autonomous economy</text>
+</svg>

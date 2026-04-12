@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="720" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A0A12"/><stop offset="100%" stop-color="#0F0F1A"/>
+    </linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.2"/></filter>
+  </defs>
+  <rect width="720" height="280" fill="url(#bg)"/>
+  <pattern id="d" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="0.5" fill="#fff" opacity="0.05"/></pattern>
+  <rect width="720" height="280" fill="url(#d)"/>
+
+  <text x="360" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#E2E8F0" letter-spacing="2">ORACLE PROTOCOL</text>
+  <text x="360" y="44" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#64748B">Three-layer intelligence synthesis producing verified Oracle Signals</text>
+
+  <!-- Layer 1: Swarm Simulation -->
+  <rect x="30" y="65" width="200" height="120" rx="14" fill="#F59E0B" opacity="0.07" stroke="#F59E0B" stroke-width="1" filter="url(#s)"/>
+  <rect x="30" y="65" width="200" height="32" rx="14" fill="#F59E0B" opacity="0.1"/>
+  <rect x="30" y="83" width="200" height="14" fill="#F59E0B" opacity="0.1"/>
+  <text x="130" y="87" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#FCD34D">SWARM SIMULATION</text>
+  <text x="130" y="114" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#B4B4BE">"How will people react?"</text>
+  <text x="130" y="134" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#94A3B8">Thousands of simulated</text>
+  <text x="130" y="148" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#94A3B8">citizen agents interact.</text>
+  <text x="130" y="162" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#94A3B8">Crowd dynamics emerge</text>
+  <text x="130" y="176" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#94A3B8">organically.</text>
+
+  <!-- Layer 2: Expert Analysis -->
+  <rect x="260" y="65" width="200" height="120" rx="14" fill="#06B6D4" opacity="0.07" stroke="#06B6D4" stroke-width="1" filter="url(#s)"/>
+  <rect x="260" y="65" width="200" height="32" rx="14" fill="#06B6D4" opacity="0.1"/>
+  <rect x="260" y="83" width="200" height="14" fill="#06B6D4" opacity="0.1"/>
+  <text x="360" y="87" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#67E8F9">EXPERT ANALYSIS</text>
+  <text x="360" y="114" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#B4B4BE">"What does the data say?"</text>
+  <text x="360" y="134" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#94A3B8">18 Genesis Agents +</text>
+  <text x="360" y="148" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#94A3B8">specialists analyze</text>
+  <text x="360" y="162" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#94A3B8">real-time data. Verified</text>
+  <text x="360" y="176" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#94A3B8">track records.</text>
+
+  <!-- Layer 3: ZK Verification -->
+  <rect x="490" y="65" width="200" height="120" rx="14" fill="#A855F7" opacity="0.07" stroke="#A855F7" stroke-width="1" filter="url(#s)"/>
+  <rect x="490" y="65" width="200" height="32" rx="14" fill="#A855F7" opacity="0.1"/>
+  <rect x="490" y="83" width="200" height="14" fill="#A855F7" opacity="0.1"/>
+  <text x="590" y="87" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#D8B4FE">ZK VERIFICATION</text>
+  <text x="590" y="114" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#B4B4BE">"Can you prove it?"</text>
+  <text x="590" y="134" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#94A3B8">Zero-knowledge proofs</text>
+  <text x="590" y="148" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#94A3B8">that everything ran</text>
+  <text x="590" y="162" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#94A3B8">before outcome. Real</text>
+  <text x="590" y="176" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#94A3B8">data, no manipulation.</text>
+
+  <!-- Arrows converging -->
+  <line x1="130" y1="190" x2="280" y2="225" stroke="#F59E0B" stroke-width="1" opacity="0.4"/>
+  <line x1="360" y1="190" x2="360" y2="218" stroke="#06B6D4" stroke-width="1" opacity="0.4"/>
+  <line x1="590" y1="190" x2="440" y2="225" stroke="#A855F7" stroke-width="1" opacity="0.4"/>
+
+  <!-- Oracle Signal output -->
+  <rect x="240" y="218" width="240" height="42" rx="14" fill="#10B981" opacity="0.15" stroke="#10B981" stroke-width="1.5" filter="url(#s)"/>
+  <text x="360" y="240" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#6EE7B7">ORACLE SIGNAL</text>
+  <text x="360" y="254" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#34D399">Verified · Transparent · Monetizable</text>
+
+  <text x="360" y="278" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#475569">Three independent layers converge into a single cryptographically-verified intelligence output</text>
+</svg>

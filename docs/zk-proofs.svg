@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="960" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A0A12"/><stop offset="100%" stop-color="#0F0F1A"/>
+    </linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.25"/></filter>
+  </defs>
+  <rect width="960" height="300" fill="url(#bg)"/>
+  <pattern id="d" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="0.5" fill="#fff" opacity="0.05"/></pattern>
+  <rect width="960" height="300" fill="url(#d)"/>
+
+  <text x="480" y="32" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#E2E8F0" letter-spacing="2.5">ZERO-KNOWLEDGE VERIFICATION</text>
+  <text x="480" y="50" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#64748B">Noir + UltraHonk (Aztec) · Client-side WASM Proving</text>
+
+  <!-- Flow: Agent Action → Generate Proof → Verify On-Chain → Trust Score -->
+  <!-- Step 1 -->
+  <rect x="30" y="75" width="160" height="60" rx="12" fill="#6366F1" opacity="0.15" stroke="#6366F1" stroke-width="1" filter="url(#s)"/>
+  <text x="110" y="101" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#A5B4FC">Agent Action</text>
+  <text x="110" y="118" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#818CF8">Prediction · Breed · Stake</text>
+
+  <!-- Arrow -->
+  <line x1="195" y1="105" x2="235" y2="105" stroke="#6366F1" stroke-width="1.5" opacity="0.5"/>
+  <polygon points="235,100 245,105 235,110" fill="#6366F1" opacity="0.5"/>
+
+  <!-- Step 2 -->
+  <rect x="250" y="75" width="160" height="60" rx="12" fill="#A855F7" opacity="0.15" stroke="#A855F7" stroke-width="1" filter="url(#s)"/>
+  <text x="330" y="101" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#D8B4FE">Generate Proof</text>
+  <text x="330" y="118" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#C084FC">WASM · Client-side</text>
+
+  <!-- Arrow -->
+  <line x1="415" y1="105" x2="455" y2="105" stroke="#A855F7" stroke-width="1.5" opacity="0.5"/>
+  <polygon points="455,100 465,105 455,110" fill="#A855F7" opacity="0.5"/>
+
+  <!-- Step 3 -->
+  <rect x="470" y="75" width="160" height="60" rx="12" fill="#10B981" opacity="0.15" stroke="#10B981" stroke-width="1" filter="url(#s)"/>
+  <text x="550" y="101" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#6EE7B7">Verify On-Chain</text>
+  <text x="550" y="118" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#34D399">Base L2 · Arc L1</text>
+
+  <!-- Arrow -->
+  <line x1="635" y1="105" x2="675" y2="105" stroke="#10B981" stroke-width="1.5" opacity="0.5"/>
+  <polygon points="675,100 685,105 675,110" fill="#10B981" opacity="0.5"/>
+
+  <!-- Step 4 -->
+  <rect x="690" y="75" width="160" height="60" rx="12" fill="#F59E0B" opacity="0.15" stroke="#F59E0B" stroke-width="1" filter="url(#s)"/>
+  <text x="770" y="101" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#FCD34D">Trust Updated</text>
+  <text x="770" y="118" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#FBBF24">Reputation · Rewards</text>
+
+  <!-- 8 Circuit Cards -->
+  <text x="480" y="172" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="600" fill="#64748B" letter-spacing="1.5">8 VERIFICATION CIRCUITS</text>
+
+  <rect x="30" y="190" width="105" height="52" rx="8" fill="#A855F7" opacity="0.08" stroke="#A855F7" stroke-width="0.5"/>
+  <text x="82" y="211" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7" font-weight="600" fill="#D8B4FE">prediction</text>
+  <text x="82" y="225" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7" font-weight="600" fill="#D8B4FE">_integrity</text>
+  <text x="82" y="237" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#7C3AED" opacity="0.7">Real data proof</text>
+
+  <rect x="147" y="190" width="105" height="52" rx="8" fill="#A855F7" opacity="0.08" stroke="#A855F7" stroke-width="0.5"/>
+  <text x="199" y="211" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7" font-weight="600" fill="#D8B4FE">breeding</text>
+  <text x="199" y="225" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7" font-weight="600" fill="#D8B4FE">_fairness</text>
+  <text x="199" y="237" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#7C3AED" opacity="0.7">DNA trait rules</text>
+
+  <rect x="264" y="190" width="105" height="52" rx="8" fill="#A855F7" opacity="0.08" stroke="#A855F7" stroke-width="0.5"/>
+  <text x="316" y="211" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7" font-weight="600" fill="#D8B4FE">accuracy</text>
+  <text x="316" y="225" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7" font-weight="600" fill="#D8B4FE">_proof</text>
+  <text x="316" y="237" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#7C3AED" opacity="0.7">Stats verification</text>
+
+  <rect x="381" y="190" width="105" height="52" rx="8" fill="#A855F7" opacity="0.08" stroke="#A855F7" stroke-width="0.5"/>
+  <text x="433" y="211" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7" font-weight="600" fill="#D8B4FE">private</text>
+  <text x="433" y="225" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7" font-weight="600" fill="#D8B4FE">_stake</text>
+  <text x="433" y="237" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#7C3AED" opacity="0.7">Hidden amounts</text>
+
+  <rect x="498" y="190" width="105" height="52" rx="8" fill="#A855F7" opacity="0.08" stroke="#A855F7" stroke-width="0.5"/>
+  <text x="550" y="211" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7" font-weight="600" fill="#D8B4FE">season</text>
+  <text x="550" y="225" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7" font-weight="600" fill="#D8B4FE">_results</text>
+  <text x="550" y="237" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#7C3AED" opacity="0.7">Merkle leaderboard</text>
+
+  <rect x="615" y="190" width="105" height="52" rx="8" fill="#A855F7" opacity="0.08" stroke="#A855F7" stroke-width="0.5"/>
+  <text x="667" y="211" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7" font-weight="600" fill="#D8B4FE">branch</text>
+  <text x="667" y="225" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7" font-weight="600" fill="#D8B4FE">_integrity</text>
+  <text x="667" y="237" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#7C3AED" opacity="0.7">Futures Engine</text>
+
+  <rect x="732" y="190" width="105" height="52" rx="8" fill="#A855F7" opacity="0.08" stroke="#A855F7" stroke-width="0.5"/>
+  <text x="784" y="211" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7" font-weight="600" fill="#D8B4FE">inference</text>
+  <text x="784" y="225" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7" font-weight="600" fill="#D8B4FE">_integrity</text>
+  <text x="784" y="237" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#7C3AED" opacity="0.7">Intel Node output</text>
+
+  <rect x="849" y="190" width="88" height="52" rx="8" fill="#A855F7" opacity="0.08" stroke="#A855F7" stroke-width="0.5"/>
+  <text x="893" y="211" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7" font-weight="600" fill="#D8B4FE">data</text>
+  <text x="893" y="225" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7" font-weight="600" fill="#D8B4FE">_integrity</text>
+  <text x="893" y="237" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#7C3AED" opacity="0.7">Feed freshness</text>
+
+  <text x="480" y="282" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#475569">Every prediction, every trade, every agent action — cryptographically verifiable.</text>
+</svg>

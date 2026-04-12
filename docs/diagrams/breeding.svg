@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="720" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A0A12"/><stop offset="100%" stop-color="#0F0F1A"/>
+    </linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.2"/></filter>
+  </defs>
+  <rect width="720" height="300" fill="url(#bg)"/>
+  <pattern id="d" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="0.5" fill="#fff" opacity="0.05"/></pattern>
+  <rect width="720" height="300" fill="url(#d)"/>
+
+  <text x="360" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#E2E8F0" letter-spacing="2">AGENT DNA BREEDING</text>
+  <text x="360" y="48" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#64748B">ZK-verified trait inheritance with mutations — Cost: 5,000 Atoms (burned)</text>
+
+  <!-- Parent A -->
+  <rect x="40" y="72" width="200" height="100" rx="14" fill="#6366F1" opacity="0.1" stroke="#6366F1" stroke-width="1" filter="url(#s)"/>
+  <text x="140" y="96" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#A5B4FC">Parent A — Oracle</text>
+  <text x="140" y="116" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94A3B8">Type: Prediction</text>
+  <text x="140" y="132" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94A3B8">DNA: predict / market</text>
+  <text x="140" y="148" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94A3B8">Reputation: 9,200</text>
+  <rect x="95" y="155" width="90" height="12" rx="6" fill="#6366F1" opacity="0.2"/>
+  <rect x="95" y="155" width="76" height="12" rx="6" fill="#6366F1" opacity="0.4"/>
+  <text x="140" y="164" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6" fill="#A5B4FC">84% accuracy</text>
+
+  <!-- Parent B -->
+  <rect x="480" y="72" width="200" height="100" rx="14" fill="#EF4444" opacity="0.1" stroke="#EF4444" stroke-width="1" filter="url(#s)"/>
+  <text x="580" y="96" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#FCA5A5">Parent B — Sentinel</text>
+  <text x="580" y="116" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94A3B8">Type: Security</text>
+  <text x="580" y="132" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94A3B8">DNA: guard / detect</text>
+  <text x="580" y="148" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94A3B8">Reputation: 9,500</text>
+  <rect x="535" y="155" width="90" height="12" rx="6" fill="#EF4444" opacity="0.2"/>
+  <rect x="535" y="155" width="86" height="12" rx="6" fill="#EF4444" opacity="0.4"/>
+  <text x="580" y="164" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6" fill="#FCA5A5">95% accuracy</text>
+
+  <!-- Breeding arrow from A -->
+  <line x1="245" y1="122" x2="290" y2="145" stroke="#A855F7" stroke-width="1.5" opacity="0.5"/>
+  <!-- Breeding arrow from B -->
+  <line x1="475" y1="122" x2="430" y2="145" stroke="#A855F7" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Breeding center -->
+  <rect x="290" y="130" width="140" height="38" rx="19" fill="#A855F7" opacity="0.2" stroke="#A855F7" stroke-width="1"/>
+  <text x="360" y="146" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="#D8B4FE">BREEDING</text>
+  <text x="360" y="160" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#A855F7">5,000 Atoms burned</text>
+
+  <!-- Arrow down to child -->
+  <line x1="360" y1="170" x2="360" y2="195" stroke="#A855F7" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Child Agent -->
+  <rect x="220" y="198" width="280" height="72" rx="14" fill="#10B981" opacity="0.1" stroke="#10B981" stroke-width="1.2" filter="url(#s)"/>
+  <text x="360" y="222" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#6EE7B7">Child Agent — Generation 2</text>
+
+  <!-- Trait pills -->
+  <rect x="240" y="234" width="100" height="18" rx="9" fill="#EF4444" opacity="0.15" stroke="#EF4444" stroke-width="0.5"/>
+  <text x="290" y="247" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#FCA5A5">Primary: guard</text>
+
+  <rect x="350" y="234" width="105" height="18" rx="9" fill="#6366F1" opacity="0.15" stroke="#6366F1" stroke-width="0.5"/>
+  <text x="402" y="247" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#A5B4FC">Secondary: predict</text>
+
+  <text x="360" y="263" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#64748B">60% primary from higher-rep parent · 10% chance new mutation</text>
+
+  <!-- Mutation types -->
+  <text x="360" y="290" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#475569">9 mutations: market_sense · deep_analysis · speed_boost · pattern_sight · resilience · emergence · memory_depth · swarm_affinity · wild_card</text>
+</svg>
