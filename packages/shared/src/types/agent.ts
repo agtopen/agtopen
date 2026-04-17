@@ -1,4 +1,4 @@
-export type AgentTier = 'foundation' | 'specialist' | 'advanced' | 'community';
+export type AgentTier = 'genesis' | 'foundation' | 'specialist' | 'advanced' | 'community';
 export type AgentType = 'research' | 'analysis' | 'crawler' | 'prediction' | 'connector' | 'security' | 'creative' | 'risk' | 'forensics' | 'quantitative' | 'geopolitical' | 'psychology' | 'macro' | 'frontier' | 'microstructure' | 'temporal' | 'verification' | 'emergent';
 export type AgentStatus = 'active' | 'paused' | 'dormant';
 

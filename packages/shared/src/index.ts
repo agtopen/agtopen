@@ -7,7 +7,18 @@ export * from './types/comms';
 
 // Constants
 export { GENESIS_AGENTS, FOUNDATION_AGENTS, AGENT_MAP, ORIGINAL_CORE_IDS, EXPANDED_CORE_IDS, SWARM_BACKBONE_IDS } from './constants/agents';
-export { COLORS, FONTS, ATOMS, RATE_LIMITS, TRACKED_MARKETS, TERRITORY_ZONES } from './constants/config';
+export {
+  COLORS,
+  FONTS,
+  ATOMS,
+  RATE_LIMITS,
+  TRACKED_MARKETS,
+  STOCK_MARKETS,
+  FOREX_MARKETS,
+  METAL_MARKETS,
+  ALL_MARKETS,
+  TERRITORY_ZONES,
+} from './constants/config';
 export { AI_MODELS, TASK_MODELS } from './constants/models';
 export type { AIModel } from './constants/models';
 export { TIER_ACCESS, getTierAccess, canAccess, getLimit, meetsMinTier } from './constants/tiers';

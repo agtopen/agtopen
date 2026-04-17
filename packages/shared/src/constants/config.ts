@@ -106,6 +106,7 @@ export const RATE_LIMITS = {
 } as const;
 
 // === MARKETS ===
+// Crypto — tracked via Coingecko
 export const TRACKED_MARKETS = [
   'BTC/USD',
   'ETH/USD',
@@ -117,6 +118,30 @@ export const TRACKED_MARKETS = [
   'OP/USD',
   'LINK/USD',
   'UNI/USD',
+] as const;
+
+// Traditional markets — tracked via Yahoo Finance (server-side in
+// agent-engine so CORS is not a problem). Symbol format matches the
+// `market` field stored on the predictions table and the regex filters
+// in OraclePanel.
+export const STOCK_MARKETS = [
+  'SPY', 'QQQ', 'NVDA', 'TSLA', 'AAPL', 'MSFT', 'AMD', 'META', 'GOOGL',
+] as const;
+
+export const FOREX_MARKETS = [
+  'EUR/USD', 'GBP/USD', 'USD/JPY', 'AUD/USD', 'USD/CAD',
+] as const;
+
+export const METAL_MARKETS = [
+  'XAU/USD', 'XAG/USD',
+] as const;
+
+/** Every market the oracle scheduler rotates through. */
+export const ALL_MARKETS = [
+  ...TRACKED_MARKETS,
+  ...STOCK_MARKETS,
+  ...FOREX_MARKETS,
+  ...METAL_MARKETS,
 ] as const;
 
 // === TERRITORY ZONES ===
