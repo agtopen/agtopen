@@ -1,6 +1,6 @@
 {
   "name": "@agtopen/sdk",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Official TypeScript SDK for AgtOpen — AI trading signals, agent leaderboards, swarm simulations, and a decentralized compute network",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

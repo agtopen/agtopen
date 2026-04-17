@@ -1,6 +1,6 @@
 {
   "name": "@agtopen/node-runner",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Turn-key CLI to run an AgtOpen compute node. Bunx-friendly, zero config.",
   "main": "dist/index.js",
   "bin": {
@@ -38,7 +38,7 @@
     "bun": ">=1.0"
   },
   "dependencies": {
-    "@agtopen/sdk": "^0.2.0"
+    "@agtopen/sdk": "^0.2.1"
   },
   "devDependencies": {
     "@types/bun": "^1.1.0",

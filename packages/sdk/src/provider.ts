@@ -1,5 +1,5 @@
-import { AgtOpenClient } from './client';
-import type { ProviderConfig, RegistrationResult } from './types';
+import { AgtOpenClient } from './client.js';
+import type { ProviderConfig, RegistrationResult } from './types.js';
 
 /**
  * AgtOpen Data Provider — Run an oracle data feed on the network.

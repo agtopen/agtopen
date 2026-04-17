@@ -1,15 +1,15 @@
 // Core
-export { AgtOpenClient, AgtOpenError } from './client';
+export { AgtOpenClient, AgtOpenError } from './client.js';
 
 // Services
-export { AgtOpenAgent } from './agent';
-export { AgtOpenForge } from './forge';
-export { AgtOpenProvider } from './provider';
-export { AgtOpenTool } from './tool';
-export { AgtOpenNode } from './node';
-export { AgtOpenValidator } from './validator';
-export { AgtOpenPredictions } from './predictions';
-export { AgtOpenMarket } from './market';
+export { AgtOpenAgent } from './agent.js';
+export { AgtOpenForge } from './forge.js';
+export { AgtOpenProvider } from './provider.js';
+export { AgtOpenTool } from './tool.js';
+export { AgtOpenNode } from './node.js';
+export { AgtOpenValidator } from './validator.js';
+export { AgtOpenPredictions } from './predictions.js';
+export { AgtOpenMarket } from './market.js';
 
 // Prediction types
 export type {
@@ -20,14 +20,14 @@ export type {
   PredictionHistory,
   PredictionHistoryRow,
   PredictionListParams,
-} from './predictions';
+} from './predictions.js';
 
 // Market / leaderboard / trades types
 export type {
   SpotQuote,
   LeaderboardRow,
   RecentTrade,
-} from './market';
+} from './market.js';
 
 // Core types
 export type {
@@ -42,4 +42,4 @@ export type {
   ValidationTask,
   RegistrationResult,
   TaskHandler,
-} from './types';
+} from './types.js';

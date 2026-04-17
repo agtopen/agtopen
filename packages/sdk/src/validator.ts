@@ -1,5 +1,5 @@
-import { AgtOpenClient } from './client';
-import type { ValidatorConfig, ValidationTask } from './types';
+import { AgtOpenClient } from './client.js';
+import type { ValidatorConfig, ValidationTask } from './types.js';
 
 /**
  * AgtOpen Validator — Verify outcomes and earn XP.

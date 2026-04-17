@@ -1,5 +1,5 @@
-import { AgtOpenClient } from './client';
-import type { AgentConfig, TaskRequest, TaskResponse, RegistrationResult } from './types';
+import { AgtOpenClient } from './client.js';
+import type { AgentConfig, TaskRequest, TaskResponse, RegistrationResult } from './types.js';
 
 /**
  * AgtOpen Agent — Register and run an AI agent on the network.

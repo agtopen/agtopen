@@ -1,5 +1,5 @@
-import { AgtOpenClient } from './client';
-import type { NodeConfig, TaskRequest } from './types';
+import { AgtOpenClient } from './client.js';
+import type { NodeConfig, TaskRequest } from './types.js';
 
 /**
  * AgtOpen Node — Connect compute resources to the network.

@@ -1,4 +1,4 @@
-import { AgtOpenClient } from './client';
+import { AgtOpenClient } from './client.js';
 
 /**
  * AgtOpen Forge — Create and manage agents programmatically.

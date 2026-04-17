@@ -1,5 +1,5 @@
-import { AgtOpenClient } from './client';
-import type { ToolConfig, RegistrationResult } from './types';
+import { AgtOpenClient } from './client.js';
+import type { ToolConfig, RegistrationResult } from './types.js';
 
 /**
  * AgtOpen Tool — Build a tool/plugin that agents can call.

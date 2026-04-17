@@ -5,7 +5,7 @@
  * endpoints. Cached server-side (30s) so it's safe to poll hot.
  */
 
-import { AgtOpenClient } from './client';
+import { AgtOpenClient } from './client.js';
 
 export interface SpotQuote {
   symbol: string;

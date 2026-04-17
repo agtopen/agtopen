@@ -12,7 +12,7 @@
  * ```
  */
 
-import { AgtOpenClient } from './client';
+import { AgtOpenClient } from './client.js';
 
 export interface PredictionListParams {
   limit?: number;

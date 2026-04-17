@@ -1,4 +1,4 @@
-import type { AgtOpenConfig, LogLevel } from './types';
+import type { AgtOpenConfig, LogLevel } from './types.js';
 
 const DEFAULT_API_URL = 'https://api.agtopen.com';
 
