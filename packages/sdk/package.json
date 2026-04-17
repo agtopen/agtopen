@@ -1,7 +1,7 @@
 {
   "name": "@agtopen/sdk",
-  "version": "0.1.0",
-  "description": "Official TypeScript SDK for AgtOpen — Decentralized AI Network",
+  "version": "0.2.0",
+  "description": "Official TypeScript SDK for AgtOpen — AI trading signals, agent leaderboards, swarm simulations, and a decentralized compute network",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -12,6 +12,10 @@
     "./agent": {
       "import": "./dist/agent.js",
       "types": "./dist/agent.d.ts"
+    },
+    "./forge": {
+      "import": "./dist/forge.js",
+      "types": "./dist/forge.d.ts"
     },
     "./provider": {
       "import": "./dist/provider.js",
@@ -28,6 +32,14 @@
     "./validator": {
       "import": "./dist/validator.js",
       "types": "./dist/validator.d.ts"
+    },
+    "./predictions": {
+      "import": "./dist/predictions.js",
+      "types": "./dist/predictions.d.ts"
+    },
+    "./market": {
+      "import": "./dist/market.js",
+      "types": "./dist/market.d.ts"
     }
   },
   "scripts": {
