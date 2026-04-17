@@ -27,7 +27,7 @@ Run a dedicated node on your own server. Supports Bun CLI, Docker, and systemd.
 ```bash
 # Clone and run
 git clone https://github.com/agtopen/agtopen.git && cd agtopen && bun install
-RELAY_URL=wss://ws.agtopen.com/node bun run apps/agent-engine/src/node-runner.ts
+RELAY_URL=wss://ws.agtopen.com/node bunx @agtopen/node-runner  # coming soon; see ./packages/sdk for AgtOpenNode
 ```
 
 Hardware nodes handle compute-intensive tasks like blockchain indexing, AI inference, and ZK proof generation. See [Deploy a Hardware Node](#deploy-a-hardware-node) for full setup.
@@ -193,7 +193,7 @@ cd agtopen
 bun install
 
 RELAY_URL=wss://ws.agtopen.com/node \
-bun run apps/agent-engine/src/node-runner.ts
+bunx @agtopen/node-runner  # coming soon; see ./packages/sdk for AgtOpenNode
 ```
 
 The node auto-detects your system capabilities (CPU, RAM, GPU) and connects to the relay. You'll see:
@@ -234,7 +234,7 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=/opt/agtopen
-ExecStart=/usr/local/bin/bun run apps/agent-engine/src/node-runner.ts
+ExecStart=/usr/local/bin/bunx @agtopen/node-runner  # coming soon; see ./packages/sdk for AgtOpenNode
 Restart=always
 Environment=RELAY_URL=wss://ws.agtopen.com/node
 

@@ -24,7 +24,7 @@ This question, raised during VC due diligence, exposes three structural vulnerab
 
 1. **Availability risk.** A provider outage or rate-limit change can halt all agent activity network-wide. The existing fallback chain in `ai-inference.ts` (Ollama -> OpenAI -> Anthropic -> heuristic) mitigates partial outages but still depends on at least one cloud provider being reachable.
 
-2. **Cost risk.** At scale, per-token API pricing dominates operating costs. At 10M inference calls/month, cloud API spend exceeds $20,000/month at current rates. Intel Node operators can serve equivalent workloads at 75% lower marginal cost.
+2. **Cost risk.** At scale, per-token API pricing dominates operating costs. At volume, per-token API pricing dominates operating cost; Intel Node operators can serve equivalent workloads at a significantly lower marginal cost.
 
 3. **Sovereignty risk.** Third-party providers can unilaterally change terms of service, introduce content filtering that conflicts with agent task requirements, or deprecate models without notice.
 
@@ -397,21 +397,21 @@ This formula mirrors the existing `estimateHardwareReward()` function in `hardwa
 
 | Tier | Reward Multiplier | Base Reward (ATOMS) | Effective USD/call | Cloud Equivalent |
 |------|------------------|--------------------|--------------------|-----------------|
-| Titan (8B) | 2.0x | 50 ATOMS | ~$0.0005 | GPT-4o-mini ($0.0003) |
-| Apex (70B) | 3.0x | 75 ATOMS | ~$0.001 | GPT-4o ($0.002) |
-| Sovereign (Mixtral) | 4.0x | 100 ATOMS | ~$0.0015 | Claude 3 Opus ($0.015) |
-| Browser | N/A | 10 ATOMS (user credit) | $0.000 | N/A |
+| Titan (8B) | 2.0x | 50 ATOMS | ~GPT-4o-mini tier |
+| Apex (70B) | 3.0x | 75 ATOMS | ~GPT-4o tier |
+| Sovereign (Mixtral) | 4.0x | 100 ATOMS | ~Claude 3 Opus tier |
+| Browser | N/A | 10 ATOMS (user credit) | local | zero-cost to network |
 
 Browser inference earns a small ATOMS credit for the user's agent, incentivizing local execution.
 
-### Cost Comparison
+### Cost Comparison (relative)
 
-| Route | Cost/Call | Monthly Cost (10M calls) | Savings vs Cloud |
-|-------|----------|--------------------------|------------------|
-| Cloud API (blended) | $0.002 | $20,000 | Baseline |
-| Intel Node (blended) | $0.0005 | $5,000 | 75% |
-| Browser | $0.000 | $0 | 100% |
-| **Target blend (40% local)** | **$0.0012** | **$12,000** | **40%** |
+| Route | Relative Cost vs Cloud | Notes |
+|-------|------------------------|-------|
+| Cloud API (blended) | 1.0× | Baseline — frontier models |
+| Intel Node (blended) | ~0.25× | Open-weight on user / operator hardware |
+| Browser | 0× | WebGPU / Chrome built-in AI |
+| **Target blend (40% local)** | **~0.6×** | — |
 
 ### Target: 40% Local Inference
 
@@ -423,7 +423,7 @@ By the end of Phase C (Week 16), the network targets the following inference dis
 | Intel Node | 30% | Market analysis, summarization, moderate reasoning |
 | Cloud API | 60% | Complex reasoning, code generation, long-form |
 
-This 40% local target reduces monthly cloud API spend by approximately $8,000 at 10M calls/month scale and eliminates single-provider dependency for nearly half of all inference volume.
+This 40% local target materially reduces monthly cloud API spend and eliminates single-provider dependency for nearly half of all inference volume.
 
 ---
 

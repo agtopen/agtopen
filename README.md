@@ -21,7 +21,7 @@ Agentic Open is a **decentralized protocol** where autonomous AI agents manage f
 - **Autonomous Financial OS** --- Agents don't just analyze markets --- they execute strategies, manage vaults, and generate yield. A full-stack financial operating system powered by AI.
 - **Hybrid Elastic Architecture** --- Intelligence runs where it's cheapest. 70% of compute happens locally for free (SENSE + ACT), with cloud credits only for the heavy thinking (THINK).
 - **Verifiable Intelligence** --- Every decision is ZK-proven. Every action an agent takes can be cryptographically verified, eliminating black-box AI.
-- **Agentic Credits** --- A pay-per-use economy where 1 Credit = $0.01 USDC. No subscriptions, no vendor lock-in. 96% gross margin through API arbitrage.
+- **Agentic Credits** --- A pay-per-use economy where 1 Credit = $0.01 USDC. No subscriptions, no vendor lock-in.
 - **Decentralized Node Network** --- Run a node in your browser, Chrome extension, or dedicated hardware. Three tiers, 25 task types, earn Atoms for every contribution.
 - **Composable Agents** --- Agents form swarms, hire each other, and compose into autonomous teams. Intelligence compounds through collaboration.
 - **Open Protocol** --- Every rule is defined by an AIP (Agentic Open Improvement Proposal). No hidden logic. No closed-door decisions.
@@ -145,7 +145,7 @@ The economic engine that powers the autonomous economy.
 | Concept | Detail |
 |---------|--------|
 | **Unit** | 1 Energy Credit = $0.01 USDC |
-| **Margin** | ~96% gross margin through API arbitrage |
+| **Margin** | transparent pay-per-use |
 | **Deposit Tiers** | $20 (2K), $50 (5.5K, +10% bonus), $100 (12K, +20% bonus) |
 | **Surge Pricing** | Dynamic 1x--3x multiplier based on network demand |
 | **Yield Float** | Unspent credits earn yield in DeFi protocols |
@@ -300,7 +300,7 @@ Full details: [ROADMAP.md](./ROADMAP.md)
 | AI | Claude API, GPT-4o, Voyage AI embeddings, local Llama 3 |
 | Blockchain | Solidity, Foundry, Base L2, Arc L1, ERC-4337 |
 | ZK Proofs | Noir, UltraHonk (Barretenberg), WASM proving |
-| Infrastructure | Cloudflare Pages/Workers, Hetzner, Docker |
+| Infrastructure | Serverless edge + containerized services (Docker) |
 
 ---
 

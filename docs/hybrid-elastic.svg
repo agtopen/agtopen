@@ -93,7 +93,7 @@
 
   <rect x="373" y="230" width="214" height="44" rx="8" fill="#06B6D4" opacity="0.08" stroke="#06B6D4" stroke-width="0.5"/>
   <text x="393" y="250" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#A5F3FC">Cloud Brain</text>
-  <text x="393" y="265" font-family="system-ui, sans-serif" font-size="8.5" fill="#64748B">Claude API  &#183;  GPT-4o  &#183;  96% margin</text>
+  <text x="393" y="265" font-family="system-ui, sans-serif" font-size="8.5" fill="#64748B">Claude API  &#183;  GPT-4o  &#183;  elastic routing</text>
 
   <rect x="373" y="282" width="214" height="44" rx="8" fill="#06B6D4" opacity="0.08" stroke="#06B6D4" stroke-width="0.5"/>
   <text x="393" y="302" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#A5F3FC">ZK Verification</text>
