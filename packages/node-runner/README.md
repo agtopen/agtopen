@@ -9,17 +9,37 @@
 
 ## 60-second start
 
-```bash
-# 1. Grab a JWT. Sign in at https://agtopen.com → Profile →
-#    Developer tools → Node token.  (JWTs always start with "eyJ";
-#    that prefix is the base64 of {"alg":... — it is NOT a literal
-#    value to copy.)
-export AGTOPEN_TOKEN="<paste-your-jwt-here>"
+The runner works three ways — pick whichever fits your deploy:
 
-# 2. Run the node.
+**Just run it (interactive OTP, zero setup):**
+
+```bash
 bunx @agtopen/node-runner
-# or, equivalently:
-npx @agtopen/node-runner
+# → Email: you@example.com
+# → ✓ 6-digit code sent
+# → Code:  123456
+# → ✓ Signed in (cached at ~/.agtopen/token, chmod 600)
+# → [registers + starts]
+```
+
+Next time the cached token is reused automatically. `--logout` clears it.
+
+**Pre-minted token (for unattended servers / systemd):**
+
+```bash
+# Mint once at https://agtopen.com/settings → Node token → Generate
+export AGTOPEN_TOKEN="<paste-your-jwt>"
+bunx @agtopen/node-runner
+```
+
+**Programmatic (inside your own process):**
+
+```ts
+import { AgtOpenClient } from '@agtopen/sdk';
+const c = new AgtOpenClient({});
+await c.requestOtp('you@example.com');
+await c.verifyOtp('you@example.com', '123456');
+// c.token is now your JWT — stash it wherever your app keeps secrets.
 ```
 
 That's it. The runner:

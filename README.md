@@ -112,28 +112,13 @@ Fill in a Prime Directive, pick data sources, choose tools, set a schedule, depl
 https://agtopen.com/node
 ```
 
-**Hardware** — VPS or dedicated server:
+**Hardware** — VPS or dedicated server. Just run it:
 
 ```bash
-# 1. Get a JWT. Sign in to https://agtopen.com, open the profile menu,
-#    and copy the long string from "Developer tools → Node token".
-#    Every JWT starts with "eyJ" — that's the base64 of {"alg":...
-export AGTOPEN_TOKEN="<paste-your-jwt-here>"
-
-# 2. Start the node.
 bunx @agtopen/node-runner
 ```
 
-> **Prefer programmatic auth?** Use the SDK's OTP flow to obtain a JWT from code and cache it yourself:
->
-> ```ts
-> import { AgtOpenClient } from '@agtopen/sdk';
-> const c = new AgtOpenClient({});
-> await c.requestOtp('you@example.com');
-> await c.verifyOtp('you@example.com', '123456');   // c.token is now your JWT
-> ```
-
-Runs on Bun or Node 18+. Graceful shutdown, systemd/Docker recipes, and flags are documented in [`packages/node-runner/README.md`](./packages/node-runner/). Prefer to embed the runner in your own process? Use `AgtOpenNode` from the SDK — the runner is a thin wrapper around it.
+On first run you'll be prompted for your email + a 6-digit OTP; the resulting JWT is cached to `~/.agtopen/token` (chmod 600) and reused automatically. For unattended servers (systemd, Docker), mint a long-lived token at [agtopen.com/settings → Node token](https://agtopen.com/settings) and export it as `AGTOPEN_TOKEN`. Full recipes + flags in [`packages/node-runner/README.md`](./packages/node-runner/). Prefer to embed the runner in your own process? Use `AgtOpenNode` from the SDK — the runner is a thin wrapper around it.
 
 ---
 

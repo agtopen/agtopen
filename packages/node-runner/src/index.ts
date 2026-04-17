@@ -26,6 +26,7 @@
 import { AgtOpenNode } from '@agtopen/sdk';
 import os from 'node:os';
 import { argv, env, exit } from 'node:process';
+import { resolveToken, removeCachedToken } from './auth';
 
 interface Flags {
   token?: string;
@@ -33,6 +34,7 @@ interface Flags {
   relayUrl?: string;
   tier?: string;
   label?: string;
+  logout?: boolean;
   debug?: boolean;
   help?: boolean;
   version?: boolean;
@@ -55,6 +57,7 @@ function parseFlags(args: string[]): Flags {
     else if (a === '--tier') out.tier = args[++i];
     else if (a.startsWith('--label=')) out.label = a.slice(8);
     else if (a === '--label') out.label = args[++i];
+    else if (a === '--logout') out.logout = true;
   }
   return out;
 }
@@ -68,17 +71,21 @@ Usage:
   npx  @agtopen/node-runner [flags]
 
 Flags:
-  --token <jwt>         Auth token (or AGTOPEN_TOKEN env) [required]
+  --token <jwt>         Auth token (or AGTOPEN_TOKEN env).
+                        If absent, the runner will prompt for email + OTP
+                        and cache the resulting JWT at ~/.agtopen/token.
   --api-url <url>       Override REST base (default: https://api.agtopen.com)
   --relay-url <url>     Override WS relay (default: wss://ws.agtopen.com/node)
   --tier <name>         browser | extension | hardware (default: hardware)
   --label <string>      Human-readable label for the leaderboard
+  --logout              Delete the cached token at ~/.agtopen/token and exit
   --debug               Verbose logging
   --help                This screen
   --version             Print version
 
 Get a token:
-  Visit https://agtopen.com/profile → Developer tools → Generate node token
+  Option A — generate one at https://agtopen.com/settings → Node token
+  Option B — just run this command; you'll be prompted for email + OTP
 
 Docs:
   https://github.com/agtopen/agtopen/tree/main/packages/node-runner
@@ -107,15 +114,26 @@ async function main(): Promise<void> {
 
   if (flags.help) { printHelp(); return; }
   if (flags.version) { process.stdout.write('0.1.0\n'); return; }
-
-  const token = flags.token ?? env.AGTOPEN_TOKEN;
-  if (!token) {
-    process.stderr.write('✗ Missing auth token. Set AGTOPEN_TOKEN or pass --token.\n');
-    process.stderr.write('  Get one at https://agtopen.com/profile → Developer tools\n');
-    exit(1);
+  if (flags.logout) {
+    await removeCachedToken();
+    process.stdout.write('  ✓ Cached token removed (~/.agtopen/token).\n');
+    return;
   }
 
   const apiUrl = flags.apiUrl ?? env.AGTOPEN_API_URL;
+  const explicitToken = flags.token ?? env.AGTOPEN_TOKEN;
+
+  // Resolves in this order:
+  //   1. --token / AGTOPEN_TOKEN (explicit)
+  //   2. ~/.agtopen/token (cached; validated against /auth/me first)
+  //   3. Interactive email → OTP prompt (TTY only)
+  let token: string;
+  try {
+    token = await resolveToken(explicitToken, apiUrl);
+  } catch (err) {
+    process.stderr.write(`✗ Could not authenticate: ${(err as Error).message}\n`);
+    exit(1);
+  }
   const relayUrl = flags.relayUrl ?? env.AGTOPEN_RELAY_URL ?? 'wss://ws.agtopen.com/node';
   const tier = (flags.tier ?? env.AGTOPEN_TIER ?? 'hardware') as 'browser' | 'extension' | 'hardware';
   const label = flags.label ?? env.AGTOPEN_LABEL ?? `runner@${os.hostname()}`;
