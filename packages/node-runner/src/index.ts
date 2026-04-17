@@ -26,7 +26,7 @@
 import { AgtOpenNode } from '@agtopen/sdk';
 import os from 'node:os';
 import { argv, env, exit } from 'node:process';
-import { resolveToken, removeCachedToken } from './auth';
+import { resolveToken, removeCachedToken } from './auth.js';
 
 interface Flags {
   token?: string;
