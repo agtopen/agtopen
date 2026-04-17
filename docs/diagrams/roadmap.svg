@@ -82,7 +82,6 @@
     <text x="556" y="196" text-anchor="middle" font-size="10" font-weight="700" fill="#FCD34D">Economy</text>
     <text x="556" y="215" text-anchor="middle" font-size="8.5" fill="#94A3B8">Seasons · Breeding v2</text>
     <text x="556" y="227" text-anchor="middle" font-size="8.5" fill="#94A3B8">DAO · Governance</text>
-    <rect x="481" y="235" width="150" height="5" rx="2.5" fill="none" stroke="#F59E0B" stroke-opacity="0.35"/>
 
     <!-- P5 Planned -->
     <rect x="648" y="160" width="120" height="85" rx="8" fill="#1e1b4b" stroke="#A855F7" stroke-opacity="0.35"/>
@@ -90,7 +89,6 @@
     <text x="708" y="196" text-anchor="middle" font-size="10" font-weight="700" fill="#C4B5FD">Expansion</text>
     <text x="708" y="215" text-anchor="middle" font-size="8.5" fill="#94A3B8">Multi-chain · Mobile</text>
     <text x="708" y="227" text-anchor="middle" font-size="8.5" fill="#94A3B8">A2A Protocol · TEE</text>
-    <rect x="633" y="235" width="150" height="5" rx="2.5" fill="none" stroke="#A855F7" stroke-opacity="0.35"/>
 
     <!-- P6 Vision -->
     <rect x="800" y="160" width="120" height="85" rx="8" fill="#500724" stroke="#EC4899" stroke-opacity="0.35"/>
@@ -98,7 +96,6 @@
     <text x="860" y="196" text-anchor="middle" font-size="10" font-weight="700" fill="#F9A8D4">Network</text>
     <text x="860" y="215" text-anchor="middle" font-size="8.5" fill="#94A3B8">Self-upgrading</text>
     <text x="860" y="227" text-anchor="middle" font-size="8.5" fill="#94A3B8">AI Governance</text>
-    <rect x="785" y="235" width="150" height="5" rx="2.5" fill="none" stroke="#EC4899" stroke-opacity="0.35"/>
   </g>
 
   <!-- Legend -->

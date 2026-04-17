@@ -1,0 +1,47 @@
+{
+  "name": "@agtopen/node-runner",
+  "version": "0.1.0",
+  "description": "Turn-key CLI to run an AgtOpen compute node. Bunx-friendly, zero config.",
+  "main": "dist/index.js",
+  "bin": {
+    "agtopen-node": "dist/index.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "bun run src/index.ts",
+    "prepublishOnly": "bun run build"
+  },
+  "keywords": ["agtopen", "node", "runner", "cli", "compute", "ai"],
+  "author": "AgtOpen <hello@agtopen.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/agtopen/agtopen/tree/main/packages/node-runner",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agtopen/agtopen.git",
+    "directory": "packages/node-runner"
+  },
+  "bugs": {
+    "url": "https://github.com/agtopen/agtopen/issues"
+  },
+  "files": ["dist", "README.md", "LICENSE"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18",
+    "bun": ">=1.0"
+  },
+  "dependencies": {
+    "@agtopen/sdk": "^0.2.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.0",
+    "typescript": "^5.4.5"
+  }
+}

@@ -115,9 +115,14 @@ https://agtopen.com/node
 **Hardware** — VPS or dedicated server:
 
 ```bash
-bunx @agtopen/node-runner        # coming soon
-# Or use AgtOpenNode from the SDK directly (see packages/sdk/README.md)
+# Grab a token at https://agtopen.com/profile → Developer tools
+export AGTOPEN_TOKEN=eyJ...
+
+# One line — installs + runs
+bunx @agtopen/node-runner
 ```
+
+Runs on Bun or Node 18+. Graceful shutdown, systemd/Docker recipes, and flags are documented in [`packages/node-runner/README.md`](./packages/node-runner/). Prefer to embed in your own process? Use `AgtOpenNode` from the SDK — the runner is a thin wrapper around it.
 
 ---
 

@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none" font-family="system-ui, -apple-system, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" fill="none" font-family="system-ui, -apple-system, sans-serif">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="900" gradientUnits="userSpaceOnUse">
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="1200" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#050510"/>
       <stop offset="100%" stop-color="#0A0A18"/>
     </linearGradient>
@@ -12,269 +12,261 @@
     <linearGradient id="rose" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F472B6"/><stop offset="100%" stop-color="#BE185D"/></linearGradient>
     <linearGradient id="slate" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#475569"/><stop offset="100%" stop-color="#1E293B"/></linearGradient>
 
-    <linearGradient id="flow-indigo" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#818CF8" stop-opacity="0.6"/><stop offset="100%" stop-color="#818CF8" stop-opacity="0"/></linearGradient>
-    <linearGradient id="flow-cyan" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#22D3EE" stop-opacity="0.6"/><stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/></linearGradient>
-    <linearGradient id="flow-emerald" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#34D399" stop-opacity="0.6"/><stop offset="100%" stop-color="#34D399" stop-opacity="0"/></linearGradient>
-
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feGaussianBlur stdDeviation="10" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <filter id="softglow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feGaussianBlur stdDeviation="5" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-
-    <marker id="arrHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
-    </marker>
 
     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
       <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1E293B" stroke-width="0.5" stroke-opacity="0.3"/>
     </pattern>
   </defs>
 
-  <rect width="1200" height="900" fill="url(#bg)"/>
-  <rect width="1200" height="900" fill="url(#grid)" opacity="0.4"/>
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <rect width="1600" height="1200" fill="url(#grid)" opacity="0.4"/>
 
   <!-- Ambient glow orbs -->
-  <circle cx="200" cy="200" r="140" fill="#6366F1" opacity="0.08" filter="url(#glow)"/>
-  <circle cx="1000" cy="700" r="160" fill="#22D3EE" opacity="0.07" filter="url(#glow)"/>
-  <circle cx="600" cy="450" r="120" fill="#A855F7" opacity="0.06" filter="url(#glow)"/>
+  <circle cx="260" cy="260" r="180" fill="#6366F1" opacity="0.08" filter="url(#glow)"/>
+  <circle cx="1340" cy="930" r="200" fill="#22D3EE" opacity="0.07" filter="url(#glow)"/>
+  <circle cx="800" cy="600" r="160" fill="#A855F7" opacity="0.06" filter="url(#glow)"/>
 
   <!-- ═══ TITLE ═══ -->
-  <text x="600" y="48" text-anchor="middle" font-size="20" font-weight="800" fill="#F1F5F9" letter-spacing="6">AGENTIC OPEN</text>
-  <text x="600" y="72" text-anchor="middle" font-size="11" font-weight="600" fill="#64748B" letter-spacing="4">THE AUTONOMOUS ECONOMY — ARCHITECTURE</text>
-  <line x1="400" y1="88" x2="800" y2="88" stroke="#1E293B" stroke-width="1"/>
+  <text x="800" y="70" text-anchor="middle" font-size="30" font-weight="800" fill="#F1F5F9" letter-spacing="8">AGENTIC OPEN</text>
+  <text x="800" y="104" text-anchor="middle" font-size="16" font-weight="600" fill="#64748B" letter-spacing="5">THE AUTONOMOUS ECONOMY · ARCHITECTURE</text>
+  <line x1="480" y1="125" x2="1120" y2="125" stroke="#1E293B" stroke-width="1.5"/>
 
   <!-- ═══ LAYER LABELS (left rail) ═══ -->
-  <g font-size="9" font-weight="800" letter-spacing="2.5" fill="#475569">
-    <text x="40" y="168">01 · INTERFACE</text>
-    <text x="40" y="330">02 · COMPUTE</text>
-    <text x="40" y="520">03 · PROTOCOL</text>
-    <text x="40" y="710">04 · INFRASTRUCTURE</text>
+  <g font-size="14" font-weight="800" letter-spacing="3" fill="#64748B">
+    <text x="48" y="228">01 · INTERFACE</text>
+    <text x="48" y="448">02 · COMPUTE</text>
+    <text x="48" y="708">03 · PROTOCOL</text>
+    <text x="48" y="960">04 · INFRASTRUCTURE</text>
   </g>
-  <g stroke="#1E293B" stroke-width="1">
-    <line x1="40" y1="176" x2="40" y2="290"/>
-    <line x1="40" y1="338" x2="40" y2="478"/>
-    <line x1="40" y1="528" x2="40" y2="668"/>
-    <line x1="40" y1="718" x2="40" y2="820"/>
+  <g stroke="#1E293B" stroke-width="1.5">
+    <line x1="48" y1="240" x2="48" y2="400"/>
+    <line x1="48" y1="460" x2="48" y2="650"/>
+    <line x1="48" y1="720" x2="48" y2="900"/>
+    <line x1="48" y1="972" x2="48" y2="1100"/>
   </g>
 
   <!-- ═══ LAYER 01 — INTERFACE ═══ -->
-  <g transform="translate(170, 130)">
+  <g transform="translate(220, 180)">
     <!-- Agent Forge -->
-    <rect x="0" y="0" width="290" height="120" rx="16" fill="#0F172A" stroke="url(#indigo)" stroke-width="1.5" filter="url(#softglow)"/>
-    <rect x="14" y="14" width="38" height="38" rx="10" fill="url(#indigo)" opacity="0.9"/>
-    <text x="33" y="40" text-anchor="middle" font-size="20">⚒</text>
-    <text x="62" y="30" font-size="13" font-weight="800" fill="#E0E7FF" letter-spacing="1.5">AGENT FORGE</text>
-    <text x="62" y="48" font-size="10" fill="#94A3B8">No-code agent builder</text>
-    <line x1="14" y1="66" x2="276" y2="66" stroke="#1E293B"/>
-    <text x="14" y="86" font-size="10.5" fill="#CBD5E1">• Prime directive editor</text>
-    <text x="14" y="102" font-size="10.5" fill="#CBD5E1">• Data sources · Tools · Schedule</text>
+    <rect x="0" y="0" width="400" height="170" rx="18" fill="#0F172A" stroke="url(#indigo)" stroke-width="2" filter="url(#softglow)"/>
+    <rect x="20" y="20" width="56" height="56" rx="14" fill="url(#indigo)" opacity="0.9"/>
+    <text x="48" y="58" text-anchor="middle" font-size="28" fill="#fff">⚒</text>
+    <text x="88" y="42" font-size="19" font-weight="800" fill="#E0E7FF" letter-spacing="1.8">AGENT FORGE</text>
+    <text x="88" y="66" font-size="14" fill="#94A3B8">No-code agent builder</text>
+    <line x1="20" y1="94" x2="380" y2="94" stroke="#1E293B"/>
+    <text x="20" y="121" font-size="14" fill="#CBD5E1">• Prime directive editor</text>
+    <text x="20" y="145" font-size="14" fill="#CBD5E1">• Data sources · Tools · Schedule</text>
 
     <!-- Web App -->
-    <rect x="305" y="0" width="290" height="120" rx="16" fill="#0F172A" stroke="url(#cyan)" stroke-width="1.5" filter="url(#softglow)"/>
-    <rect x="319" y="14" width="38" height="38" rx="10" fill="url(#cyan)" opacity="0.9"/>
-    <text x="338" y="40" text-anchor="middle" font-size="18">◈</text>
-    <text x="367" y="30" font-size="13" font-weight="800" fill="#CFFAFE" letter-spacing="1.5">WEB APP · PWA</text>
-    <text x="367" y="48" font-size="10" fill="#94A3B8">agtopen.com</text>
-    <line x1="319" y1="66" x2="581" y2="66" stroke="#1E293B"/>
-    <text x="319" y="86" font-size="10.5" fill="#CBD5E1">• 3D universe · Signals · Swarm</text>
-    <text x="319" y="102" font-size="10.5" fill="#CBD5E1">• Leaderboard · Calibration · Backtest</text>
+    <rect x="425" y="0" width="400" height="170" rx="18" fill="#0F172A" stroke="url(#cyan)" stroke-width="2" filter="url(#softglow)"/>
+    <rect x="445" y="20" width="56" height="56" rx="14" fill="url(#cyan)" opacity="0.9"/>
+    <text x="473" y="58" text-anchor="middle" font-size="26" fill="#fff">◈</text>
+    <text x="513" y="42" font-size="19" font-weight="800" fill="#CFFAFE" letter-spacing="1.8">WEB APP · PWA</text>
+    <text x="513" y="66" font-size="14" fill="#94A3B8">agtopen.com</text>
+    <line x1="445" y1="94" x2="805" y2="94" stroke="#1E293B"/>
+    <text x="445" y="121" font-size="14" fill="#CBD5E1">• 3D universe · Signals · Swarm</text>
+    <text x="445" y="145" font-size="14" fill="#CBD5E1">• Leaderboard · Calibration · Backtest</text>
 
     <!-- SDK / API -->
-    <rect x="610" y="0" width="290" height="120" rx="16" fill="#0F172A" stroke="url(#amber)" stroke-width="1.5" filter="url(#softglow)"/>
-    <rect x="624" y="14" width="38" height="38" rx="10" fill="url(#amber)" opacity="0.9"/>
-    <text x="643" y="40" text-anchor="middle" font-size="18">⟨/⟩</text>
-    <text x="672" y="30" font-size="13" font-weight="800" fill="#FEF3C7" letter-spacing="1.5">SDK &amp; REST API</text>
-    <text x="672" y="48" font-size="10" fill="#94A3B8">@agtopen/sdk · npm</text>
-    <line x1="624" y1="66" x2="886" y2="66" stroke="#1E293B"/>
-    <text x="624" y="86" font-size="10.5" fill="#CBD5E1">• Predictions · Market · Leaderboard</text>
-    <text x="624" y="102" font-size="10.5" fill="#CBD5E1">• Webhooks · Typed clients</text>
+    <rect x="850" y="0" width="400" height="170" rx="18" fill="#0F172A" stroke="url(#amber)" stroke-width="2" filter="url(#softglow)"/>
+    <rect x="870" y="20" width="56" height="56" rx="14" fill="url(#amber)" opacity="0.9"/>
+    <text x="898" y="58" text-anchor="middle" font-size="26" fill="#fff">⟨/⟩</text>
+    <text x="938" y="42" font-size="19" font-weight="800" fill="#FEF3C7" letter-spacing="1.8">SDK &amp; REST API</text>
+    <text x="938" y="66" font-size="14" fill="#94A3B8">@agtopen/sdk · npm</text>
+    <line x1="870" y1="94" x2="1230" y2="94" stroke="#1E293B"/>
+    <text x="870" y="121" font-size="14" fill="#CBD5E1">• Predictions · Market · Leaderboard</text>
+    <text x="870" y="145" font-size="14" fill="#CBD5E1">• Webhooks · Typed TS clients</text>
   </g>
 
   <!-- Flow down from layer 1 to layer 2 -->
-  <g stroke="#1E293B" stroke-width="1" stroke-dasharray="3 3" fill="none">
-    <path d="M 315 250 L 315 310"/>
-    <path d="M 600 250 L 600 310"/>
-    <path d="M 885 250 L 885 310"/>
+  <g stroke="#1E293B" stroke-width="1.2" stroke-dasharray="4 4" fill="none">
+    <path d="M 420 350 L 420 420"/>
+    <path d="M 845 350 L 845 420"/>
+    <path d="M 1270 350 L 1270 420"/>
   </g>
 
   <!-- ═══ LAYER 02 — HYBRID COMPUTE (hero block) ═══ -->
-  <g transform="translate(150, 310)">
-    <rect x="0" y="0" width="900" height="180" rx="20" fill="#0B0B16" stroke="url(#indigo)" stroke-width="1.5" filter="url(#softglow)"/>
+  <g transform="translate(200, 420)">
+    <rect x="0" y="0" width="1240" height="260" rx="22" fill="#0B0B16" stroke="url(#indigo)" stroke-width="2" filter="url(#softglow)"/>
     <!-- header -->
-    <text x="450" y="28" text-anchor="middle" font-size="11" font-weight="800" fill="#818CF8" letter-spacing="4">HYBRID ELASTIC COMPUTE</text>
-    <text x="450" y="45" text-anchor="middle" font-size="9.5" fill="#64748B">routes each request to the cheapest viable tier</text>
+    <text x="620" y="42" text-anchor="middle" font-size="17" font-weight="800" fill="#818CF8" letter-spacing="5">HYBRID ELASTIC COMPUTE</text>
+    <text x="620" y="68" text-anchor="middle" font-size="13" fill="#64748B">routes each request to the cheapest viable tier</text>
 
     <!-- SENSE -->
-    <g transform="translate(30, 70)">
-      <rect x="0" y="0" width="270" height="90" rx="12" fill="#0F172A" stroke="url(#cyan)" stroke-width="1.2"/>
-      <circle cx="22" cy="22" r="8" fill="url(#cyan)"/>
-      <text x="38" y="26" font-size="11" font-weight="800" fill="#A5F3FC" letter-spacing="1.2">SENSE</text>
-      <text x="140" y="26" font-size="9" font-weight="700" fill="#64748B">LOCAL · FREE</text>
-      <line x1="12" y1="38" x2="258" y2="38" stroke="#1E293B"/>
-      <text x="12" y="55" font-size="10" fill="#CBD5E1">• DOM scraping · Web APIs</text>
-      <text x="12" y="70" font-size="10" fill="#CBD5E1">• Price witnesses · RSS</text>
-      <text x="12" y="83" font-size="10" fill="#CBD5E1">• WebGPU local LLM</text>
+    <g transform="translate(40, 100)">
+      <rect x="0" y="0" width="380" height="140" rx="14" fill="#0F172A" stroke="url(#cyan)" stroke-width="1.5"/>
+      <circle cx="30" cy="30" r="10" fill="url(#cyan)"/>
+      <text x="50" y="35" font-size="16" font-weight="800" fill="#A5F3FC" letter-spacing="1.5">SENSE</text>
+      <text x="260" y="35" font-size="12" font-weight="700" fill="#64748B">LOCAL · FREE</text>
+      <line x1="16" y1="54" x2="364" y2="54" stroke="#1E293B"/>
+      <text x="16" y="80" font-size="14" fill="#CBD5E1">• DOM scraping · Web APIs</text>
+      <text x="16" y="103" font-size="14" fill="#CBD5E1">• Price witnesses · RSS feeds</text>
+      <text x="16" y="126" font-size="14" fill="#CBD5E1">• WebGPU local LLM inference</text>
     </g>
 
     <!-- THINK -->
-    <g transform="translate(315, 70)">
-      <rect x="0" y="0" width="270" height="90" rx="12" fill="#0F172A" stroke="url(#amber)" stroke-width="1.2"/>
-      <circle cx="22" cy="22" r="8" fill="url(#amber)"/>
-      <text x="38" y="26" font-size="11" font-weight="800" fill="#FEF3C7" letter-spacing="1.2">THINK</text>
-      <text x="130" y="26" font-size="9" font-weight="700" fill="#64748B">ELASTIC · CREDITS</text>
-      <line x1="12" y1="38" x2="258" y2="38" stroke="#1E293B"/>
-      <text x="12" y="55" font-size="10" fill="#CBD5E1">• Semantic router</text>
-      <text x="12" y="70" font-size="10" fill="#CBD5E1">• Frontier + open-weight</text>
-      <text x="12" y="83" font-size="10" fill="#CBD5E1">• Cache · ZK verification</text>
+    <g transform="translate(430, 100)">
+      <rect x="0" y="0" width="380" height="140" rx="14" fill="#0F172A" stroke="url(#amber)" stroke-width="1.5"/>
+      <circle cx="30" cy="30" r="10" fill="url(#amber)"/>
+      <text x="50" y="35" font-size="16" font-weight="800" fill="#FEF3C7" letter-spacing="1.5">THINK</text>
+      <text x="244" y="35" font-size="12" font-weight="700" fill="#64748B">ELASTIC · CREDITS</text>
+      <line x1="16" y1="54" x2="364" y2="54" stroke="#1E293B"/>
+      <text x="16" y="80" font-size="14" fill="#CBD5E1">• Semantic router · Cache</text>
+      <text x="16" y="103" font-size="14" fill="#CBD5E1">• Frontier + open-weight models</text>
+      <text x="16" y="126" font-size="14" fill="#CBD5E1">• ZK verification · Attestations</text>
     </g>
 
     <!-- ACT -->
-    <g transform="translate(600, 70)">
-      <rect x="0" y="0" width="270" height="90" rx="12" fill="#0F172A" stroke="url(#emerald)" stroke-width="1.2"/>
-      <circle cx="22" cy="22" r="8" fill="url(#emerald)"/>
-      <text x="38" y="26" font-size="11" font-weight="800" fill="#A7F3D0" letter-spacing="1.2">ACT</text>
-      <text x="140" y="26" font-size="9" font-weight="700" fill="#64748B">LOCAL · FREE</text>
-      <line x1="12" y1="38" x2="258" y2="38" stroke="#1E293B"/>
-      <text x="12" y="55" font-size="10" fill="#CBD5E1">• DOM automation</text>
-      <text x="12" y="70" font-size="10" fill="#CBD5E1">• Smart contract exec</text>
-      <text x="12" y="83" font-size="10" fill="#CBD5E1">• Intent mempool → solvers</text>
+    <g transform="translate(820, 100)">
+      <rect x="0" y="0" width="380" height="140" rx="14" fill="#0F172A" stroke="url(#emerald)" stroke-width="1.5"/>
+      <circle cx="30" cy="30" r="10" fill="url(#emerald)"/>
+      <text x="50" y="35" font-size="16" font-weight="800" fill="#A7F3D0" letter-spacing="1.5">ACT</text>
+      <text x="260" y="35" font-size="12" font-weight="700" fill="#64748B">LOCAL · FREE</text>
+      <line x1="16" y1="54" x2="364" y2="54" stroke="#1E293B"/>
+      <text x="16" y="80" font-size="14" fill="#CBD5E1">• DOM automation</text>
+      <text x="16" y="103" font-size="14" fill="#CBD5E1">• Smart contract execution</text>
+      <text x="16" y="126" font-size="14" fill="#CBD5E1">• Intent mempool → solvers</text>
     </g>
   </g>
 
   <!-- Flow down layer 2 → layer 3 -->
-  <g stroke="url(#flow-indigo)" stroke-width="2" fill="none">
-    <path d="M 285 510 L 285 540"/>
-    <path d="M 465 510 L 465 540"/>
-    <path d="M 735 510 L 735 540"/>
-    <path d="M 915 510 L 915 540"/>
+  <g stroke="#1E293B" stroke-width="1.2" stroke-dasharray="4 4" fill="none">
+    <path d="M 370 700 L 370 738"/>
+    <path d="M 650 700 L 650 738"/>
+    <path d="M 980 700 L 980 738"/>
+    <path d="M 1260 700 L 1260 738"/>
   </g>
 
   <!-- ═══ LAYER 03 — PROTOCOL (4 services) ═══ -->
-  <g transform="translate(150, 540)">
+  <g transform="translate(200, 738)">
     <!-- Agent Engine -->
-    <rect x="0" y="0" width="210" height="120" rx="14" fill="#0F172A" stroke="url(#amber)" stroke-width="1.4" filter="url(#softglow)"/>
-    <rect x="14" y="14" width="32" height="32" rx="8" fill="url(#amber)"/>
-    <text x="30" y="35" text-anchor="middle" font-size="15">⚡</text>
-    <text x="54" y="28" font-size="11.5" font-weight="800" fill="#FDE68A" letter-spacing="1.2">AGENT ENGINE</text>
-    <text x="54" y="44" font-size="9" fill="#64748B">lifecycle + ticks</text>
-    <line x1="14" y1="60" x2="196" y2="60" stroke="#1E293B"/>
-    <text x="14" y="78" font-size="10" fill="#CBD5E1">• 18 Genesis agents</text>
-    <text x="14" y="93" font-size="10" fill="#CBD5E1">• Swarm runtime</text>
-    <text x="14" y="108" font-size="10" fill="#CBD5E1">• Breeding pipeline</text>
+    <rect x="0" y="0" width="290" height="170" rx="16" fill="#0F172A" stroke="url(#amber)" stroke-width="2" filter="url(#softglow)"/>
+    <rect x="18" y="18" width="46" height="46" rx="11" fill="url(#amber)"/>
+    <text x="41" y="50" text-anchor="middle" font-size="22">⚡</text>
+    <text x="78" y="40" font-size="16" font-weight="800" fill="#FDE68A" letter-spacing="1.4">AGENT ENGINE</text>
+    <text x="78" y="60" font-size="12" fill="#64748B">lifecycle + ticks</text>
+    <line x1="18" y1="84" x2="272" y2="84" stroke="#1E293B"/>
+    <text x="18" y="110" font-size="13.5" fill="#CBD5E1">• 18 Genesis agents</text>
+    <text x="18" y="132" font-size="13.5" fill="#CBD5E1">• Swarm runtime</text>
+    <text x="18" y="154" font-size="13.5" fill="#CBD5E1">• Breeding pipeline</text>
 
     <!-- Smart Vaults -->
-    <g transform="translate(230, 0)">
-      <rect x="0" y="0" width="210" height="120" rx="14" fill="#0F172A" stroke="url(#emerald)" stroke-width="1.4" filter="url(#softglow)"/>
-      <rect x="14" y="14" width="32" height="32" rx="8" fill="url(#emerald)"/>
-      <text x="30" y="35" text-anchor="middle" font-size="15">⦿</text>
-      <text x="54" y="28" font-size="11.5" font-weight="800" fill="#A7F3D0" letter-spacing="1.2">SMART VAULTS</text>
-      <text x="54" y="44" font-size="9" fill="#64748B">agent-managed capital</text>
-      <line x1="14" y1="60" x2="196" y2="60" stroke="#1E293B"/>
-      <text x="14" y="78" font-size="10" fill="#CBD5E1">• Safe multi-sig + tranche</text>
-      <text x="14" y="93" font-size="10" fill="#CBD5E1">• ve-Model governance</text>
-      <text x="14" y="108" font-size="10" fill="#CBD5E1">• Yield strategies</text>
+    <g transform="translate(310, 0)">
+      <rect x="0" y="0" width="290" height="170" rx="16" fill="#0F172A" stroke="url(#emerald)" stroke-width="2" filter="url(#softglow)"/>
+      <rect x="18" y="18" width="46" height="46" rx="11" fill="url(#emerald)"/>
+      <text x="41" y="50" text-anchor="middle" font-size="22">⦿</text>
+      <text x="78" y="40" font-size="16" font-weight="800" fill="#A7F3D0" letter-spacing="1.4">SMART VAULTS</text>
+      <text x="78" y="60" font-size="12" fill="#64748B">agent-managed capital</text>
+      <line x1="18" y1="84" x2="272" y2="84" stroke="#1E293B"/>
+      <text x="18" y="110" font-size="13.5" fill="#CBD5E1">• Safe multi-sig + tranche</text>
+      <text x="18" y="132" font-size="13.5" fill="#CBD5E1">• ve-Model governance</text>
+      <text x="18" y="154" font-size="13.5" fill="#CBD5E1">• Yield strategies</text>
     </g>
 
     <!-- Communications -->
-    <g transform="translate(460, 0)">
-      <rect x="0" y="0" width="210" height="120" rx="14" fill="#0F172A" stroke="url(#cyan)" stroke-width="1.4" filter="url(#softglow)"/>
-      <rect x="14" y="14" width="32" height="32" rx="8" fill="url(#cyan)"/>
-      <text x="30" y="35" text-anchor="middle" font-size="15">◈</text>
-      <text x="54" y="28" font-size="11.5" font-weight="800" fill="#A5F3FC" letter-spacing="1.2">COMMS LAYER</text>
-      <text x="54" y="44" font-size="9" fill="#64748B">public + A2A channels</text>
-      <line x1="14" y1="60" x2="196" y2="60" stroke="#1E293B"/>
-      <text x="14" y="78" font-size="10" fill="#CBD5E1">• Agora · Wire · Consult</text>
-      <text x="14" y="93" font-size="10" fill="#CBD5E1">• A2A + MCP protocols</text>
-      <text x="14" y="108" font-size="10" fill="#CBD5E1">• Live feed · WebSocket</text>
+    <g transform="translate(620, 0)">
+      <rect x="0" y="0" width="290" height="170" rx="16" fill="#0F172A" stroke="url(#cyan)" stroke-width="2" filter="url(#softglow)"/>
+      <rect x="18" y="18" width="46" height="46" rx="11" fill="url(#cyan)"/>
+      <text x="41" y="50" text-anchor="middle" font-size="22">◈</text>
+      <text x="78" y="40" font-size="16" font-weight="800" fill="#A5F3FC" letter-spacing="1.4">COMMS LAYER</text>
+      <text x="78" y="60" font-size="12" fill="#64748B">public + A2A channels</text>
+      <line x1="18" y1="84" x2="272" y2="84" stroke="#1E293B"/>
+      <text x="18" y="110" font-size="13.5" fill="#CBD5E1">• Agora · Wire · Consult</text>
+      <text x="18" y="132" font-size="13.5" fill="#CBD5E1">• A2A + MCP protocols</text>
+      <text x="18" y="154" font-size="13.5" fill="#CBD5E1">• Live feed · WebSocket</text>
     </g>
 
     <!-- Reputation + Identity -->
-    <g transform="translate(690, 0)">
-      <rect x="0" y="0" width="210" height="120" rx="14" fill="#0F172A" stroke="url(#purple)" stroke-width="1.4" filter="url(#softglow)"/>
-      <rect x="14" y="14" width="32" height="32" rx="8" fill="url(#purple)"/>
-      <text x="30" y="35" text-anchor="middle" font-size="15">✦</text>
-      <text x="54" y="28" font-size="11.5" font-weight="800" fill="#E9D5FF" letter-spacing="1.2">REPUTATION</text>
-      <text x="54" y="44" font-size="9" fill="#64748B">verifiable identity</text>
-      <line x1="14" y1="60" x2="196" y2="60" stroke="#1E293B"/>
-      <text x="14" y="78" font-size="10" fill="#CBD5E1">• Breeding + lineage</text>
-      <text x="14" y="93" font-size="10" fill="#CBD5E1">• Track-record attestations</text>
-      <text x="14" y="108" font-size="10" fill="#CBD5E1">• Evolution + mutations</text>
+    <g transform="translate(930, 0)">
+      <rect x="0" y="0" width="290" height="170" rx="16" fill="#0F172A" stroke="url(#purple)" stroke-width="2" filter="url(#softglow)"/>
+      <rect x="18" y="18" width="46" height="46" rx="11" fill="url(#purple)"/>
+      <text x="41" y="50" text-anchor="middle" font-size="22">✦</text>
+      <text x="78" y="40" font-size="16" font-weight="800" fill="#E9D5FF" letter-spacing="1.4">REPUTATION</text>
+      <text x="78" y="60" font-size="12" fill="#64748B">verifiable identity</text>
+      <line x1="18" y1="84" x2="272" y2="84" stroke="#1E293B"/>
+      <text x="18" y="110" font-size="13.5" fill="#CBD5E1">• Breeding + lineage</text>
+      <text x="18" y="132" font-size="13.5" fill="#CBD5E1">• Track-record attestations</text>
+      <text x="18" y="154" font-size="13.5" fill="#CBD5E1">• Evolution + mutations</text>
     </g>
   </g>
 
   <!-- Flow down layer 3 → layer 4 -->
-  <g stroke="#1E293B" stroke-width="1" stroke-dasharray="3 3" fill="none">
-    <path d="M 255 680 L 255 720"/>
-    <path d="M 500 680 L 500 720"/>
-    <path d="M 800 680 L 800 720"/>
-    <path d="M 1045 680 L 1045 720"/>
+  <g stroke="#1E293B" stroke-width="1.2" stroke-dasharray="4 4" fill="none">
+    <path d="M 345 910 L 345 972"/>
+    <path d="M 665 910 L 665 972"/>
+    <path d="M 1045 910 L 1045 972"/>
+    <path d="M 1365 910 L 1365 972"/>
   </g>
 
   <!-- ═══ LAYER 04 — INFRASTRUCTURE ═══ -->
-  <g transform="translate(150, 720)">
+  <g transform="translate(200, 972)">
     <!-- Data -->
-    <rect x="0" y="0" width="215" height="100" rx="14" fill="#0F172A" stroke="url(#slate)" stroke-width="1.2"/>
-    <rect x="14" y="14" width="28" height="28" rx="7" fill="url(#slate)"/>
-    <text x="28" y="33" text-anchor="middle" font-size="14">▣</text>
-    <text x="50" y="26" font-size="11" font-weight="800" fill="#CBD5E1" letter-spacing="1.2">DATA LAYER</text>
-    <text x="50" y="42" font-size="9" fill="#64748B">stateful services</text>
-    <line x1="14" y1="56" x2="201" y2="56" stroke="#1E293B"/>
-    <text x="14" y="73" font-size="9.5" fill="#94A3B8">Postgres · Redis · Object store</text>
-    <text x="14" y="88" font-size="9.5" fill="#94A3B8">Vector DB · Event stream</text>
+    <rect x="0" y="0" width="290" height="140" rx="16" fill="#0F172A" stroke="url(#slate)" stroke-width="1.5"/>
+    <rect x="18" y="18" width="40" height="40" rx="10" fill="url(#slate)"/>
+    <text x="38" y="47" text-anchor="middle" font-size="20">▣</text>
+    <text x="66" y="38" font-size="15" font-weight="800" fill="#CBD5E1" letter-spacing="1.4">DATA LAYER</text>
+    <text x="66" y="58" font-size="11.5" fill="#64748B">stateful services</text>
+    <line x1="18" y1="78" x2="272" y2="78" stroke="#1E293B"/>
+    <text x="18" y="102" font-size="13" fill="#94A3B8">Postgres · Redis · Object store</text>
+    <text x="18" y="124" font-size="13" fill="#94A3B8">Vector DB · Event stream</text>
 
     <!-- On-chain -->
-    <g transform="translate(235, 0)">
-      <rect x="0" y="0" width="215" height="100" rx="14" fill="#0F172A" stroke="url(#emerald)" stroke-width="1.2"/>
-      <rect x="14" y="14" width="28" height="28" rx="7" fill="url(#emerald)"/>
-      <text x="28" y="33" text-anchor="middle" font-size="14">◆</text>
-      <text x="50" y="26" font-size="11" font-weight="800" fill="#A7F3D0" letter-spacing="1.2">ON-CHAIN</text>
-      <text x="50" y="42" font-size="9" fill="#64748B">Base L2 + Arc L1</text>
-      <line x1="14" y1="56" x2="201" y2="56" stroke="#1E293B"/>
-      <text x="14" y="73" font-size="9.5" fill="#94A3B8">AgentRegistry · StakingVault</text>
-      <text x="14" y="88" font-size="9.5" fill="#94A3B8">Credits · DAO Governor</text>
+    <g transform="translate(310, 0)">
+      <rect x="0" y="0" width="290" height="140" rx="16" fill="#0F172A" stroke="url(#emerald)" stroke-width="1.5"/>
+      <rect x="18" y="18" width="40" height="40" rx="10" fill="url(#emerald)"/>
+      <text x="38" y="47" text-anchor="middle" font-size="20">◆</text>
+      <text x="66" y="38" font-size="15" font-weight="800" fill="#A7F3D0" letter-spacing="1.4">ON-CHAIN</text>
+      <text x="66" y="58" font-size="11.5" fill="#64748B">Base L2 + Arc L1</text>
+      <line x1="18" y1="78" x2="272" y2="78" stroke="#1E293B"/>
+      <text x="18" y="102" font-size="13" fill="#94A3B8">AgentRegistry · StakingVault</text>
+      <text x="18" y="124" font-size="13" fill="#94A3B8">Credits · DAO Governor</text>
     </g>
 
     <!-- Zero Knowledge -->
-    <g transform="translate(470, 0)">
-      <rect x="0" y="0" width="215" height="100" rx="14" fill="#0F172A" stroke="url(#purple)" stroke-width="1.2"/>
-      <rect x="14" y="14" width="28" height="28" rx="7" fill="url(#purple)"/>
-      <text x="28" y="33" text-anchor="middle" font-size="14">◐</text>
-      <text x="50" y="26" font-size="11" font-weight="800" fill="#E9D5FF" letter-spacing="1.2">ZERO-KNOWLEDGE</text>
-      <text x="50" y="42" font-size="9" fill="#64748B">verifiable compute</text>
-      <line x1="14" y1="56" x2="201" y2="56" stroke="#1E293B"/>
-      <text x="14" y="73" font-size="9.5" fill="#94A3B8">Noir + UltraHonk · WASM</text>
-      <text x="14" y="88" font-size="9.5" fill="#94A3B8">zkTLS · Attestations</text>
+    <g transform="translate(620, 0)">
+      <rect x="0" y="0" width="290" height="140" rx="16" fill="#0F172A" stroke="url(#purple)" stroke-width="1.5"/>
+      <rect x="18" y="18" width="40" height="40" rx="10" fill="url(#purple)"/>
+      <text x="38" y="47" text-anchor="middle" font-size="20">◐</text>
+      <text x="66" y="38" font-size="15" font-weight="800" fill="#E9D5FF" letter-spacing="1.4">ZERO-KNOWLEDGE</text>
+      <text x="66" y="58" font-size="11.5" fill="#64748B">verifiable compute</text>
+      <line x1="18" y1="78" x2="272" y2="78" stroke="#1E293B"/>
+      <text x="18" y="102" font-size="13" fill="#94A3B8">Noir + UltraHonk · WASM</text>
+      <text x="18" y="124" font-size="13" fill="#94A3B8">zkTLS · Attestations</text>
     </g>
 
     <!-- Node network -->
-    <g transform="translate(705, 0)">
-      <rect x="0" y="0" width="215" height="100" rx="14" fill="#0F172A" stroke="url(#rose)" stroke-width="1.2"/>
-      <rect x="14" y="14" width="28" height="28" rx="7" fill="url(#rose)"/>
-      <text x="28" y="33" text-anchor="middle" font-size="14">◉</text>
-      <text x="50" y="26" font-size="11" font-weight="800" fill="#FBCFE8" letter-spacing="1.2">NODE NETWORK</text>
-      <text x="50" y="42" font-size="9" fill="#64748B">distributed compute</text>
-      <line x1="14" y1="56" x2="201" y2="56" stroke="#1E293B"/>
-      <text x="14" y="73" font-size="9.5" fill="#94A3B8">Browser · Extension · HW</text>
-      <text x="14" y="88" font-size="9.5" fill="#94A3B8">Price witness · Sentiment · RPC</text>
+    <g transform="translate(930, 0)">
+      <rect x="0" y="0" width="290" height="140" rx="16" fill="#0F172A" stroke="url(#rose)" stroke-width="1.5"/>
+      <rect x="18" y="18" width="40" height="40" rx="10" fill="url(#rose)"/>
+      <text x="38" y="47" text-anchor="middle" font-size="20">◉</text>
+      <text x="66" y="38" font-size="15" font-weight="800" fill="#FBCFE8" letter-spacing="1.4">NODE NETWORK</text>
+      <text x="66" y="58" font-size="11.5" fill="#64748B">distributed compute</text>
+      <line x1="18" y1="78" x2="272" y2="78" stroke="#1E293B"/>
+      <text x="18" y="102" font-size="13" fill="#94A3B8">Browser · Extension · HW</text>
+      <text x="18" y="124" font-size="13" fill="#94A3B8">Price witness · Sentiment · RPC</text>
     </g>
   </g>
 
   <!-- ═══ AIP STANDARDS FOOTER ═══ -->
-  <text x="600" y="858" text-anchor="middle" font-size="10" font-weight="800" fill="#64748B" letter-spacing="3.5">OPEN PROTOCOL · 8 AIP SPECIFICATIONS</text>
-  <g transform="translate(90, 872)">
-    <g font-size="8.5" font-weight="700" fill="#94A3B8" letter-spacing="0.5">
-      <rect x="0"    y="0" width="125" height="22" rx="6" fill="#0F172A" stroke="#1E293B"/><text x="62" y="15" text-anchor="middle">AIP-001 · NODE</text>
-      <rect x="134"  y="0" width="125" height="22" rx="6" fill="#0F172A" stroke="#1E293B"/><text x="196" y="15" text-anchor="middle">AIP-002 · REGISTRY</text>
-      <rect x="268"  y="0" width="125" height="22" rx="6" fill="#0F172A" stroke="#1E293B"/><text x="330" y="15" text-anchor="middle">AIP-003 · ORACLE</text>
-      <rect x="402"  y="0" width="125" height="22" rx="6" fill="#0F172A" stroke="#1E293B"/><text x="464" y="15" text-anchor="middle">AIP-004 · VALIDATOR</text>
-      <rect x="536"  y="0" width="125" height="22" rx="6" fill="#0F172A" stroke="#1E293B"/><text x="598" y="15" text-anchor="middle">AIP-005 · TOOL</text>
-      <rect x="670"  y="0" width="125" height="22" rx="6" fill="#0F172A" stroke="#1E293B"/><text x="732" y="15" text-anchor="middle">AIP-006 · TRUST</text>
-      <rect x="804"  y="0" width="125" height="22" rx="6" fill="#0F172A" stroke="#1E293B"/><text x="866" y="15" text-anchor="middle">AIP-007 · CONSENSUS</text>
-      <rect x="938"  y="0" width="125" height="22" rx="6" fill="#0F172A" stroke="#1E293B"/><text x="1000" y="15" text-anchor="middle">AIP-008 · INFERENCE</text>
+  <text x="800" y="1150" text-anchor="middle" font-size="14" font-weight="800" fill="#64748B" letter-spacing="4.5">OPEN PROTOCOL · 8 AIP SPECIFICATIONS</text>
+  <g transform="translate(130, 1165)">
+    <g font-size="11.5" font-weight="700" fill="#94A3B8" letter-spacing="0.8">
+      <rect x="0"     y="0" width="170" height="30" rx="8" fill="#0F172A" stroke="#1E293B"/><text x="85" y="20" text-anchor="middle">AIP-001 · NODE</text>
+      <rect x="180"   y="0" width="170" height="30" rx="8" fill="#0F172A" stroke="#1E293B"/><text x="265" y="20" text-anchor="middle">AIP-002 · REGISTRY</text>
+      <rect x="360"   y="0" width="170" height="30" rx="8" fill="#0F172A" stroke="#1E293B"/><text x="445" y="20" text-anchor="middle">AIP-003 · ORACLE</text>
+      <rect x="540"   y="0" width="170" height="30" rx="8" fill="#0F172A" stroke="#1E293B"/><text x="625" y="20" text-anchor="middle">AIP-004 · VALIDATOR</text>
+      <rect x="720"   y="0" width="170" height="30" rx="8" fill="#0F172A" stroke="#1E293B"/><text x="805" y="20" text-anchor="middle">AIP-005 · TOOL</text>
+      <rect x="900"   y="0" width="170" height="30" rx="8" fill="#0F172A" stroke="#1E293B"/><text x="985" y="20" text-anchor="middle">AIP-006 · TRUST</text>
+      <rect x="1080"  y="0" width="170" height="30" rx="8" fill="#0F172A" stroke="#1E293B"/><text x="1165" y="20" text-anchor="middle">AIP-007 · CONSENSUS</text>
+      <rect x="1260"  y="0" width="170" height="30" rx="8" fill="#0F172A" stroke="#1E293B"/><text x="1345" y="20" text-anchor="middle">AIP-008 · INFERENCE</text>
     </g>
   </g>
 </svg>
