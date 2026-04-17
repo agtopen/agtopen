@@ -115,14 +115,25 @@ https://agtopen.com/node
 **Hardware** — VPS or dedicated server:
 
 ```bash
-# Grab a token at https://agtopen.com/profile → Developer tools
-export AGTOPEN_TOKEN=eyJ...
+# 1. Get a JWT. Sign in to https://agtopen.com, open the profile menu,
+#    and copy the long string from "Developer tools → Node token".
+#    Every JWT starts with "eyJ" — that's the base64 of {"alg":...
+export AGTOPEN_TOKEN="<paste-your-jwt-here>"
 
-# One line — installs + runs
+# 2. Start the node.
 bunx @agtopen/node-runner
 ```
 
-Runs on Bun or Node 18+. Graceful shutdown, systemd/Docker recipes, and flags are documented in [`packages/node-runner/README.md`](./packages/node-runner/). Prefer to embed in your own process? Use `AgtOpenNode` from the SDK — the runner is a thin wrapper around it.
+> **Prefer programmatic auth?** Use the SDK's OTP flow to obtain a JWT from code and cache it yourself:
+>
+> ```ts
+> import { AgtOpenClient } from '@agtopen/sdk';
+> const c = new AgtOpenClient({});
+> await c.requestOtp('you@example.com');
+> await c.verifyOtp('you@example.com', '123456');   // c.token is now your JWT
+> ```
+
+Runs on Bun or Node 18+. Graceful shutdown, systemd/Docker recipes, and flags are documented in [`packages/node-runner/README.md`](./packages/node-runner/). Prefer to embed the runner in your own process? Use `AgtOpenNode` from the SDK — the runner is a thin wrapper around it.
 
 ---
 
