@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="960" y2="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A0A12"/>
+      <stop offset="100%" stop-color="#0F0F1A"/>
+    </linearGradient>
+    <linearGradient id="indigo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#818CF8"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#C084FC"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="emerald" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <linearGradient id="rose" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F472B6"/>
+      <stop offset="100%" stop-color="#EF4444"/>
+    </linearGradient>
+    <marker id="arrowS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="420" fill="url(#bg)"/>
+
+  <!-- Title -->
+  <text x="480" y="32" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#E2E8F0" letter-spacing="3">SWARM SIMULATION</text>
+  <text x="480" y="50" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#64748B">Many personas argue a thesis — consensus emerges, not a single guess</text>
+
+  <!-- ── LEFT: persona archetypes ── -->
+  <g transform="translate(40, 90)">
+    <text x="115" y="0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#94A3B8" letter-spacing="1.5">PERSONA ARCHETYPES</text>
+
+    <!-- Row 1 -->
+    <circle cx="30" cy="40" r="14" fill="url(#indigo)"/>
+    <text x="30" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#fff">🐋</text>
+    <text x="30" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#E2E8F0">Whale</text>
+
+    <circle cx="85" cy="40" r="14" fill="url(#amber)"/>
+    <text x="85" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#fff">📱</text>
+    <text x="85" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#E2E8F0">Retail</text>
+
+    <circle cx="140" cy="40" r="14" fill="url(#cyan)"/>
+    <text x="140" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#fff">📊</text>
+    <text x="140" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#E2E8F0">Macro</text>
+
+    <circle cx="195" cy="40" r="14" fill="url(#emerald)"/>
+    <text x="195" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#fff">⚙</text>
+    <text x="195" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#E2E8F0">MM</text>
+
+    <!-- Row 2 -->
+    <circle cx="30" cy="110" r="14" fill="url(#rose)"/>
+    <text x="30" y="115" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#fff">↩</text>
+    <text x="30" y="142" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#E2E8F0">Contra.</text>
+
+    <circle cx="85" cy="110" r="14" fill="url(#purple)"/>
+    <text x="85" y="115" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#fff">𝝈</text>
+    <text x="85" y="142" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#E2E8F0">Quant</text>
+
+    <circle cx="140" cy="110" r="14" fill="url(#cyan)"/>
+    <text x="140" y="115" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#fff">⛓</text>
+    <text x="140" y="142" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#E2E8F0">On-chain</text>
+
+    <circle cx="195" cy="110" r="14" fill="url(#rose)"/>
+    <text x="195" y="115" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#fff">🐻</text>
+    <text x="195" y="142" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#E2E8F0">Perma-bear</text>
+
+    <!-- Caption -->
+    <text x="115" y="175" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748B">each persona = own bias + style</text>
+  </g>
+
+  <!-- Arrow left → middle -->
+  <path d="M 280 175 L 340 175" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 3" fill="none" marker-end="url(#arrowS)"/>
+
+  <!-- ── MIDDLE: debate rounds ── -->
+  <g transform="translate(340, 90)">
+    <text x="135" y="0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#94A3B8" letter-spacing="1.5">DEBATE ROUNDS</text>
+
+    <!-- Round boxes -->
+    <g transform="translate(0, 30)">
+      <rect x="0" y="0" width="80" height="60" rx="8" fill="#1E1B4B" stroke="#6366F1" stroke-opacity="0.4"/>
+      <text x="40" y="22" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#C7D2FE" font-weight="700">Round 1</text>
+      <text x="40" y="38" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#E2E8F0">45% LONG</text>
+      <text x="40" y="50" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#64748B">mixed</text>
+    </g>
+
+    <g transform="translate(95, 30)">
+      <rect x="0" y="0" width="80" height="60" rx="8" fill="#1E1B4B" stroke="#818CF8" stroke-opacity="0.5"/>
+      <text x="40" y="22" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#C7D2FE" font-weight="700">Round 2</text>
+      <text x="40" y="38" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#E2E8F0">58% LONG</text>
+      <text x="40" y="50" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#64748B">trending</text>
+    </g>
+
+    <g transform="translate(190, 30)">
+      <rect x="0" y="0" width="80" height="60" rx="8" fill="#1E1B4B" stroke="#A78BFA" stroke-opacity="0.7"/>
+      <text x="40" y="22" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#C7D2FE" font-weight="700">Round 3</text>
+      <text x="40" y="38" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#E2E8F0">62% LONG</text>
+      <text x="40" y="50" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#34D399">convergence</text>
+    </g>
+
+    <!-- Inter-round arrows -->
+    <path d="M 80 60 L 95 60" stroke="#6366F1" stroke-width="1.5" fill="none" marker-end="url(#arrowS)"/>
+    <path d="M 175 60 L 190 60" stroke="#818CF8" stroke-width="1.5" fill="none" marker-end="url(#arrowS)"/>
+
+    <!-- DeGroot formula hint -->
+    <text x="135" y="120" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#64748B">b_i ← (1−α)·b_i + α·⟨neighbors⟩</text>
+    <text x="135" y="135" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748B">DeGroot opinion update</text>
+
+    <!-- Small persona dots inside each round to suggest debate -->
+    <g transform="translate(5, 12)">
+      <circle cx="8" cy="2" r="2" fill="#818CF8"/>
+      <circle cx="16" cy="2" r="2" fill="#FCD34D"/>
+      <circle cx="24" cy="2" r="2" fill="#22D3EE"/>
+      <circle cx="32" cy="2" r="2" fill="#EF4444"/>
+      <circle cx="40" cy="2" r="2" fill="#34D399"/>
+      <circle cx="48" cy="2" r="2" fill="#A855F7"/>
+      <circle cx="56" cy="2" r="2" fill="#F472B6"/>
+    </g>
+    <g transform="translate(100, 12)">
+      <circle cx="8" cy="2" r="2" fill="#818CF8"/>
+      <circle cx="16" cy="2" r="2" fill="#FCD34D"/>
+      <circle cx="24" cy="2" r="2" fill="#22D3EE"/>
+      <circle cx="32" cy="2" r="2" fill="#EF4444"/>
+      <circle cx="40" cy="2" r="2" fill="#34D399"/>
+      <circle cx="48" cy="2" r="2" fill="#A855F7"/>
+      <circle cx="56" cy="2" r="2" fill="#F472B6"/>
+    </g>
+    <g transform="translate(195, 12)">
+      <circle cx="8" cy="2" r="2" fill="#818CF8"/>
+      <circle cx="16" cy="2" r="2" fill="#34D399"/>
+      <circle cx="24" cy="2" r="2" fill="#34D399"/>
+      <circle cx="32" cy="2" r="2" fill="#34D399"/>
+      <circle cx="40" cy="2" r="2" fill="#22D3EE"/>
+      <circle cx="48" cy="2" r="2" fill="#EF4444"/>
+      <circle cx="56" cy="2" r="2" fill="#34D399"/>
+    </g>
+  </g>
+
+  <!-- Arrow middle → right -->
+  <path d="M 620 175 L 680 175" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 3" fill="none" marker-end="url(#arrowS)"/>
+
+  <!-- ── RIGHT: outputs ── -->
+  <g transform="translate(680, 90)">
+    <text x="120" y="0" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#94A3B8" letter-spacing="1.5">CONSENSUS OUTPUT</text>
+
+    <!-- Big probability card -->
+    <rect x="0" y="22" width="240" height="74" rx="10" fill="#0F172A" stroke="#A78BFA" stroke-opacity="0.4"/>
+    <text x="120" y="42" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94A3B8" letter-spacing="1.2">PROBABILITY (LONG)</text>
+    <text x="120" y="72" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="28" font-weight="800" fill="#34D399">62%</text>
+    <text x="120" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748B">24 personas · 3 rounds · on-device</text>
+
+    <!-- EV + Kelly -->
+    <g transform="translate(0, 106)">
+      <rect x="0" y="0" width="115" height="52" rx="8" fill="#0F172A" stroke="#10B981" stroke-opacity="0.3"/>
+      <text x="58" y="16" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#64748B" letter-spacing="1.2">EV / $100</text>
+      <text x="58" y="36" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700" fill="#10B981">+$2.40</text>
+      <text x="58" y="48" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#64748B">expected</text>
+
+      <rect x="125" y="0" width="115" height="52" rx="8" fill="#0F172A" stroke="#A78BFA" stroke-opacity="0.3"/>
+      <text x="182" y="16" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#64748B" letter-spacing="1.2">HALF-KELLY</text>
+      <text x="182" y="36" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700" fill="#A78BFA">6.0%</text>
+      <text x="182" y="48" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#64748B">of bankroll</text>
+    </g>
+
+    <text x="120" y="180" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#64748B">not advice — decision aid</text>
+  </g>
+
+  <!-- Footer ribbon -->
+  <rect x="40" y="370" width="880" height="32" rx="6" fill="#0F172A" stroke="#1E293B"/>
+  <text x="60" y="390" font-family="JetBrains Mono, monospace" font-size="10" fill="#94A3B8">Runs 100% in browser via WebGPU · no data leaves your device · inspired by DeGroot + MiroFish</text>
+</svg>

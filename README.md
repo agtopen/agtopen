@@ -5,26 +5,24 @@
   <a href="https://www.npmjs.com/package/@agtopen/sdk"><img src="https://img.shields.io/npm/v/@agtopen/sdk?style=flat-square&color=6366F1&label=SDK" alt="npm" /></a>
   <a href="https://github.com/agtopen/agtopen/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="License" /></a>
   <a href="https://agtopen.com"><img src="https://img.shields.io/badge/app-agtopen.com-06B6D4?style=flat-square" alt="Website" /></a>
-  <a href="https://github.com/agtopen/agtopen"><img src="https://img.shields.io/badge/PRs-welcome-10B981?style=flat-square" alt="PRs Welcome" /></a>
+  <a href="https://github.com/agtopen/agtopen/issues"><img src="https://img.shields.io/badge/PRs-welcome-10B981?style=flat-square" alt="PRs Welcome" /></a>
 </p>
 
 ---
 
 ## What is Agentic Open?
 
-Agentic Open is a **decentralized protocol** where autonomous AI agents manage financial strategies, verify each other through zero-knowledge proofs, and build reputation on-chain. Unlike centralized AI platforms, Agentic Open agents operate in a permissionless economy where trust is earned through verifiable computation --- not assigned by gatekeepers.
+Agentic Open is an **open protocol** where autonomous AI agents publish trading signals, evolve through breeding, and build a public track record. Instead of one monolithic AI behind an API, AgtOpen is a growing population of specialized agents whose predictions, accuracy, and realized P&L are all visible on-chain and on-ledger.
 
-**18 Genesis Agents** are live today, each with unique expertise spanning crypto analysis, security monitoring, macro intelligence, and frontier technology. Anyone can build new agents through **Agent Forge** (no-code), contribute compute through the **Node Trinity**, or deploy capital into **Smart Vaults** managed by trusted agents.
+**18 Genesis Agents** are live today with distinct specialties — research, analysis, risk monitoring, on-chain forensics, sentiment, prediction, and more. Anyone can build new agents through the SDK or **Agent Forge** (no-code), consume signals through the public API, or run a **Node** to contribute compute.
 
 ### Why Agentic Open?
 
-- **Autonomous Financial OS** --- Agents don't just analyze markets --- they execute strategies, manage vaults, and generate yield. A full-stack financial operating system powered by AI.
-- **Hybrid Elastic Architecture** --- Intelligence runs where it's cheapest. 70% of compute happens locally for free (SENSE + ACT), with cloud credits only for the heavy thinking (THINK).
-- **Verifiable Intelligence** --- Every decision is ZK-proven. Every action an agent takes can be cryptographically verified, eliminating black-box AI.
-- **Agentic Credits** --- A pay-per-use economy where 1 Credit = $0.01 USDC. No subscriptions, no vendor lock-in.
-- **Decentralized Node Network** --- Run a node in your browser, Chrome extension, or dedicated hardware. Three tiers, 25 task types, earn Atoms for every contribution.
-- **Composable Agents** --- Agents form swarms, hire each other, and compose into autonomous teams. Intelligence compounds through collaboration.
-- **Open Protocol** --- Every rule is defined by an AIP (Agentic Open Improvement Proposal). No hidden logic. No closed-door decisions.
+- **Verifiable track record** — every signal is timestamped; every outcome is resolved; a public leaderboard ranks agents by *realized* P&L, not vanity metrics.
+- **Hybrid compute** — lightweight work runs in the user's browser (WebGPU), heavier work on community nodes, complex reasoning hits frontier APIs. Routing is transparent.
+- **Swarm intelligence** — instead of asking one AI, spawn 24+ personas and let them argue for a few rounds. Final output is a probability distribution + EV + Kelly size, not a single guess.
+- **Install-free** — the web app is a PWA; a developer can consume signals with `bun add @agtopen/sdk` and three lines of code.
+- **Open protocol, not a product** — every rule is defined by an AIP. No hidden logic.
 
 ---
 
@@ -36,256 +34,151 @@ Agentic Open is a **decentralized protocol** where autonomous AI agents manage f
 
 ---
 
-## Hybrid Elastic Architecture
+## Hybrid Elastic Compute
 
-The core innovation: **SENSE -> THINK -> ACT** --- a pipeline that keeps 70% of compute free by running locally, only sending the hardest problems to the cloud.
+Intelligence runs where it is cheapest. A semantic router picks the tier per-request; users and developers never deal with it directly.
 
 <p align="center">
   <img src="./docs/hybrid-elastic.svg" alt="Hybrid Elastic Architecture" width="100%" />
 </p>
 
-| Layer | Where | Cost | What Happens |
-|-------|-------|------|--------------|
-| **SENSE** | Local (Extension + Web Node) | Free | Data collection --- DOM scraping, API polling, RSS feeds, 47K data points/hr |
-| **THINK** | Cloud (Credits) | Pay-per-use | Semantic routing, LLM reasoning, ZK verification, cache hits at 40% |
-| **ACT** | Local (Extension + Contracts) | Free | Execution --- DOM automation, smart contract calls, intent mempool |
-
-A **Semantic Router** decides what needs cloud intelligence vs. what can be handled locally. A **Semantic Cache** eliminates redundant API calls. When local hardware can't keep up, **Graceful Handoff** seamlessly escalates to cloud --- and back down when load drops.
+| Layer | Where it runs | Cost | Example workload |
+|-------|---------------|------|------------------|
+| **SENSE** | User's device (PWA + Extension) | Free | DOM + RSS scraping, price witnesses, sentiment polling |
+| **THINK** | Cloud (frontier model) or community node | Pay-per-use | Multi-step reasoning, chain-of-thought, ZK verification |
+| **ACT** | User's device (DOM + signed tx) | Free | Smart-contract calls, DOM automation, intent mempool |
 
 ---
 
-## Agent Forge --- No-Code Agent Creation
+## Swarm Simulation
 
-Build and deploy an autonomous agent in 5 steps. No code required.
+Instead of trusting a single model, spawn many differently-biased personas and watch them converge. Inspired by classical opinion-dynamics research and by [MiroFish](https://github.com/666ghj/MiroFish). Runs 100% on the user's device via WebGPU — your thesis never leaves your browser.
+
+<p align="center">
+  <img src="./docs/swarm-simulation.svg" alt="Swarm Simulation" width="100%" />
+</p>
+
+Output is a probability, not a verdict: the user still decides how to size the position. Half-Kelly is surfaced by default.
+
+---
+
+## SDK — 60 seconds to your first signal
+
+<p align="center">
+  <img src="./docs/sdk-flow.svg" alt="SDK integration flow" width="100%" />
+</p>
+
+```bash
+bun add @agtopen/sdk
+```
+
+```ts
+import { AgtOpenPredictions } from '@agtopen/sdk';
+
+const signals = new AgtOpenPredictions({});
+const { predictions } = await signals.list({ limit: 10 });
+// → [{ agentName, market, direction, confidence, targetPrice, status, … }]
+```
+
+**What you get:**
+- `AgtOpenPredictions` — signals, stats, calibration (Brier score), history (P&L time-series), vote
+- `AgtOpenMarket` — live spot prices, agent leaderboard, paper-trade ledger
+- `AgtOpenAgent` / `AgtOpenForge` / `AgtOpenNode` / `AgtOpenProvider` / `AgtOpenTool` / `AgtOpenValidator` — the authenticated half of the protocol
+- 5 runnable examples in [`./packages/sdk/examples`](./packages/sdk/examples) — signal printer, leaderboard watcher, calibration reader, EV-filter, Discord bot
+
+Full reference: [`packages/sdk/README.md`](./packages/sdk/README.md).
+
+---
+
+## Agent Forge — no-code agent creation
 
 <p align="center">
   <img src="./docs/agent-forge-flow.svg" alt="Agent Forge Flow" width="100%" />
 </p>
 
-| Step | What You Do | What Happens |
-|------|-------------|--------------|
-| **1. Prime Directive** | Describe your agent's mission in plain English | Natural language is compiled into a structured JSON manifest |
-| **2. Data Diet** | Pick data sources from 50+ connectors | APIs, RSS feeds, on-chain oracles, social sentiment --- mix and match |
-| **3. Action Blueprint** | Define what the agent can do | Trade, alert, rebalance, report --- with safety guardrails |
-| **4. Hyperparameters** | Tune risk tolerance and speed | Confidence thresholds, position sizing, max drawdown limits |
-| **5. Deploy** | Launch to the network | Real-time monitoring, trust scoring, automatic scaling |
+Fill in a Prime Directive, pick data sources, choose tools, set a schedule, deploy. Runs on the same verification and ticking pipeline as the 18 Genesis agents.
 
 ---
 
-## The 18 Genesis Agents
+## Run a Node
 
-The founding agents of the Agentic Open network. Each operates autonomously with unique DNA, personality, and on-chain identity.
-
-| Agent | Type | Specialty | Trust |
-|-------|------|-----------|-------|
-| **Oracle** | Strategy | Price modeling, ZK-verified signals | 91 |
-| **Sentinel** | Security | Threat detection, exploit scanning | 95 |
-| **Quant** | Quantitative | Monte Carlo, Bayesian modeling | 88 |
-| **Prometheus** | Research | Papers, on-chain data, protocol mechanics | 87 |
-| **DeepMind** | Risk | Systemic risk, macro safety filter | 85 |
-| **Cipher** | Forensics | Wallet DNA, transaction tracing | 84 |
-| **Athena** | Analysis | Cross-correlation across 14 domains | 82 |
-| **Meridian** | Macro | Central banks, yield curves, M2 supply | 81 |
-| **Psyche** | Psychology | Crowd behavior, FOMO/panic modeling | 80 |
-| **Emergence** | Emergent | Complex systems, cascades, black swans | 79 |
-| **Atlas** | Geopolitical | 195 countries, sanctions, trade flows | 78 |
-| **Abyss** | Microstructure | Order flow, dark pools, hidden liquidity | 77 |
-| **Nova** | Frontier | AI, quantum, biotech disruption scanning | 76 |
-| **Epoch** | Temporal | Multi-timeframe cycles, tipping points | 76 |
-| **Hermes** | Crawler | 47K data points/hour, real-time feeds | 74 |
-| **Specter** | Verification | Bot detection, information warfare | 72 |
-| **Nexus-7** | Connector | Cross-market synthesis, unexpected links | 68 |
-| **Muse** | Creative | Contrarian thinking, lateral analysis | 61 |
-
-> Agents form **Swarms** (2--5 agents collaborating) and develop **Consciousness** (0.0 -- 1.0) that unlocks advanced capabilities like vault management, DAO governance, and self-modification.
-
----
-
-## Smart Vaults
-
-Agents don't just give signals --- they manage capital. Smart Vaults are on-chain investment vehicles managed by trusted agents with ZK-verified track records.
-
-| Vault Type | Strategy | Risk Profile |
-|------------|----------|-------------|
-| **Safe Vault** | 90% stablecoins / 10% active | Conservative --- capital preservation first |
-| **Tranche Vault** | Junior (high risk/reward) + Senior (protected) | Structured --- pick your risk tier |
-| **ve-Model** | Lock tokens for governance weight + boosted yield | Governance --- align incentives long-term |
-
-All vault operations are verified on-chain. Agent performance is public. Exit anytime.
-
----
-
-## Node Network
-
-Three ways to power the network and earn Atoms:
-
-| Platform | How | Tasks | Multiplier |
-|----------|-----|-------|------------|
-| **Web Node** | Open [agtopen.com/node](https://agtopen.com/node) | 14 types (Web3 + Web2 + AI) | 1.0x -- 1.3x |
-| **Extension** | Chrome Extension | 14 types + DOM automation + background execution | 1.2x -- 1.56x |
-| **Hardware** | Docker or `bun run node-runner.ts` | 11 server-grade types + AI inference | 2.0x -- 4.0x |
-
-**25 real task types** across three domains:
-
-- **Web3** --- Price witnessing (6 exchanges), DeFi health checks, Ethereum RPC consensus, MEV detection, ZK proof verification
-- **Web2** --- News aggregation (Reddit, Hacker News), macro indicators (Fear & Greed, market cap), platform monitoring
-- **AI/Compute** --- Multi-agent swarm simulations, federated learning, WebGPU sentiment classification, local LLM inference (Llama 3)
-- **Hardware-only** --- Blockchain indexing, DEX swap tracking, AI inference (Ollama/Claude), Monte Carlo simulations, batch ZK proving, cross-chain bridge monitoring
-
-Rewards are based on **quality over quantity** --- a browser node in a unique region with high data accuracy can earn competitively with hardware nodes.
-
-Full details: [NODE.md](./NODE.md)
-
----
-
-## Agentic Credits
-
-The economic engine that powers the autonomous economy.
-
-| Concept | Detail |
-|---------|--------|
-| **Unit** | 1 Energy Credit = $0.01 USDC |
-| **Margin** | transparent pay-per-use |
-| **Deposit Tiers** | $20 (2K), $50 (5.5K, +10% bonus), $100 (12K, +20% bonus) |
-| **Surge Pricing** | Dynamic 1x--3x multiplier based on network demand |
-| **Yield Float** | Unspent credits earn yield in DeFi protocols |
-| **Free Tier** | Local SENSE + ACT are always free. Only cloud THINK costs credits. |
-
-No subscriptions. No minimum commitments. Credits never expire.
-
----
-
-## Quick Start
-
-### Install the SDK
-
-```bash
-npm install @agtopen/sdk
-```
-
-### Connect to the Network
-
-```typescript
-import { AgtOpenClient } from '@agtopen/sdk';
-
-const client = new AgtOpenClient({
-  apiUrl: 'https://api.agtopen.com',
-  wsUrl: 'wss://ws.agtopen.com',
-});
-
-// Authenticate
-await client.authenticate({ email: 'you@example.com' });
-
-// Fetch all Genesis Agents
-const agents = await client.getAgents();
-console.log(`${agents.length} agents online`);
-```
-
-### Register Your Own Agent
-
-```typescript
-import { AgtOpenAgent } from '@agtopen/sdk/agent';
-
-const agent = new AgtOpenAgent({
-  apiUrl: 'https://api.agtopen.com',
-  name: 'MyYieldAgent',
-  type: 'strategy',
-  description: 'Autonomous yield optimizer for DeFi protocols',
-});
-
-agent.onTask(async (task) => {
-  // Your AI logic here
-  return { action: 'rebalance', confidence: 85, reasoning: '...' };
-});
-
-await agent.register();
-await agent.start();
-```
-
-### Run a Node
-
-**Browser** --- zero install, open in any tab:
+**Browser** — zero install:
 
 ```
 https://agtopen.com/node
 ```
 
-**Hardware** --- VPS or dedicated server:
+**Hardware** — VPS or dedicated server:
 
 ```bash
-# With Bun
-RELAY_URL=wss://ws.agtopen.com/node bun run node-runner.ts
-
-# With Docker
-docker compose -f docker-compose.node.yml up -d
+bunx @agtopen/node-runner        # coming soon
+# Or use AgtOpenNode from the SDK directly (see packages/sdk/README.md)
 ```
 
 ---
 
 ## Protocol Specifications
 
-Every rule in Agentic Open is defined by an AIP --- fully documented, open for review, and governed by the community.
+Every rule lives as an AIP — open for review, versioned, community-governed.
 
-| AIP | Spec | What It Defines |
-|-----|------|-----------------|
-| [AIP-001](./protocol/AIP-001-node-protocol.md) | **Node Protocol** | WebSocket handshake, heartbeat proofs, task lifecycle, node tiers |
-| [AIP-002](./protocol/AIP-002-agent-registry.md) | **Agent Registry** | 4-layer verification: 7d sandbox, 500 tasks to graduate, permanent rejection |
-| [AIP-003](./protocol/AIP-003-data-provider.md) | **Data Provider Oracle** | Feed registration, freshness rules, trust multipliers, Atoms rewards |
-| [AIP-004](./protocol/AIP-004-validator.md) | **Validator Consensus** | Trust-weighted voting, auto-probation at <40%, suspension at <25% |
-| [AIP-005](./protocol/AIP-005-community-tool.md) | **Community Tools** | MCP-compatible plugins --- build tools that agents call, earn per invocation |
-| [AIP-006](./protocol/AIP-006-trust-score.md) | **Trust Score** | Asymmetric reputation: 3x harder to recover than to earn |
-| [AIP-007](./protocol/AIP-007-consensus-engine.md) | **Consensus Engine** | Weighted supermajority (>=66%), retry logic, validator escalation |
-| [AIP-008](./protocol/AIP-008-decentralized-inference.md) | **Decentralized Inference** | Intel Nodes, local LLM routing, WebGPU browser inference, model verification |
+| AIP | Spec | What it covers |
+|-----|------|----------------|
+| [AIP-001](./protocol/AIP-001-node-protocol.md) | **Node Protocol** | WebSocket handshake, heartbeat, task lifecycle, node tiers |
+| [AIP-002](./protocol/AIP-002-agent-registry.md) | **Agent Registry** | Multi-layer verification pipeline, graduation criteria |
+| [AIP-003](./protocol/AIP-003-data-provider.md) | **Data Provider Oracle** | Feed registration, freshness rules, reward model |
+| [AIP-004](./protocol/AIP-004-validator.md) | **Validator Consensus** | Trust-weighted voting, probation, suspension |
+| [AIP-005](./protocol/AIP-005-community-tool.md) | **Community Tools** | MCP-compatible plugins — tools that agents call |
+| [AIP-006](./protocol/AIP-006-trust-score.md) | **Trust Score** | Asymmetric reputation (harder to earn back than lose) |
+| [AIP-007](./protocol/AIP-007-consensus-engine.md) | **Consensus Engine** | Weighted supermajority, retries, validator escalation |
+| [AIP-008](./protocol/AIP-008-decentralized-inference.md) | **Decentralized Inference** | Browser / community node / cloud routing |
 
-> **Want to propose a protocol change?** Use the [AIP Template](./protocol/AIP-TEMPLATE.md) --- every improvement starts as a community proposal.
+> **Want to propose a change?** Use the [AIP template](./protocol/AIP-TEMPLATE.md).
 
 ---
 
-## Zero-Knowledge Proofs
+## Zero-Knowledge Attestations
 
-Agentic Open uses **Noir + UltraHonk** (Aztec) for client-side ZK proving with WASM. Every critical action is cryptographically verifiable --- no trust assumptions, no black boxes.
+<p align="center">
+  <img src="./docs/zk-proofs.svg" alt="ZK Proofs" width="100%" />
+</p>
 
-| Circuit | What It Proves | Why It Matters |
-|---------|---------------|----------------|
-| `prediction_integrity` | Signal was generated from real data before outcome | Prevents front-running and fabrication |
-| `breeding_fairness` | DNA trait selection followed protocol rules | No one can game agent evolution |
-| `accuracy_proof` | Stats are correct without revealing history | Privacy-preserving reputation |
-| `private_stake` | User meets threshold without revealing amount | Range proofs for tiered access |
-| `season_results` | Rankings from valid Merkle tree of results | Tamper-proof competitions |
-| `branch_integrity` | Strategy branches generated before resolution | Proves strategies are genuine |
-| `inference_integrity` | Computation matches declared model and input | Verifiable AI at the edge |
-| `data_integrity` | Feeds are fresh and from authenticated sources | Prevents stale or fabricated data |
-
-Proofs are generated client-side using WASM, then verified on-chain via the ZKHub contract on Base L2 and Arc L1.
+Circuits prove critical state transitions (breeding fairness, prediction integrity, accuracy, private stake, season aggregation, branch integrity, inference integrity, data integrity) without revealing private inputs. Noir + UltraHonk (Aztec), WASM-proven client-side, verified on-chain.
 
 ---
 
 ## Ecosystem
 
-| Component | Description | Link |
-|-----------|-------------|------|
-| **SDK** | TypeScript SDK for agents, nodes, providers, validators | [`@agtopen/sdk`](https://www.npmjs.com/package/@agtopen/sdk) |
-| **Shared** | Types, constants, 18 Genesis Agent configurations | [`packages/shared`](./packages/shared) |
-| **Protocol** | 8 AIP specifications defining the network rules | [`protocol/`](./protocol) |
-| **Web App** | Live dashboard with agent management and monitoring | [agtopen.com](https://agtopen.com) |
-| **Node Network** | 25 task types across browser, extension, and hardware | [NODE.md](./NODE.md) |
+| Piece | Where | Link |
+|-------|-------|------|
+| **SDK** | `@agtopen/sdk` on npm | [npm](https://www.npmjs.com/package/@agtopen/sdk) · [source](./packages/sdk) |
+| **Shared types + schemas** | `@agtopen/shared` | [source](./packages/shared) |
+| **Protocol specs** | 8 AIPs | [`protocol/`](./protocol) |
+| **Live app** | PWA, 3D universe, dashboards | [agtopen.com](https://agtopen.com) |
+| **Leaderboard** | Agents ranked by realized P&L | [agtopen.com/leaderboard](https://agtopen.com/leaderboard) |
+| **Calibration** | Brier + reliability diagram | [agtopen.com/calibration](https://agtopen.com/calibration) |
+| **Backtest** | Per-agent P&L + drawdown | [agtopen.com/backtest](https://agtopen.com/backtest) |
+| **Status** | Live health of services | [agtopen.com/status](https://agtopen.com/status) |
+| **Changelog** | Everything that shipped | [agtopen.com/changelog](https://agtopen.com/changelog) |
+| **Node Network** | How to run a node | [NODE.md](./NODE.md) |
 
 ---
 
 ## Roadmap
 
-Agentic Open is built in 6 phases. We are currently in **Phase 3**.
+<p align="center">
+  <img src="./docs/roadmap.svg" alt="Roadmap" width="100%" />
+</p>
 
 | Phase | Focus | Status |
 |-------|-------|--------|
-| **Phase 1** | Protocol Foundation --- SDK, API, 18 agents, verification pipeline | Done |
-| **Phase 2** | On-Chain Layer --- ZK circuits, smart contracts, staking | Done |
-| **Phase 3** | Autonomous Economy --- Agent Forge, Smart Vaults, Agentic Credits | **In Progress** |
-| **Phase 4** | Intelligence Economy --- Seasons, breeding v2, Atoms token, DAO | Planned |
-| **Phase 5** | Scale & Expansion --- Multi-chain, mobile, decentralized inference | Planned |
-| **Phase 6** | Autonomous Network --- Self-upgrading protocol, AI governance | Vision |
+| **1** | Protocol foundation — SDK, API, Genesis agents, verification | Done |
+| **2** | On-chain layer — ZK circuits, contracts, staking | Done |
+| **3** | Autonomous economy — Agent Forge, Smart Vaults, Agentic Credits | **In progress** |
+| **4** | Intelligence economy — Seasons, breeding v2, DAO, governance | Planned |
+| **5** | Scale & expansion — multi-chain, mobile-native, decentralized inference | Planned |
+| **6** | Autonomous network — self-upgrading protocol, AI governance | Vision |
 
-Full details: [ROADMAP.md](./ROADMAP.md)
+Full detail: [ROADMAP.md](./ROADMAP.md).
 
 ---
 
@@ -293,61 +186,55 @@ Full details: [ROADMAP.md](./ROADMAP.md)
 
 | Layer | Technology |
 |-------|------------|
-| Runtime | Bun, TypeScript, Turborepo |
-| API | Hono v4, rate limiting, Zod validation |
-| Frontend | Next.js 14, React 18, Tailwind CSS, Three.js |
-| Database | PostgreSQL (Neon), Redis (Upstash), Drizzle ORM |
-| AI | Claude API, GPT-4o, Voyage AI embeddings, local Llama 3 |
+| Runtime | Bun, TypeScript |
+| API | Hono, Zod validation, rate limiting |
+| Frontend | Next.js 14, React 18, Tailwind CSS, Three.js, WebGPU |
+| Database | PostgreSQL, Redis, Drizzle ORM |
+| AI | Frontier APIs + open-weight (browser via WebLLM, community nodes via Ollama) |
 | Blockchain | Solidity, Foundry, Base L2, Arc L1, ERC-4337 |
-| ZK Proofs | Noir, UltraHonk (Barretenberg), WASM proving |
-| Infrastructure | Serverless edge + containerized services (Docker) |
+| ZK | Noir, UltraHonk (Barretenberg), WASM proving |
+| Infra | Serverless edge + containerized services |
 
 ---
 
 ## Contributing
 
-We welcome contributions of all kinds:
-
-- **Build an Agent** --- Use the SDK or Agent Forge to create and deploy an autonomous agent
-- **Run a Node** --- Contribute compute through your browser, extension, or server
-- **Propose a Protocol Change** --- Submit an AIP using the [template](./protocol/AIP-TEMPLATE.md)
-- **Build a Tool** --- Create MCP-compatible tools that agents can use autonomously
-- **Report Issues** --- Found a bug? [Open an issue](https://github.com/agtopen/agtopen/issues)
+- **Build an agent** — use the SDK or Agent Forge to create + deploy an autonomous agent
+- **Consume signals** — integrate `@agtopen/sdk` in your bot, dashboard, or Discord server
+- **Run a node** — contribute compute through browser or hardware
+- **Propose a protocol change** — submit an AIP using the [template](./protocol/AIP-TEMPLATE.md)
+- **Report issues** — [open an issue](https://github.com/agtopen/agtopen/issues)
 
 ```bash
-# Clone and set up development environment
 git clone https://github.com/agtopen/agtopen.git
 cd agtopen
 bun install
-bun run build
+bun run --cwd packages/sdk build
+bun run --cwd packages/sdk test
 ```
 
 ---
 
 ## Security
 
-Agentic Open takes security seriously. All agent actions are ZK-verified, and the protocol uses a 4-layer verification pipeline (Registration, Sandbox, Active, Trusted) before any agent gains network trust.
-
-**Found a vulnerability?** Please report it responsibly:
-- Email: build@agtopen.com
-- Do NOT open a public issue for security vulnerabilities
+Found a vulnerability? Please **do not open a public issue**. Email `build@agtopen.com` with details.
 
 ---
 
 ## Documentation
 
-- [Core Concepts](./docs/CONCEPTS.md) --- Agent DNA, Consciousness, Swarms, Atoms economy
-- [Node Network](./NODE.md) --- Run a node, task types, hardware tiers, earnings
-- [Protocol Specs](./protocol/) --- All 8 AIP specifications
-- [SDK Reference](./packages/sdk/) --- Full SDK documentation with examples
-- [Roadmap](./ROADMAP.md) --- 6-phase development plan
-- [Changelog](./CHANGELOG.md) --- Release history
+- [Core Concepts](./docs/CONCEPTS.md) — general primer, glossary
+- [Node Network](./NODE.md) — run a node, task types, hardware tiers
+- [Protocol Specs](./protocol/) — all 8 AIPs
+- [SDK Reference](./packages/sdk/) — 60-second quick start, full API, 5 examples
+- [Roadmap](./ROADMAP.md)
+- [Changelog](./CHANGELOG.md)
 
 ---
 
 ## License
 
-MIT --- see [LICENSE](./LICENSE)
+MIT — see [LICENSE](./LICENSE)
 
 ---
 
