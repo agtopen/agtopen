@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 340" fill="none" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="960" y2="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A0A12"/>
+      <stop offset="100%" stop-color="#0F0F1A"/>
+    </linearGradient>
+    <linearGradient id="emeraldG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#34D399"/><stop offset="100%" stop-color="#10B981"/></linearGradient>
+    <linearGradient id="cyanG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#22D3EE"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient>
+    <linearGradient id="amberG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FCD34D"/><stop offset="100%" stop-color="#F59E0B"/></linearGradient>
+    <linearGradient id="purpleG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#C084FC"/><stop offset="100%" stop-color="#A855F7"/></linearGradient>
+    <linearGradient id="roseG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F472B6"/><stop offset="100%" stop-color="#EC4899"/></linearGradient>
+    <linearGradient id="progressLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10B981"/><stop offset="50%" stop-color="#34D399"/><stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="960" height="340" fill="url(#bg)"/>
+
+  <!-- Title -->
+  <text x="480" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#E2E8F0" letter-spacing="2.5">ROADMAP</text>
+  <text x="480" y="50" text-anchor="middle" font-size="9" fill="#64748B">six phases from protocol foundation to autonomous network</text>
+
+  <!-- Timeline base -->
+  <line x1="100" y1="130" x2="860" y2="130" stroke="#1E293B" stroke-width="2"/>
+  <!-- Progress fill (phases 1-3) -->
+  <line x1="100" y1="130" x2="480" y2="130" stroke="url(#progressLine)" stroke-width="3"/>
+
+  <!-- Phase circles -->
+  <g>
+    <circle cx="100" cy="130" r="11" fill="url(#emeraldG)"/>
+    <text x="100" y="134" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">1</text>
+
+    <circle cx="252" cy="130" r="11" fill="url(#emeraldG)"/>
+    <text x="252" y="134" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">2</text>
+
+    <circle cx="404" cy="130" r="14" fill="url(#cyanG)"/>
+    <circle cx="404" cy="130" r="20" fill="none" stroke="#22D3EE" stroke-width="1" opacity="0.4"/>
+    <text x="404" y="134" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">3</text>
+
+    <circle cx="556" cy="130" r="11" fill="none" stroke="#F59E0B" stroke-width="2"/>
+    <text x="556" y="134" text-anchor="middle" font-size="9" font-weight="700" fill="#FCD34D">4</text>
+
+    <circle cx="708" cy="130" r="11" fill="none" stroke="#A855F7" stroke-width="2"/>
+    <text x="708" y="134" text-anchor="middle" font-size="9" font-weight="700" fill="#C084FC">5</text>
+
+    <circle cx="860" cy="130" r="11" fill="none" stroke="#EC4899" stroke-width="2"/>
+    <text x="860" y="134" text-anchor="middle" font-size="9" font-weight="700" fill="#F472B6">6</text>
+  </g>
+
+  <!-- Phase cards -->
+  <g font-size="10">
+    <!-- P1 Done -->
+    <rect x="40" y="160" width="120" height="85" rx="8" fill="#042f2e" stroke="#10B981" stroke-opacity="0.35"/>
+    <text x="100" y="182" text-anchor="middle" font-size="10" font-weight="700" fill="#6EE7B7">Protocol</text>
+    <text x="100" y="196" text-anchor="middle" font-size="10" font-weight="700" fill="#6EE7B7">Foundation</text>
+    <text x="100" y="215" text-anchor="middle" font-size="8.5" fill="#94A3B8">SDK · API · 18 Agents</text>
+    <text x="100" y="227" text-anchor="middle" font-size="8.5" fill="#94A3B8">Verification pipeline</text>
+    <rect x="65" y="235" width="70" height="5" rx="2.5" fill="#10B981"/>
+
+    <!-- P2 Done -->
+    <rect x="192" y="160" width="120" height="85" rx="8" fill="#042f2e" stroke="#10B981" stroke-opacity="0.35"/>
+    <text x="252" y="182" text-anchor="middle" font-size="10" font-weight="700" fill="#6EE7B7">On-Chain</text>
+    <text x="252" y="196" text-anchor="middle" font-size="10" font-weight="700" fill="#6EE7B7">Layer</text>
+    <text x="252" y="215" text-anchor="middle" font-size="8.5" fill="#94A3B8">ZK Circuits · Contracts</text>
+    <text x="252" y="227" text-anchor="middle" font-size="8.5" fill="#94A3B8">Staking · DAO</text>
+    <rect x="217" y="235" width="70" height="5" rx="2.5" fill="#10B981"/>
+
+    <!-- P3 In Progress (bigger card, highlighted) -->
+    <rect x="342" y="154" width="124" height="97" rx="9" fill="#083344" stroke="url(#cyanG)" stroke-width="1.5"/>
+    <text x="404" y="177" text-anchor="middle" font-size="11" font-weight="800" fill="#67E8F9">Platform</text>
+    <text x="404" y="191" text-anchor="middle" font-size="11" font-weight="800" fill="#67E8F9">&amp; App</text>
+    <text x="404" y="210" text-anchor="middle" font-size="8.5" fill="#94A3B8">Web App · Predictions</text>
+    <text x="404" y="222" text-anchor="middle" font-size="8.5" fill="#94A3B8">Analytics · Dev Portal</text>
+    <g transform="translate(369, 232)">
+      <rect x="0" y="0" width="70" height="12" rx="6" fill="#0E7490"/>
+      <text x="35" y="9" text-anchor="middle" font-size="8" font-weight="700" fill="#CFFAFE" letter-spacing="1">IN PROGRESS</text>
+    </g>
+
+    <!-- P4 Planned -->
+    <rect x="496" y="160" width="120" height="85" rx="8" fill="#1c1917" stroke="#F59E0B" stroke-opacity="0.35"/>
+    <text x="556" y="182" text-anchor="middle" font-size="10" font-weight="700" fill="#FCD34D">Intelligence</text>
+    <text x="556" y="196" text-anchor="middle" font-size="10" font-weight="700" fill="#FCD34D">Economy</text>
+    <text x="556" y="215" text-anchor="middle" font-size="8.5" fill="#94A3B8">Seasons · Breeding v2</text>
+    <text x="556" y="227" text-anchor="middle" font-size="8.5" fill="#94A3B8">DAO · Governance</text>
+    <rect x="481" y="235" width="150" height="5" rx="2.5" fill="none" stroke="#F59E0B" stroke-opacity="0.35"/>
+
+    <!-- P5 Planned -->
+    <rect x="648" y="160" width="120" height="85" rx="8" fill="#1e1b4b" stroke="#A855F7" stroke-opacity="0.35"/>
+    <text x="708" y="182" text-anchor="middle" font-size="10" font-weight="700" fill="#C4B5FD">Scale &amp;</text>
+    <text x="708" y="196" text-anchor="middle" font-size="10" font-weight="700" fill="#C4B5FD">Expansion</text>
+    <text x="708" y="215" text-anchor="middle" font-size="8.5" fill="#94A3B8">Multi-chain · Mobile</text>
+    <text x="708" y="227" text-anchor="middle" font-size="8.5" fill="#94A3B8">A2A Protocol · TEE</text>
+    <rect x="633" y="235" width="150" height="5" rx="2.5" fill="none" stroke="#A855F7" stroke-opacity="0.35"/>
+
+    <!-- P6 Vision -->
+    <rect x="800" y="160" width="120" height="85" rx="8" fill="#500724" stroke="#EC4899" stroke-opacity="0.35"/>
+    <text x="860" y="182" text-anchor="middle" font-size="10" font-weight="700" fill="#F9A8D4">Autonomous</text>
+    <text x="860" y="196" text-anchor="middle" font-size="10" font-weight="700" fill="#F9A8D4">Network</text>
+    <text x="860" y="215" text-anchor="middle" font-size="8.5" fill="#94A3B8">Self-upgrading</text>
+    <text x="860" y="227" text-anchor="middle" font-size="8.5" fill="#94A3B8">AI Governance</text>
+    <rect x="785" y="235" width="150" height="5" rx="2.5" fill="none" stroke="#EC4899" stroke-opacity="0.35"/>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(310, 285)" font-size="9" fill="#94A3B8">
+    <circle cx="6" cy="8" r="5" fill="url(#emeraldG)"/><text x="16" y="12">Complete</text>
+    <circle cx="96" cy="8" r="5" fill="url(#cyanG)"/><text x="106" y="12">In Progress</text>
+    <circle cx="196" cy="8" r="5" fill="none" stroke="#F59E0B" stroke-width="2"/><text x="206" y="12">Planned</text>
+    <circle cx="276" cy="8" r="5" fill="none" stroke="#EC4899" stroke-width="2"/><text x="286" y="12">Vision</text>
+  </g>
+</svg>
