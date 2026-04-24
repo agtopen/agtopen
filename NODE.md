@@ -1,230 +1,98 @@
 # Node Network
 
-The Agentic Open node network is a decentralized compute layer that powers 18 autonomous AI agents. Nodes collect real-time data, verify predictions, run simulations, and earn Atoms for their contributions.
+The Agentic Open node network is a decentralized compute layer that
+powers 18 Genesis Agents. Nodes collect real-time data, verify
+predictions, run simulations, and earn Atoms for their contributions.
 
-## Three Ways to Run a Node
+---
 
-### 1. Web Node --- Zero Install
+## Three ways to run a node
 
-Open [agtopen.com/node](https://agtopen.com/node) in any browser. No downloads, no configuration. Your idle browser tab becomes a node.
+### 1. Web Node — zero install
+
+Open [agtopen.com/node](https://agtopen.com/node) in any browser.
+No download, no config. Your idle browser tab becomes a node.
 
 - Works on desktop, tablet, and mobile
-- Uses < 3% CPU
-- Earns Atoms every task cycle
+- Uses `< 3%` CPU on typical tasks
+- Progresses through the browser tier ladder (`spark → nexus`)
 
-### 2. Extension Node --- Always On
+### 2. Extension Node — always on
 
-Install the Chrome Extension for persistent background operation. Runs when your browser is open, even when the tab is closed.
+Install the Chrome extension for background execution — runs even
+when the tab is closed.
 
-- Background service worker execution
-- Higher tier eligibility (up to Vortex)
-- 1.2x reward multiplier vs web nodes
+- Background service-worker execution
+- Faster tier progression (higher concurrent task throughput)
+- Same tier ladder as the web node
 
-### 3. Hardware Node --- VPS / Dedicated / GPU
+### 3. Hardware Node — VPS / dedicated / GPU
 
-Run a dedicated node on your own server. Supports Bun CLI, Docker, and systemd.
+Run a dedicated node on your own server. Two supported paths,
+**picked by how you want to deploy**:
+
+| Path | Use when | Env convention |
+|---|---|---|
+| **npm CLI** `@agtopen/node-runner` | You want a single binary, systemd-friendly, auto-OTP login | `AGTOPEN_*` |
+| **Docker** `docker-compose.node.yml` | You want resource limits, restart policies, multi-container | `RELAY_URL`, `NODE_*` |
+
+The two paths run **the same network protocol** but expose different
+env-var names — pick one and stay with it. Mixing (e.g. passing
+`RELAY_URL` to the npm CLI) is the single most common config bug.
+
+Hardware nodes also progress through a **separate hardware-tier
+ladder** (`titan / apex / sovereign`) based on hardware capability +
+contribution score — see [Hardware Tiers](#hardware-tiers).
+
+---
+
+## npm CLI — quickest
+
+Installed via `bunx` or `npx` — no repo clone required:
 
 ```bash
-# Clone and run
-git clone https://github.com/agtopen/agtopen.git && cd agtopen && bun install
-RELAY_URL=wss://ws.agtopen.com/node bunx @agtopen/node-runner  # coming soon; see ./packages/sdk for AgtOpenNode
+bunx @agtopen/node-runner
+# or
+npx @agtopen/node-runner
 ```
 
-Hardware nodes handle compute-intensive tasks like blockchain indexing, AI inference, and ZK proof generation. See [Deploy a Hardware Node](#deploy-a-hardware-node) for full setup.
+First run prompts for email + OTP and caches the JWT at
+`~/.agtopen/token` (chmod 600). Subsequent runs reuse it silently.
 
----
-
-## How Rewards Work
-
-Rewards are calculated using a multi-factor formula that values quality over quantity:
+### Real CLI output
 
 ```
-reward = basePoints x taskWeight x qualityScore x tierMultiplier x uptimeBonus x diminishingFactor
+@agtopen/node-runner — run an AgtOpen compute node
+
+Usage:
+  bunx @agtopen/node-runner [flags]
+
+Flags:
+  --token <jwt>         Auth token (or AGTOPEN_TOKEN env).
+                        If absent, prompts for email + OTP and caches JWT.
+  --api-url <url>       Override REST base (default: https://api.agtopen.com)
+  --relay-url <url>     Override WS relay (default: wss://ws.agtopen.com/node)
+  --tier <name>         browser | extension | hardware (default: hardware)
+  --label <string>      Human-readable label for the leaderboard
+  --logout              Delete the cached token at ~/.agtopen/token and exit
+  --debug               Verbose logging
 ```
 
-**What each factor means:**
+Every flag has an env-var fallback; the set the runner actually reads:
 
-| Factor | Range | Description |
-|--------|-------|-------------|
-| **Base Points** | Fixed per cycle | Every completed task earns a base amount of Atoms |
-| **Task Weight** | 1.0 - 2.5x | Harder tasks pay more (light=1.0, medium=1.5, heavy=2.0, compute=2.5) |
-| **Quality Score** | 0.5 - 1.5x | How accurate your data is compared to network consensus |
-| **Tier Multiplier** | 1.0 - 2.0x | Higher tiers earn more per task (see tier tables below) |
-| **Uptime Bonus** | 1.0 - 1.2x | Consistent uptime streaks are rewarded |
-| **Diminishing Factor** | Logarithmic | Prevents any single node from dominating the reward pool |
+| Env | Default |
+|---|---|
+| `AGTOPEN_TOKEN` | — (prompts if unset) |
+| `AGTOPEN_API_URL` | `https://api.agtopen.com` |
+| `AGTOPEN_RELAY_URL` | `wss://ws.agtopen.com/node` |
+| `AGTOPEN_TIER` | `hardware` |
+| `AGTOPEN_LABEL` | `runner@<hostname>` |
 
-### Quality Bonuses
+For unattended servers, mint a long-lived token at
+[agtopen.com/settings → Node token](https://agtopen.com/settings) and
+export it as `AGTOPEN_TOKEN`.
 
-Your node earns bonus rewards for high-quality contributions:
-
-- **Consensus agreement** --- Your data matches the network majority (+10%)
-- **Regional uniqueness** --- You provide data from an underserved locale (+15%)
-- **First responder** --- You submit results fastest (+5%)
-- **Data freshness** --- Data submitted within seconds of collection (+5%)
-
-A well-run browser node in a unique region can be highly competitive with basic hardware nodes.
-
-### Diminishing Returns
-
-To keep the network fair and prevent any single operator from dominating:
-
-- **First 8 hours/day**: Full reward rate
-- **8-16 hours/day**: 80% reward rate
-- **16-24 hours/day**: 60% reward rate
-
-This ensures that running a single VPS 24/7 does not produce outsized returns compared to active browser node operators.
-
----
-
-## Task Types
-
-Nodes execute tasks assigned by the relay server. Each task feeds real-time data to one or more of the 18 Genesis Agents.
-
-### Browser Tasks (Web Node + Extension)
-
-| Task | Reward Level | What It Does | Feeds Agent |
-|------|-------------|-------------|-------------|
-| **Price Witness** | Low | Fetches BTC/ETH prices from 6 exchanges (Binance, Coinbase, Kraken, OKX, Bybit, KuCoin) | Oracle, Quant |
-| **Protocol Health** | Low | Checks 10 DeFi protocols (Uniswap, Aave, Compound, Lido...) accessibility from your ISP | Sentinel, DeepMind |
-| **Sentiment Pulse** | Medium | Scrapes Reddit + CoinGecko for crypto sentiment in your language/region | Psyche, Specter |
-| **News Relay** | Medium | Aggregates headlines from Reddit, Hacker News, CoinGecko with category + relevance scoring | Atlas, Hermes |
-| **RPC Verify** | Medium | Queries 6 Ethereum RPC endpoints and computes consensus hash | Cipher |
-| **Macro Data** | Medium | Fetches Fear & Greed Index, BTC dominance, market cap, gas prices | Meridian, Quant |
-| **Platform Health** | Low | Checks GitHub, Cloudflare, AWS, Vercel, npm status from your location | Sentinel |
-| **ZK Verify** | High | Verifies zero-knowledge proofs using Web Crypto API (SHA-256, ECDSA, Merkle proofs) | Protocol-wide |
-| **Swarm Slice** | Very High | Runs multi-agent simulation with 7 strategies and GBM price model | Oracle |
-| **Federated Learn** | High | Trains local neural network with differential privacy, sends only gradients | Protocol-wide |
-| **WebGPU Inference** | High | Runs crypto sentiment classifier on GPU (CPU fallback) | Psyche, Oracle |
-| **WebAuthn Attest** | Medium | Hardware-backed identity attestation | Protocol-wide |
-| **MEV Detect** | High | Analyzes Ethereum blocks for sandwich attacks, frontrunning, arbitrage | Cipher, Abyss |
-
-### Hardware Tasks (VPS / GPU Only)
-
-| Task | Reward Level | Min Tier | What It Does |
-|------|-------------|----------|-------------|
-| **Chain Index** | High | Titan | Index blockchain transactions, classify contract calls vs transfers |
-| **DEX Monitor** | High | Titan | Track Uniswap V2/V3 swap events, detect large trades + MEV patterns |
-| **Web Crawl** | Medium | Titan | Scrape crypto news sites (CoinDesk, CoinTelegraph, TheBlock, Decrypt) |
-| **Data Cache** | Medium | Titan | LRU cache layer for market data (512MB, TTL eviction) |
-| **Storage Serve** | Medium | Titan | Content-addressable storage for historical data |
-| **Full Node RPC** | Very High | Apex | Run blockchain RPC proxy with LRU cache |
-| **Block Analytics** | High | Apex | Analyze gas patterns, MEV extraction, builder activity |
-| **Cross-Chain Bridge** | High | Apex | Monitor Stargate, Wormhole, Across bridge volumes + whale movements |
-| **AI Inference** | Very High | Sovereign | Run AI models (Ollama/OpenAI/Claude) for market analysis |
-| **GPU Simulation** | Very High | Sovereign | Monte Carlo simulation with VaR95/CVaR95 (10K+ paths) |
-| **ZK Batch Prove** | Very High | Sovereign | Generate batches of ZK proofs for protocol verification |
-
----
-
-## Browser Tier Progression
-
-Browser nodes progress through tiers by completing tasks:
-
-| Tier | Tasks Required | Tier Multiplier | Unlocked Task Types |
-|------|---------------|----------------|-------------------|
-| **Seed** | 0 | 1.0x | Price Witness, Protocol Health |
-| **Flame** | 100 | 1.1x | + Sentiment Pulse, News Relay |
-| **Storm** | 500 | 1.2x | + RPC Verify, ZK Verify |
-| **Vortex** | 2,000 | 1.3x | + Swarm Slice (all types) |
-
-Extension nodes receive a 1.2x multiplier on top of their browser tier. For example, a Vortex Extension node earns at 1.56x (1.3 x 1.2).
-
----
-
-## Hardware Tiers
-
-Hardware tiers are determined by your node's hardware capability and contribution history. Higher tiers require sustained, reliable operation over time.
-
-| Tier | Type | Hardware Requirements | Contribution Score | Reward Multiplier |
-|------|------|---------------------|-------------------|------------------|
-| **Titan** | VPS | 2 CPU, 4GB RAM, 100GB SSD, 100Mbps | Entry level | 2.0x |
-| **Apex** | Dedicated | 8 CPU, 32GB RAM, 500GB SSD, 1Gbps | Established operator | 3.0x |
-| **Sovereign** | GPU | 8 CPU, 64GB RAM, 1TB NVMe, GPU 8GB+ | Proven track record | 4.0x |
-
-**Contribution Score** is built over time through:
-- Consistent uptime meeting SLA requirements (Titan 95%, Apex 99%, Sovereign 99.5%)
-- High task completion rate
-- Data quality and consensus agreement
-- Duration of reliable operation
-
-New hardware operators start at Titan and advance through demonstrated reliability, not by spending more.
-
----
-
-## Data Flow
-
-```
-Browser/Extension Nodes              Hardware Nodes
-(14 task types)                      (11 task types)
-        |                                   |
-        +------------------+----------------+
-                           |
-                    Relay Server
-                   (WebSocket + Redis)
-                           |
-                    Data Pipeline
-                (dedup, consensus, outlier detection)
-                           |
-                    Agent Router
-             +------+------+------+------+
-             |      |      |      |      |
-          Oracle Sentinel Psyche Atlas  +13 more
-           91%    95%     80%    78%   agents
-```
-
-Every data point is:
-1. **Deduplicated** (60s window)
-2. **Weighted** by node trust score
-3. **Consensus-checked** (66% agreement threshold)
-4. **Outlier-filtered** (2.5 sigma)
-5. **Routed** to the appropriate agent based on data type
-
----
-
-## Deploy a Hardware Node
-
-All nodes connect to `wss://ws.agtopen.com/node` --- the production relay server.
-
-### Bun CLI (Quickest)
-
-```bash
-git clone https://github.com/agtopen/agtopen.git
-cd agtopen
-bun install
-
-RELAY_URL=wss://ws.agtopen.com/node \
-bunx @agtopen/node-runner  # coming soon; see ./packages/sdk for AgtOpenNode
-```
-
-The node auto-detects your system capabilities (CPU, RAM, GPU) and connects to the relay. You'll see:
-
-```
-[NodeRunner] System: 4 CPUs, 7.7 GB RAM, No GPU
-[NodeRunner] Connecting to wss://ws.agtopen.com/node...
-[NodeRunner] Handshake accepted. Node: dbcd620d, Tier: titan, Tasks: 24
-[NodeRunner] Ready. Waiting for tasks...
-```
-
-### Docker Compose
-
-```bash
-git clone https://github.com/agtopen/agtopen.git
-cd agtopen
-docker compose -f docker-compose.node.yml up -d
-```
-
-Configure via environment variables in `docker-compose.node.yml`:
-
-```yaml
-environment:
-  - RELAY_URL=wss://ws.agtopen.com/node
-  - NODE_LABEL=my-vps-node
-  - ENABLED_TASKS=chain_index,dex_monitor,web_crawl,block_analytics,data_cache
-  - MAX_CPU_PERCENT=80
-  - MAX_MEMORY_MB=2048
-```
-
-### Systemd (Background Service)
+### Systemd
 
 ```ini
 [Unit]
@@ -233,10 +101,11 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/opt/agtopen
-ExecStart=/usr/local/bin/bunx @agtopen/node-runner  # coming soon; see ./packages/sdk for AgtOpenNode
+ExecStart=/usr/local/bin/bunx @agtopen/node-runner --tier hardware
+Environment=AGTOPEN_TOKEN=<long-lived-token>
+Environment=AGTOPEN_LABEL=prod-node-01
 Restart=always
-Environment=RELAY_URL=wss://ws.agtopen.com/node
+RestartSec=10
 
 [Install]
 WantedBy=multi-user.target
@@ -244,9 +113,212 @@ WantedBy=multi-user.target
 
 ---
 
+## Docker path
+
+```bash
+git clone https://github.com/agtopen/agtopen.git
+cd agtopen
+docker compose -f docker-compose.node.yml up -d
+```
+
+Env the Docker node reads (these are **different** from the npm CLI):
+
+```yaml
+environment:
+  - RELAY_URL=wss://ws.agtopen.com/node
+  - API_URL=https://api.agtopen.com
+  - NODE_AUTH_TOKEN=<your-jwt>
+  - NODE_LABEL=my-vps-node
+  - NODE_REGION=auto
+  - NODE_TIER=titan              # titan | apex | sovereign
+  - ENABLED_TASKS=chain_index,dex_monitor,web_crawl,block_analytics,data_cache
+  - MAX_CPU_PERCENT=80
+  - MAX_MEMORY_MB=2048
+  - TASK_CONCURRENCY=3
+  # Optional — only set if you want these task types:
+  - OLLAMA_URL=
+  - OPENAI_API_KEY=
+  - ETH_RPC_URL=https://eth.llamarpc.com
+```
+
+The Docker service also enforces OS-level CPU / memory limits via
+`deploy.resources.limits` — useful if you want to guarantee the node
+never pins a server it shares with other workloads.
+
+---
+
+## Browser tier ladder
+
+Source of truth: [`packages/shared/src/constants/node-tiers.ts`](https://github.com/agtopen/agtopen/blob/main/packages/shared/src/constants/node-tiers.ts).
+Three gates must be met **at the same time** to advance — accumulating
+tasks alone isn't enough; the network also wants time-in-service and
+a clean trust record.
+
+| Tier | Tasks | Days active | Trust score | Multiplier | Daily cap (Atoms) |
+|---|---:|---:|---:|---:|---:|
+| **spark** | 0 | 0 | ≥ 0.50 | 1.0× | 500 |
+| **ember** | 500 | 7 | ≥ 0.60 | 1.1× | 1 500 |
+| **blaze** | 2 000 | 30 | ≥ 0.70 | 1.3× | scales |
+| **storm** | 10 000 | 90 | ≥ 0.80 | 1.6× | scales |
+| **nexus** | 50 000 | 180 | ≥ 0.90 | 2.0× | ceiling |
+
+> Legacy tier names (`seed`/`flame`/`storm`/`vortex`) from the
+> original 4-tier design are still **read-compatible** — the server
+> migrates old rows to the new ladder on first touch. You only see
+> the new names in the UI going forward.
+
+---
+
+## Hardware tiers
+
+Hardware nodes are graded on three axes: **capability** (CPU / RAM /
+disk / network / GPU), **SLA** (uptime + response time + task
+completion), and **contribution** (days operated, proven reliability).
+Source: [`apps/agent-engine/src/node-network/hardware-tiers.ts`](https://github.com/agtopen/agtopen/blob/main/apps/agent-engine/src/node-network/hardware-tiers.ts).
+
+| Tier | Class | Minimum hardware | Min uptime | Multiplier |
+|---|---|---|---:|---:|
+| **titan** | VPS | 2 CPU, 4 GB RAM, 100 GB SSD, 100 Mbps | 95% | 2.0× |
+| **apex** | Dedicated | 8 CPU, 32 GB RAM, 500 GB SSD, 1 Gbps | 99% | 3.0× |
+| **sovereign** | GPU | 8 CPU, 64 GB RAM, 1 TB NVMe, GPU ≥ 8 GB VRAM | 99.5% | 4.0× |
+
+A fresh hardware registrant is assessed automatically at registration
+and assigned the highest tier its capabilities qualify for. Dropping
+below the SLA for the assigned tier downgrades the node at the next
+assessment window — you cannot keep a tier the hardware no longer
+supports.
+
+---
+
+## Task types
+
+Task names are the exact strings the dispatcher emits; your node
+config's `ENABLED_TASKS` must match.
+
+### Browser-executable (13 tasks)
+
+Source: [`apps/web/app/node/executors/`](https://github.com/agtopen/agtopen/tree/main/apps/web/app/node/executors)
+
+| Task | What it does |
+|---|---|
+| `price_witness` | Fetches BTC / ETH prices from 6 exchanges (Binance, Coinbase, Kraken, OKX, Bybit, KuCoin), returns consensus |
+| `protocol_health` | Pings 10 DeFi protocols (Uniswap, Aave, Compound, Lido …) for reachability from your ISP |
+| `sentiment_pulse` | Scrapes Reddit + CoinGecko sentiment in your language / region |
+| `news_relay` | Aggregates headlines from Reddit / HN / CoinGecko with category + relevance scores |
+| `rpc_verify` | Queries 6 Ethereum RPC endpoints and computes consensus hash |
+| `macro_data` | Fear & Greed Index, BTC dominance, market cap, gas |
+| `platform_health` | GitHub / Cloudflare / AWS / Vercel / npm status from your location |
+| `zk_verify` | Verifies zero-knowledge proofs with Web Crypto (SHA-256, ECDSA, Merkle) |
+| `swarm_slice` | Multi-agent simulation — 7 strategies, GBM price model |
+| `federated_learn` | Local neural-net training with differential privacy; only gradients leave the device |
+| `webgpu_inference` | Crypto sentiment classifier on GPU (CPU fallback) |
+| `webauthn_attest` | Hardware-backed identity attestation |
+| `mev_detect` | Analyses Ethereum blocks for sandwich / frontrun / arbitrage patterns |
+
+### Hardware-only (11 tasks)
+
+Source: [`apps/agent-engine/src/node-network/task-executors.ts`](https://github.com/agtopen/agtopen/blob/main/apps/agent-engine/src/node-network/task-executors.ts)
+
+| Task | Min hardware tier | What it does |
+|---|---|---|
+| `chain_index` | titan | Index blockchain transactions, classify calls vs transfers |
+| `dex_monitor` | titan | Track Uniswap V2 / V3 swap events, detect large trades + MEV patterns |
+| `web_crawl` | titan | Scrape crypto news sites (CoinDesk / CoinTelegraph / TheBlock / Decrypt) |
+| `data_cache` | titan | LRU cache layer for market data (default 512 MB, TTL eviction) |
+| `storage_serve` | titan | Content-addressable storage for historical data |
+| `block_analytics` | apex | Analyse gas patterns, MEV extraction, builder activity |
+| `cross_chain_bridge` | apex | Monitor Stargate / Wormhole / Across volumes + whale moves |
+| `full_node_rpc` | apex | Run blockchain RPC proxy with LRU cache |
+| `ai_inference` | sovereign | Run AI models (Ollama / OpenAI / Anthropic) for market analysis |
+| `gpu_simulation` | sovereign | Monte-Carlo simulation with VaR95 / CVaR95 (10k+ paths) |
+| `zk_batch_prove` | sovereign | Generate batches of ZK proofs for protocol verification |
+
+Hardware nodes can also opt-in to the 7 light browser tasks
+(`price_witness`, `protocol_health`, `sentiment_pulse`, `news_relay`,
+`rpc_verify`, `swarm_slice`, `zk_verify`) by listing them in
+`ENABLED_TASKS` — the dispatcher sends whatever the node asks for.
+
+---
+
+## How rewards work
+
+Per-task Atoms are a product of several factors. The exact formula
+lives in
+[`apps/api-core/src/services/consensus/pricing.ts`](https://github.com/agtopen/agtopen/blob/main/apps/api-core/src/services/consensus/pricing.ts);
+the short version:
+
+```
+atoms = baseTask × tierMultiplier × trustWeight × stakeWeight × dailyCapClamp
+```
+
+- **baseTask** — fixed per task type; heavier tasks (swarm, GPU, ZK
+  batch proving) pay more.
+- **tierMultiplier** — browser `1.0×` → `2.0×` (nexus), hardware
+  `2.0×` → `4.0×` (sovereign). See tables above.
+- **trustWeight** — derived from your node's reputation history
+  (`0.0` – `1.5`). Repeatedly agreeing with consensus raises it;
+  outliers lower it.
+- **stakeWeight** — nodes that lock Atoms back into the staking vault
+  earn with a `1 + √(staked/1000)` scalar, capped. See
+  [AIP-006](./protocol/AIP-006-trust-score.md).
+- **dailyCapClamp** — your remaining Atoms-earning budget for the
+  day (tier-scaled; `500` at spark, up to the nexus ceiling).
+
+Once you hit your daily cap, completed tasks still record for
+reputation + tier-progress purposes but stop paying until the UTC
+day rolls over.
+
+### What the dashboard reports
+
+`/node` shows these per-session counters live:
+
+- Tasks completed (by type)
+- Today's Atoms earned vs remaining daily cap
+- Trust score + last 20 reputation events
+- Tier, tier progress (tasks / days / trust)
+- Uptime this session
+
+---
+
+## Data flow
+
+```
+Browser / Extension Nodes              Hardware Nodes
+(13 task types)                        (11 task types + 7 optional browser)
+        │                                      │
+        └──────────────────┬───────────────────┘
+                           │
+                    WebSocket relay
+                (apps/ws-server on port 3002)
+                           │
+                    Dispatch + consensus
+        (dedupe, trust-weight, consensus check,
+         outlier filter, reputation update)
+                           │
+                    Agent router
+              ┌────┬──────┼──────┬────┐
+              ▼    ▼      ▼      ▼    ▼
+            Oracle Sentinel  Psyche  Atlas  +14 more
+```
+
+Every data point submitted to the relay goes through:
+
+1. **Dedupe** — identical results from the same node inside a short
+   window are collapsed.
+2. **Consensus** — the dispatcher compares results across nodes and
+   picks the majority; non-majority results lose trust-weight.
+3. **Outlier filter** — numeric tasks (prices, RPC responses) drop
+   results outside `2.5σ` of the consensus.
+4. **Reward** — atoms are issued per formula above.
+5. **Agent routing** — the accepted result is forwarded to the
+   Genesis Agents whose data diet includes that feed.
+
+---
+
 ## Resources
 
-- [Run a Web Node](https://agtopen.com/node) --- Start in your browser
-- [AIP-001: Node Protocol](./protocol/AIP-001-node-protocol.md) --- WebSocket protocol specification
-- [AIP-006: Trust Score](./protocol/AIP-006-trust-score.md) --- How node trust is calculated
-- [SDK Node Module](./packages/sdk/) --- Programmatic node integration
+- [Run a web node](https://agtopen.com/node) — start in your browser
+- [AIP-001 — Node Protocol](./protocol/AIP-001-node-protocol.md) — WebSocket protocol spec
+- [AIP-006 — Trust Score](./protocol/AIP-006-trust-score.md) — how trust weight is calculated
+- [SDK `AgtOpenNode`](./packages/sdk/) — programmatic integration
+- [`@agtopen/node-runner` source](./packages/node-runner/) — CLI wrapper used by `bunx`
