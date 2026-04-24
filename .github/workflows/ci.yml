@@ -1,0 +1,86 @@
+# CI — typecheck + build + test the published packages.
+#
+# Runs on every push to main and every pull request. Any failure
+# blocks merging and surfaces a red ❌ on the commit list — the
+# cheapest way to signal to external readers that the code in the
+# repo actually compiles and its tests pass.
+#
+# The public repo ships three standalone packages (no monorepo root
+# package.json), so each job installs into its own directory.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sdk:
+    name: "@agtopen/sdk"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/sdk
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install
+        run: bun install
+
+      - name: Typecheck
+        run: bun run typecheck
+
+      - name: Build
+        run: bun run build
+
+      - name: Test
+        run: bun test src/__tests__/
+
+  node-runner:
+    name: "@agtopen/node-runner"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/node-runner
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install
+        run: bun install
+
+      - name: Build
+        run: bun run build
+
+  shared:
+    name: "@agtopen/shared"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/shared
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install
+        run: bun install
+
+      - name: Typecheck
+        run: bun run lint

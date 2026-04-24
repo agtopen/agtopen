@@ -3,6 +3,7 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/@agtopen/sdk"><img src="https://img.shields.io/npm/v/@agtopen/sdk?style=flat-square&color=6366F1&label=SDK" alt="npm" /></a>
+  <a href="https://github.com/agtopen/agtopen/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/agtopen/agtopen/ci.yml?style=flat-square&label=CI" alt="CI" /></a>
   <a href="https://github.com/agtopen/agtopen/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="License" /></a>
   <a href="https://agtopen.com"><img src="https://img.shields.io/badge/app-agtopen.com-06B6D4?style=flat-square" alt="Website" /></a>
   <a href="https://github.com/agtopen/agtopen/issues"><img src="https://img.shields.io/badge/PRs-welcome-10B981?style=flat-square" alt="PRs Welcome" /></a>
