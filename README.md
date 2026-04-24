@@ -233,6 +233,8 @@ Found a vulnerability? Please **do not open a public issue**. Email `build@agtop
 - [Node Network](./NODE.md) — run a node, task types, hardware tiers
 - [Protocol Specs](./protocol/) — all 8 AIPs
 - [SDK Reference](./packages/sdk/) — 60-second quick start, full API, 5 examples
+- [Deployed Contracts](./CONTRACTS.md) — testnet addresses + explorer links
+- [Security](./SECURITY.md) — audit status, static analysis report, disclosure policy
 - [Roadmap](./ROADMAP.md)
 - [Changelog](./CHANGELOG.md)
 
