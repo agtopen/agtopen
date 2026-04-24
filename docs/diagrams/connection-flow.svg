@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="700" y2="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A0A12"/><stop offset="100%" stop-color="#0F0F1A"/>
+    </linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.2"/></filter>
+  </defs>
+  <rect width="700" height="340" fill="url(#bg)"/>
+  <pattern id="d" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="0.5" fill="#fff" opacity="0.05"/></pattern>
+  <rect width="700" height="340" fill="url(#d)"/>
+
+  <text x="350" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#E2E8F0" letter-spacing="2">NODE COMMUNICATION — AIP-001</text>
+  <text x="350" y="44" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#64748B">WebSocket handshake, heartbeat, and task execution flow</text>
+
+  <!-- Column headers -->
+  <rect x="80" y="60" width="100" height="26" rx="8" fill="#6366F1" opacity="0.2" stroke="#6366F1" stroke-width="0.7"/>
+  <text x="130" y="78" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#A5B4FC">Client</text>
+
+  <rect x="520" y="60" width="100" height="26" rx="8" fill="#06B6D4" opacity="0.2" stroke="#06B6D4" stroke-width="0.7"/>
+  <text x="570" y="78" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#67E8F9">Server</text>
+
+  <!-- Lifelines -->
+  <line x1="130" y1="90" x2="130" y2="320" stroke="#6366F1" stroke-width="0.5" opacity="0.3" stroke-dasharray="3 3"/>
+  <line x1="570" y1="90" x2="570" y2="320" stroke="#06B6D4" stroke-width="0.5" opacity="0.3" stroke-dasharray="3 3"/>
+
+  <!-- Step 1: TCP + WS Upgrade -->
+  <line x1="135" y1="105" x2="565" y2="105" stroke="#10B981" stroke-width="1"/>
+  <polygon points="560,101 570,105 560,109" fill="#10B981" opacity="0.7"/>
+  <text x="350" y="100" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7.5" fill="#6EE7B7">TCP connect + HTTP Upgrade (WebSocket)</text>
+
+  <line x1="565" y1="120" x2="135" y2="120" stroke="#10B981" stroke-width="1"/>
+  <polygon points="140,116 130,120 140,124" fill="#10B981" opacity="0.7"/>
+  <text x="350" y="115" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7.5" fill="#6EE7B7">101 Switching Protocols</text>
+
+  <!-- Label -->
+  <rect x="15" y="98" width="60" height="16" rx="4" fill="#10B981" opacity="0.15"/>
+  <text x="45" y="110" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#10B981">CONNECT</text>
+
+  <!-- Step 2: Handshake -->
+  <line x1="135" y1="148" x2="565" y2="148" stroke="#F59E0B" stroke-width="1"/>
+  <polygon points="560,144 570,148 560,152" fill="#F59E0B" opacity="0.7"/>
+  <text x="350" y="143" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7.5" fill="#FCD34D">handshake_request (nodeId, capabilities, version)</text>
+
+  <line x1="565" y1="163" x2="135" y2="163" stroke="#F59E0B" stroke-width="1"/>
+  <polygon points="140,159 130,163 140,167" fill="#F59E0B" opacity="0.7"/>
+  <text x="350" y="158" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7.5" fill="#FCD34D">handshake_response (sessionId, config)</text>
+
+  <rect x="15" y="142" width="72" height="16" rx="4" fill="#F59E0B" opacity="0.15"/>
+  <text x="51" y="154" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#F59E0B">HANDSHAKE</text>
+
+  <!-- Step 3: Heartbeat -->
+  <line x1="565" y1="195" x2="135" y2="195" stroke="#A855F7" stroke-width="1" stroke-dasharray="4 2"/>
+  <polygon points="140,191 130,195 140,199" fill="#A855F7" opacity="0.7"/>
+  <text x="350" y="190" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7.5" fill="#D8B4FE">heartbeat_ping</text>
+
+  <line x1="135" y1="210" x2="565" y2="210" stroke="#A855F7" stroke-width="1" stroke-dasharray="4 2"/>
+  <polygon points="560,206 570,210 560,214" fill="#A855F7" opacity="0.7"/>
+  <text x="350" y="205" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7.5" fill="#D8B4FE">heartbeat_pong</text>
+
+  <rect x="15" y="190" width="72" height="16" rx="4" fill="#A855F7" opacity="0.15"/>
+  <text x="51" y="202" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#A855F7">HEARTBEAT</text>
+
+  <!-- Step 4: Task execution -->
+  <line x1="565" y1="242" x2="135" y2="242" stroke="#06B6D4" stroke-width="1.2"/>
+  <polygon points="140,238 130,242 140,246" fill="#06B6D4" opacity="0.7"/>
+  <text x="350" y="237" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7.5" fill="#67E8F9">task_assign (taskId, type, payload)</text>
+
+  <line x1="135" y1="257" x2="565" y2="257" stroke="#06B6D4" stroke-width="1" stroke-dasharray="4 2"/>
+  <polygon points="560,253 570,257 560,261" fill="#06B6D4" opacity="0.5"/>
+  <text x="350" y="252" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7.5" fill="#67E8F9" opacity="0.7">task_ack</text>
+
+  <!-- Execution bracket -->
+  <rect x="100" y="266" width="60" height="20" rx="4" fill="#1e293b" stroke="#64748B" stroke-width="0.5"/>
+  <text x="130" y="280" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#94A3B8">executing...</text>
+
+  <line x1="135" y1="295" x2="565" y2="295" stroke="#06B6D4" stroke-width="1.2"/>
+  <polygon points="560,291 570,295 560,299" fill="#06B6D4" opacity="0.7"/>
+  <text x="350" y="290" text-anchor="middle" font-family="'SF Mono',monospace" font-size="7.5" fill="#67E8F9">task_result (taskId, result, proof)</text>
+
+  <rect x="15" y="258" width="55" height="16" rx="4" fill="#06B6D4" opacity="0.15"/>
+  <text x="42" y="270" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#06B6D4">TASK</text>
+
+  <text x="350" y="330" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#475569">All messages use JSON-RPC 2.0 format with typed payloads</text>
+</svg>

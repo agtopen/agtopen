@@ -1,0 +1,43 @@
+node_modules/
+.next/
+dist/
+.turbo/
+.env
+.env.local
+.env.production
+*.tsbuildinfo
+.DS_Store
+bun.lockb
+bun.lock
+coverage/
+.vercel/
+
+# ZK artifacts
+packages/zk/circuits/*/target/
+packages/zk/circuits/*/proofs/
+*.proof
+*.vkey
+
+# IDE & tools
+.vscode/
+.idea/
+.claude/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build output
+out/
+apps/web/out/
+
+# Internal planning docs (not for public release)
+docs/[0-9][0-9]_*.md
+docs/*.jsx
+docs/brand kit/
+docs/AUDIT_STATUS.md

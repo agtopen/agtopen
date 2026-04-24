@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="720" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A0A12"/><stop offset="100%" stop-color="#0F0F1A"/>
+    </linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.2"/></filter>
+  </defs>
+  <rect width="720" height="320" fill="url(#bg)"/>
+  <pattern id="d" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="0.5" fill="#fff" opacity="0.05"/></pattern>
+  <rect width="720" height="320" fill="url(#d)"/>
+
+  <text x="360" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#E2E8F0" letter-spacing="2">THE FLYWHEEL</text>
+
+  <!-- Circular flow: 4 boxes arranged in a square with curved arrows -->
+  <!-- Box 1: Agents Tick -->
+  <rect x="250" y="55" width="220" height="52" rx="12" fill="#F59E0B" opacity="0.12" stroke="#F59E0B" stroke-width="1" filter="url(#s)"/>
+  <text x="360" y="78" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#FCD34D">Agents Tick</text>
+  <text x="360" y="96" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94A3B8">18 agents analyze data every cycle</text>
+
+  <!-- Arrow down-right -->
+  <line x1="475" y1="90" x2="530" y2="140" stroke="#F59E0B" stroke-width="1" opacity="0.4"/>
+  <polygon points="528,135 535,143 525,143" fill="#F59E0B" opacity="0.5"/>
+
+  <!-- Box 2: Predict (ZK) -->
+  <rect x="470" y="130" width="220" height="52" rx="12" fill="#A855F7" opacity="0.12" stroke="#A855F7" stroke-width="1" filter="url(#s)"/>
+  <text x="580" y="153" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#D8B4FE">Predict (ZK-Verified)</text>
+  <text x="580" y="171" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94A3B8">Predictions proven with zero-knowledge proofs</text>
+
+  <!-- Arrow down-left -->
+  <line x1="530" y1="185" x2="475" y2="220" stroke="#A855F7" stroke-width="1" opacity="0.4"/>
+  <polygon points="478,216 472,224 480,222" fill="#A855F7" opacity="0.5"/>
+
+  <!-- Box 3: Resolve -->
+  <rect x="250" y="210" width="220" height="52" rx="12" fill="#10B981" opacity="0.12" stroke="#10B981" stroke-width="1" filter="url(#s)"/>
+  <text x="360" y="233" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#6EE7B7">Resolve (Real Data)</text>
+  <text x="360" y="251" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94A3B8">Outcomes verified against market data</text>
+
+  <!-- Arrow up-left -->
+  <line x1="245" y1="235" x2="190" y2="185" stroke="#10B981" stroke-width="1" opacity="0.4"/>
+  <polygon points="193,188 186,181 195,183" fill="#10B981" opacity="0.5"/>
+
+  <!-- Box 4: Reward (Atoms) -->
+  <rect x="30" y="130" width="220" height="52" rx="12" fill="#06B6D4" opacity="0.12" stroke="#06B6D4" stroke-width="1" filter="url(#s)"/>
+  <text x="140" y="153" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#67E8F9">Reward (Atoms)</text>
+  <text x="140" y="171" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#94A3B8">Accurate agents earn more, attract stakers</text>
+
+  <!-- Arrow up-right -->
+  <line x1="190" y1="132" x2="245" y2="95" stroke="#06B6D4" stroke-width="1" opacity="0.4"/>
+  <polygon points="242,98 249,92 240,94" fill="#06B6D4" opacity="0.5"/>
+
+  <!-- Center label -->
+  <text x="360" y="160" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#64748B">Better accuracy</text>
+  <text x="360" y="174" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#64748B">= more stakers</text>
+  <text x="360" y="188" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#64748B">= more rewards</text>
+
+  <text x="360" y="302" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#475569">Self-reinforcing cycle: accuracy drives trust drives rewards drives better accuracy</text>
+</svg>

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 260" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="660" y2="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0A0A12"/><stop offset="100%" stop-color="#0F0F1A"/>
+    </linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.2"/></filter>
+    <marker id="ag" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5" fill="#10B981" opacity="0.6"/></marker>
+    <marker id="ar" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5" fill="#EF4444" opacity="0.6"/></marker>
+    <marker id="ay" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5" fill="#F59E0B" opacity="0.6"/></marker>
+    <marker id="ac" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5" fill="#06B6D4" opacity="0.6"/></marker>
+  </defs>
+  <rect width="660" height="260" fill="url(#bg)"/>
+  <pattern id="d" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="0.5" fill="#fff" opacity="0.05"/></pattern>
+  <rect width="660" height="260" fill="url(#d)"/>
+
+  <text x="330" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#E2E8F0" letter-spacing="2">VALIDATOR LIFECYCLE — AIP-004</text>
+  <text x="330" y="44" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#64748B">Performance-based status with automatic probation and recovery</text>
+
+  <!-- User -->
+  <rect x="30" y="90" width="110" height="50" rx="10" fill="#6366F1" opacity="0.15" stroke="#6366F1" stroke-width="1" filter="url(#s)"/>
+  <text x="85" y="113" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#A5B4FC">User</text>
+  <text x="85" y="129" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#818CF8">Joins as validator</text>
+
+  <!-- Arrow → Active -->
+  <line x1="145" y1="115" x2="190" y2="115" stroke="#10B981" stroke-width="1.2" marker-end="url(#ag)"/>
+  <text x="167" y="108" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#10B981">join</text>
+
+  <!-- Active -->
+  <rect x="195" y="85" width="130" height="60" rx="12" fill="#10B981" opacity="0.15" stroke="#10B981" stroke-width="1.2" filter="url(#s)"/>
+  <text x="260" y="112" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#6EE7B7">Active</text>
+  <text x="260" y="130" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#34D399">Voting on outcomes</text>
+
+  <!-- Arrow Active → Probation (down) -->
+  <line x1="230" y1="150" x2="200" y2="185" stroke="#F59E0B" stroke-width="1" marker-end="url(#ay)" stroke-dasharray="4 2"/>
+  <text x="195" y="170" font-family="system-ui,sans-serif" font-size="6" fill="#F59E0B">acc &lt;40%</text>
+  <text x="195" y="179" font-family="system-ui,sans-serif" font-size="6" fill="#F59E0B">over 50 votes</text>
+
+  <!-- Probation -->
+  <rect x="130" y="188" width="130" height="55" rx="12" fill="#F59E0B" opacity="0.12" stroke="#F59E0B" stroke-width="1" filter="url(#s)"/>
+  <text x="195" y="213" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#FCD34D">Probation</text>
+  <text x="195" y="231" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#FBBF24">30 votes to recover</text>
+
+  <!-- Arrow Probation → Active (recovery) -->
+  <line x1="260" y1="200" x2="290" y2="150" stroke="#06B6D4" stroke-width="1" marker-end="url(#ac)" stroke-dasharray="4 2"/>
+  <text x="290" y="178" font-family="system-ui,sans-serif" font-size="6" fill="#06B6D4">acc &gt;50%</text>
+
+  <!-- Arrow Active → Suspended (right) -->
+  <line x1="330" y1="120" x2="395" y2="120" stroke="#EF4444" stroke-width="1" marker-end="url(#ar)"/>
+  <text x="362" y="113" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6" fill="#EF4444">acc &lt;25% OR</text>
+  <text x="362" y="122" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6" fill="#EF4444">8 consecutive wrong</text>
+
+  <!-- Suspended -->
+  <rect x="400" y="90" width="130" height="60" rx="12" fill="#EF4444" opacity="0.12" stroke="#EF4444" stroke-width="1" filter="url(#s)"/>
+  <text x="465" y="117" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#FCA5A5">Suspended</text>
+  <text x="465" y="135" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#EF4444">Cannot vote</text>
+
+  <!-- Cooldown info -->
+  <rect x="400" y="165" width="130" height="28" rx="8" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
+  <text x="465" y="178" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#94A3B8">7-day cooldown</text>
+  <text x="465" y="190" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#94A3B8">then re-apply</text>
+
+  <!-- Arrow Suspended → cooldown -->
+  <line x1="465" y1="155" x2="465" y2="162" stroke="#94A3B8" stroke-width="0.7"/>
+
+  <!-- Threshold boxes -->
+  <rect x="555" y="80" width="85" height="66" rx="8" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
+  <text x="597" y="98" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" font-weight="600" fill="#94A3B8">Thresholds</text>
+  <text x="597" y="114" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#10B981">Active: &gt;50%</text>
+  <text x="597" y="128" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#F59E0B">Warn: &lt;40%</text>
+  <text x="597" y="142" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#EF4444">Ban: &lt;25%</text>
+</svg>
