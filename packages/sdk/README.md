@@ -184,6 +184,20 @@ commitment + block timestamp; when the Noir `prediction_integrity`
 verifier replaces the Mock, the same shape keeps working with a
 real UltraHonk proof in the proof argument.
 
+### Live proof dashboard
+
+A public, no-auth dashboard at [agtopen.com/proof](https://agtopen.com/proof)
+shows live counters — committed / anchored / resolved / fully-verified —
+with the latest anchor's basescan link. Same data is available raw via:
+
+```bash
+curl https://api.agtopen.com/predictions/integrity
+```
+
+The dashboard polls that endpoint every 30 s and renders a copy-paste-able
+SDK snippet that anyone can run to independently verify the latest anchor.
+Useful for embedding in a slide / blog post / Discord announcement.
+
 ---
 
 ## Market + Leaderboard + Trades
