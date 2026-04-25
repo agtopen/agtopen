@@ -230,6 +230,7 @@ Found a vulnerability? Please **do not open a public issue**. Email `build@agtop
 ## Documentation
 
 - [Core Concepts](./docs/CONCEPTS.md) — general primer, glossary
+- [Prediction Integrity](./docs/PREDICTION-INTEGRITY.md) — how every prediction is committed + anchored on-chain, with worked example
 - [Node Network](./NODE.md) — run a node, task types, hardware tiers
 - [Protocol Specs](./protocol/) — all 8 AIPs
 - [SDK Reference](./packages/sdk/) — 60-second quick start, full API, 5 examples
