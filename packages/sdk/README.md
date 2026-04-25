@@ -150,6 +150,40 @@ While the prediction is still `pending`, `getReveal()` returns HTTP
 binding property requires the nonce stays secret until the outcome
 is known.
 
+### On-chain anchor (block-witnessed timestamp)
+
+Every prediction's commitment hash is also submitted to the
+**ZKHub** contract on Base Sepolia. The Base Sepolia block timestamp
+is the independent witness — agtopen does not control the chain, so
+the moment the commitment was published is unforgeable.
+
+The `Prediction` object exposes the anchor coordinates:
+
+```ts
+const { prediction } = await signals.getById(id);
+console.log({
+  commitmentHash:   prediction.commitmentHash,    // SHA-256 of preimage
+  commitmentChainTx: prediction.commitmentChainTx, // 0x… on Base Sepolia
+  commitmentBlockNo: prediction.commitmentBlockNo, // 40_658_823 etc.
+});
+
+// Verify anyone, anytime, no agtopen API needed:
+//   1. Fetch the tx on Base Sepolia: https://sepolia.basescan.org/tx/<commitmentChainTx>
+//   2. The 5th public input of `verifyPrediction(...)` is the SHA-256 commitment.
+//   3. Compare to `commitmentHash` from the SDK — same hex.
+//   4. The block.timestamp on that tx witnesses the latest moment the
+//      commitment could have been published.
+```
+
+The contract used is `ZKHub @ 0x77b74c57f63bee3acf08f464d748c8cf1fd1ce8f`
+on Base Sepolia (chainId 84532). The function is `verifyPrediction`
+with `[commitment, agentIdHash, marketHash, direction, confidenceBps]`
+as the 5 public inputs. The MockZKVerifier currently accepts any
+proof bytes — the cryptographic anchor today is the SHA-256
+commitment + block timestamp; when the Noir `prediction_integrity`
+verifier replaces the Mock, the same shape keeps working with a
+real UltraHonk proof in the proof argument.
+
 ---
 
 ## Market + Leaderboard + Trades
