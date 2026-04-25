@@ -5,10 +5,10 @@
 | AIP | 009 |
 | Title | Multi-Agent Synthesis Protocol |
 | Author | AgtOpen Core Team |
-| Status | Draft (Phase 1 implemented) |
+| Status | Draft (Phase 1 + Phase 2 implemented) |
 | Category | Synthesis |
 | Created | 2026-04-25 |
-| Updated | 2026-04-25 (v1.1 — research amendments) |
+| Updated | 2026-04-25 (v1.2 — Phase 2 status) |
 | Requires | AIP-002, AIP-006, AIP-007 |
 
 ## Abstract
@@ -460,7 +460,7 @@ This in-context calibration loop is cheap to apply and tends to converge confide
 | Phase | Scope | Effort | Cost delta | Status |
 |-------|-------|--------|-----------|--------|
 | **1 — Signal schema + Oracle MoA** | Soft synthesis: collect last 4h of specialist `feedEvents`, weight per §4 (Bayesian-smoothed accuracy × log-volume × recency-decay), format as briefing block, inject into Oracle's prompt. Calibration hint baked in. Audit log via reused `prediction_ensemble_components` table with new `sourceType='genesis_specialist'`. | 2-3 days | +$8/month (longer Oracle prompt at gpt-5 rates) | **✅ Shipped 2026-04-25** |
-| **2 — Structured AgentSignal + dedicated provenance table** | Each Layer 1 specialist emits `payload.signal` per §2.1. New `prediction_synthesis_components` table. Public `/predictions/:id/synthesis` endpoint (section 12). | 1 week | negligible | Planned |
+| **2 — Structured AgentSignal + dedicated provenance table** | Each Layer 1 specialist emits `payload.signal` per §2.1. New `prediction_synthesis_components` table. Public `/predictions/:id/synthesis` endpoint (section 12). | 1 week | negligible | **✅ Shipped 2026-04-25** (5 of 17 agents migrated; remaining 12 keep Phase 1 fallback and migrate incrementally) |
 | **3 — Critic pass** | Layer 3 Reflexion-style critic (DeepMind reviews Oracle predictions, ±0.20 confidence delta). | 3-5 days | +$3/month (Critic LLM call) | Planned |
 | **4 — Regime routing** | Add `Emergence`-driven regime router. Default routing table (section 6). Per-regime weight multipliers + audit logging. | 3-4 days | negligible (no extra LLM calls) | Planned |
 | **5 — Multi-round debate (daily flagships only)** | Implement debate phase for Athena + Prometheus daily synthesis. 3-agent × 2-round configuration. | 1 week | +$10/month (daily cost amortization) | Planned |
@@ -489,7 +489,40 @@ apps/agent-engine/src/tick/scheduler.ts
         components to prediction_ensemble_components after the call.
 ```
 
-Phase 2 will introduce the Phase 2 contract (`payload.signal`) by extending each Layer 1 agent's emission code in `apps/agent-engine/src/agents/*-agent.ts` and adding the dedicated provenance table via Drizzle migration.
+#### 11.2 Phase 2 Reference Implementation
+
+Phase 2 shipped as commit [`25c3b4d`](https://github.com/agtopen/agtopen-core/commit/25c3b4d) on 2026-04-25. Adds:
+
+```
+packages/db/src/migrations/0026_synthesis_components.sql
+packages/db/src/schema/synthesis.ts
+    └── predictionSynthesisComponents Drizzle table per §9.1
+
+packages/shared/src/types/synthesis.ts
+    └── AgentSignal, SynthesisProvenance, SynthesisContributor types
+
+apps/agent-engine/src/intelligence/synthesis/recorder.ts
+    └── recordSynthesisComponents() — persists to new table with
+        agreement classification (agree/disagree/orthogonal) computed
+        at write time. Dual-writes to legacy table during rollout.
+
+apps/agent-engine/src/intelligence/synthesis/signal-collector.ts
+    └── extractSignal() dispatcher: trust payload.signal when present,
+        fall back to soft inferDirection() otherwise. Carries eventId
+        through for §9.1 signal_id provenance.
+
+apps/api-core/src/routes/predictions.ts
+    └── GET /:id/synthesis public endpoint per §12. Computes
+        consensusStrength at read time. Returns 'pre-synthesis'
+        status for predictions that pre-date the pipeline.
+
+apps/agent-engine/src/tick/scheduler.ts
+    └── 5 of 17 specialist agents migrated to emit payload.signal
+        directly (Sentinel, Hermes, Quant, Athena, Prometheus). The
+        remaining 12 use Phase 1 fallback and migrate incrementally.
+```
+
+Each remaining specialist agent (Abyss, Cipher, Psyche, Specter, Muse, Meridian, Emergence, Nexus-7, Nova, DeepMind, Atlas, Epoch) keeps the Phase 1 fallback path until it gets its `payload.signal` block. Migration is independent per agent — the protocol works at every intermediate state.
 
 ### 12. API Endpoints
 
