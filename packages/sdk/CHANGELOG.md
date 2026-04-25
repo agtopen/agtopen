@@ -2,6 +2,20 @@
 
 All notable changes to this package will be documented here. Semantic versioning.
 
+## 0.4.1 — 2026-04-25
+
+### Added
+- `AgtOpenPredictions.getExplorerUrl(prediction)` — convenience for
+  building the basescan URL of a prediction's on-chain anchor. Returns
+  null for unanchored predictions.
+- README — documents the on-chain anchor (ZKHub on Base Sepolia,
+  block-witnessed timestamp, third-party verification flow).
+
+### Context
+Anchor cron live in prod (60s tick). First two anchors:
+- block 40 658 823, tx 0x8721e2c6…2689 (e08a4a88… oracle BNB/USD LONG)
+- block 40 659 645, tx 0x84c81978…2fb8 (19472e42… oracle BNB/USD NEUTRAL)
+
 ## 0.4.0 — 2026-04-25
 
 ### Added

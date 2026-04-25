@@ -204,6 +204,20 @@ export class AgtOpenPredictions extends AgtOpenClient {
   }
 
   /**
+   * Build a block-explorer URL for a prediction's on-chain anchor.
+   * Returns null if the prediction has no `commitmentChainTx` (e.g.
+   * still in the cron backlog or pre-anchor row).
+   *
+   * Currently anchors only on Base Sepolia (chainId 84532), so we
+   * always point at basescan; if a future schema change adds Arc
+   * Testnet anchors, branch on the chain identifier here.
+   */
+  static getExplorerUrl(prediction: Pick<Prediction, 'commitmentChainTx'>): string | null {
+    if (!prediction.commitmentChainTx) return null;
+    return `https://sepolia.basescan.org/tx/${prediction.commitmentChainTx}`;
+  }
+
+  /**
    * Fetch the commitment reveal for a resolved prediction. Returns
    * the nonce + canonical preimage so anyone can recompute the
    * SHA-256 and verify the commitment matches.
