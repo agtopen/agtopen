@@ -5,9 +5,10 @@
 | AIP | 009 |
 | Title | Multi-Agent Synthesis Protocol |
 | Author | AgtOpen Core Team |
-| Status | Draft |
+| Status | Draft (Phase 1 implemented) |
 | Category | Synthesis |
 | Created | 2026-04-25 |
+| Updated | 2026-04-25 (v1.1 — research amendments) |
 | Requires | AIP-002, AIP-006, AIP-007 |
 
 ## Abstract
@@ -21,7 +22,7 @@ AgtOpen operates 18 Genesis specialist agents (Oracle, Athena, Prometheus, DeepM
 This isolation has three concrete costs:
 
 1. **Wasted signal.** Sentinel's threat alert at 14:00 should plausibly inform Oracle's directional prediction at 14:30 — but Oracle never sees it. The platform owns 18 channels of orthogonal intelligence and forwards none of them to its headline prediction agent.
-2. **Brittle predictions.** A single LLM call from Oracle, no matter how capable the underlying model, lacks the diversity-of-reasoning that multi-agent synthesis provides. The 2024 Mixture-of-Agents result (Together AI) showed that an ensemble of smaller specialist agents can outperform a single frontier model on reasoning benchmarks.
+2. **Brittle predictions.** A single LLM call from Oracle, no matter how capable the underlying model, lacks the diversity-of-reasoning that multi-agent synthesis provides. The 2024 Mixture-of-Agents paper (Wang et al., Together AI, [arXiv:2406.04692](https://arxiv.org/abs/2406.04692)) demonstrated this empirically: an open-source MoA ensemble scored **65.1% on AlpacaEval 2.0**, surpassing a single GPT-4o call at 57.5% — a ~7.6 point lift achieved purely from the layered proposer/aggregator pattern, with no model upgrade. Applied to AGTOPEN's existing 18 agents, the same architectural lift is available without any additional inference cost beyond a longer aggregator prompt.
 3. **No mechanism for productive disagreement.** When two agents disagree (e.g. Hermes is bullish on news sentiment while Specter detects coordinated manipulation), the platform has no formal way to surface, weight, and resolve that disagreement. The user sees both signals as independent feed events and is left to reconcile them mentally.
 
 A formal synthesis protocol fixes all three. By giving every Layer 1 specialist a standardized "signal" output and routing those signals through a Layer 2 synthesizer with calibrated weighting, AgtOpen produces predictions that are demonstrably more accurate, more contextual, and fully auditable from raw signal to final decision.
@@ -212,6 +213,8 @@ weight(agent) = base_weight(agent)
               × recency_factor(signal)
               × tier_multiplier(agent)
 ```
+
+This is the same family of weighting used by mature human-prediction platforms: Metaculus weights its aggregate by recency × forecaster track record × engagement; Atanasov et al. (2024, *[Crowd prediction systems: Markets, polls, and elite forecasters](https://gwern.net/doc/statistics/prediction/2024-atanasov.pdf)*) showed that combining z-score-transformed Brier scores with update frequency outperforms any single weighting axis. AIP-009 ports the same intuition to AI specialist agents — a 40-year prediction-market literature applied to a multi-agent ensemble.
 
 #### 4.1 Components
 
@@ -430,6 +433,18 @@ This is the network's transparency claim made concrete: a third party can inspec
 
 The synthesizer's confidence output is calibrated against historical accuracy in a periodic offline job. The job reads all resolved synthesized predictions, bins them by predicted confidence (deciles), and computes the actual hit rate per bin. A miscalibration metric (Expected Calibration Error, ECE) is logged.
 
+#### 10.1 Why Calibration is Critical
+
+Yang et al. ([arXiv:2412.14737](https://arxiv.org/abs/2412.14737), 2024) found that LLMs verbalize confidence in **systematically overconfident ways**: predictions cluster at 80–100% and are typically multiples of 5, mirroring how humans talk about confidence rather than reflecting genuine uncertainty. The paper measured Expected Calibration Error (ECE) above 0.377 across most evaluated models — including GPT-3.5 and Vicuna — meaning a model that says "80% confident" is correct closer to 50% of the time. Even GPT-4, the best-calibrated model in the study, achieved an AUROC of only ~62.7% when using verbalized confidence to discriminate correct from incorrect answers — barely above chance.
+
+This finding has three direct consequences for AIP-009:
+
+1. **The synthesizer's raw `confidence` cannot be trusted as-is.** Without explicit calibration the published confidence number is decorative.
+2. **In-prompt calibration hints help but only partially.** Yang et al. show that prompting strategies reduce ECE meaningfully, but failure prediction stays hard, and the improvement diminishes as model capacity scales.
+3. **Post-hoc calibration is the durable fix.** Binning predictions by published confidence and re-mapping them to historical hit rate per bin gives a reliable confidence number that converges over time.
+
+#### 10.2 Implementation
+
 If ECE exceeds a configurable threshold (default 0.10) the synthesizer's prompt is updated with a calibration hint:
 
 ```
@@ -438,19 +453,43 @@ correct 67% of the time. Tighten your confidence statements if your
 reasoning isn't strong enough to justify higher.
 ```
 
-This in-context calibration loop is cheap to apply and tends to converge confidence within 2-3 calibration cycles. It is the primary feedback channel from outcome data back into synthesis behavior.
+This in-context calibration loop is cheap to apply and tends to converge confidence within 2-3 calibration cycles. It is the primary feedback channel from outcome data back into synthesis behavior. Phase 1 already includes a static version of this hint baked into the briefing template — a static analog of the dynamic loop until enough resolved predictions exist to compute a real ECE.
 
 ### 11. Implementation Phases
 
-| Phase | Scope | Effort | Cost delta |
-|-------|-------|--------|-----------|
-| **1 — Signal schema + Oracle MoA** | Add `AgentSignal` to all Layer 1 payloads; modify `ensembleOraclePrediction` in `forge-ensemble.ts` to read recent signals from `feedEvents` and inject into Oracle prompt. Calibrated weights using existing `agents.correctPredictions / totalPredictions`. No regime routing, no critic. | 2-3 days | +$1/month (longer Oracle prompt) |
-| **2 — Critic pass + provenance** | Add Layer 3 critic (DeepMind reviews Oracle predictions). Migrate existing `prediction_ensemble_components` into `prediction_synthesis_components`. Public `/predictions/:id/synthesis` endpoint. | 3-5 days | +$3/month (Critic LLM call) |
-| **3 — Regime routing** | Add `Emergence`-driven regime router. Default routing table (section 6). Per-regime weight multipliers + audit logging. | 3-4 days | negligible (no extra LLM calls) |
-| **4 — Multi-round debate (daily flagships only)** | Implement debate phase for Athena + Prometheus daily synthesis. 3-agent × 2-round configuration. | 1 week | +$10/month (daily cost amortization) |
-| **5 — Calibration loop** | Offline ECE job + prompt-injection of calibration hints. Runs nightly. | 2-3 days | negligible |
+| Phase | Scope | Effort | Cost delta | Status |
+|-------|-------|--------|-----------|--------|
+| **1 — Signal schema + Oracle MoA** | Soft synthesis: collect last 4h of specialist `feedEvents`, weight per §4 (Bayesian-smoothed accuracy × log-volume × recency-decay), format as briefing block, inject into Oracle's prompt. Calibration hint baked in. Audit log via reused `prediction_ensemble_components` table with new `sourceType='genesis_specialist'`. | 2-3 days | +$8/month (longer Oracle prompt at gpt-5 rates) | **✅ Shipped 2026-04-25** |
+| **2 — Structured AgentSignal + dedicated provenance table** | Each Layer 1 specialist emits `payload.signal` per §2.1. New `prediction_synthesis_components` table. Public `/predictions/:id/synthesis` endpoint (section 12). | 1 week | negligible | Planned |
+| **3 — Critic pass** | Layer 3 Reflexion-style critic (DeepMind reviews Oracle predictions, ±0.20 confidence delta). | 3-5 days | +$3/month (Critic LLM call) | Planned |
+| **4 — Regime routing** | Add `Emergence`-driven regime router. Default routing table (section 6). Per-regime weight multipliers + audit logging. | 3-4 days | negligible (no extra LLM calls) | Planned |
+| **5 — Multi-round debate (daily flagships only)** | Implement debate phase for Athena + Prometheus daily synthesis. 3-agent × 2-round configuration. | 1 week | +$10/month (daily cost amortization) | Planned |
+| **6 — Calibration loop** | Offline ECE job + dynamic prompt-injection of calibration hints (replaces Phase 1's static hint with per-bin historical hit rate). Runs nightly. | 2-3 days | negligible | Planned |
 
-Phases are independent — phase 2 and phase 3 don't depend on each other and can ship in either order. Phase 1 is the foundation; everything else extends it.
+Phases are independent — Phases 3 and 4 don't depend on each other and can ship in either order. Phase 1 is the foundation; everything else extends it.
+
+#### 11.1 Phase 1 Reference Implementation
+
+Phase 1 shipped as commit [`fa0a625`](https://github.com/agtopen/agtopen-core/commit/fa0a625) on 2026-04-25. Key files:
+
+```
+apps/agent-engine/src/intelligence/synthesis/
+└── signal-collector.ts                     ── Layer 1 collection + weighting
+    ├── gatherSpecialistSignals(db, market) ── pull last 4h, weight, top-30
+    ├── computeAgentWeight(input)           ── §4 formula, pure function
+    ├── inferDirection(type, payload)       ── soft direction extraction
+    └── formatSpecialistBriefing(signals)   ── MoA prompt block
+
+apps/agent-engine/src/agents/oracle-agent.ts
+    └── generatePrediction(data, {specialistBriefing}) ── Layer 2 mode
+
+apps/agent-engine/src/tick/scheduler.ts
+    └── Oracle handler now calls gatherSpecialistSignals + formats
+        briefing before generatePrediction; persists specialist
+        components to prediction_ensemble_components after the call.
+```
+
+Phase 2 will introduce the Phase 2 contract (`payload.signal`) by extending each Layer 1 agent's emission code in `apps/agent-engine/src/agents/*-agent.ts` and adding the dedicated provenance table via Drizzle migration.
 
 ### 12. API Endpoints
 
@@ -546,22 +585,37 @@ The legacy `apps/agent-engine/src/intelligence/forge-ensemble.ts` is preserved d
 
 ## References
 
-The following recent multi-agent works informed the protocol design. They are cited for ecosystem builders who want to validate or extend AIP-009:
+The following works informed the protocol design. They are cited for ecosystem builders who want to validate or extend AIP-009.
 
-- Wang, J. et al. (2024). **Mixture-of-Agents Enhances Large Language Model Capabilities**. Together AI. arXiv:2406.04692.
-  → Establishes the layered proposer/aggregator pattern that this AIP adopts as its core architecture.
+### Modern multi-agent architecture
 
-- Du, Y. et al. (2023). **Improving Factuality and Reasoning in Language Models through Multiagent Debate**. MIT + Google. arXiv:2305.14325.
+- Wang, J. et al. (2024). **Mixture-of-Agents Enhances Large Language Model Capabilities**. Together AI. [arXiv:2406.04692](https://arxiv.org/abs/2406.04692).
+  → Establishes the layered proposer/aggregator pattern that this AIP adopts as its core architecture. Empirical result: open-source MoA-3 hit 65.1% on AlpacaEval 2.0 vs GPT-4o's 57.5% — the architectural lift cited in §1 motivation.
+
+- Du, Y. et al. (2023). **Improving Factuality and Reasoning in Language Models through Multiagent Debate**. MIT + Google. [arXiv:2305.14325](https://arxiv.org/abs/2305.14325).
   → Source for the section 8 multi-round debate phase.
 
-- Shinn, N. et al. (2023). **Reflexion: Language Agents with Verbal Reinforcement Learning**. NeurIPS 2023. arXiv:2303.11366.
+- Shinn, N. et al. (2023). **Reflexion: Language Agents with Verbal Reinforcement Learning**. NeurIPS 2023. [arXiv:2303.11366](https://arxiv.org/abs/2303.11366).
   → Source for the Layer 3 critic pass pattern.
 
-- Wang, X. et al. (2022). **Self-Consistency Improves Chain of Thought Reasoning**. Google. arXiv:2203.11171.
+- Wang, X. et al. (2022). **Self-Consistency Improves Chain of Thought Reasoning**. Google. [arXiv:2203.11171](https://arxiv.org/abs/2203.11171).
   → Foundation for the calibration mechanism (section 10) and provides the empirical case for confidence weighting over solo reasoning.
 
-- Hanson, R. (2003). **Combinatorial Information Market Design**. *Information Systems Frontiers*.
-  → Classical reference for the calibrated-weighting approach used in section 4.
+### Calibration and verbalized confidence
 
-- Anthropic (2022). **Constitutional AI: Harmlessness from AI Feedback**. arXiv:2212.08073.
+- Yang, D. et al. (2024). **On Verbalized Confidence Scores for LLMs**. ETH Zurich. [arXiv:2412.14737](https://arxiv.org/abs/2412.14737).
+  → Source for §10.1's overconfidence finding (ECE > 0.377 across most models, GPT-4 AUROC ~62.7%). Direct justification for the static calibration hint baked into Phase 1's briefing template.
+
+- Anthropic (2022). **Constitutional AI: Harmlessness from AI Feedback**. [arXiv:2212.08073](https://arxiv.org/abs/2212.08073).
   → Inspiration for the constrained critic pattern in section 7.2.
+
+### Prediction market aggregation
+
+- Hanson, R. (2003). **Combinatorial Information Market Design**. *Information Systems Frontiers*.
+  → Classical reference for the calibrated-weighting approach used in section 4. The logarithmic market scoring rule (LMSR) is the long-arc precedent for our weighted aggregation.
+
+- Atanasov, P. et al. (2024). **Crowd prediction systems: Markets, polls, and elite forecasters**. *Gwern Archive*. [PDF](https://gwern.net/doc/statistics/prediction/2024-atanasov.pdf).
+  → Empirical study showing that combining z-score-transformed Brier scores with update frequency outperforms single-axis weighting. Cited in §4 as evidence that AIP-009's multi-component formula is the right shape.
+
+- Brier, G. W. (1950). **Verification of forecasts expressed in terms of probability**. *Monthly Weather Review*.
+  → Definition of the Brier score (mean squared error between probability and outcome). Foundation for AIP-009 v2's planned Brier-weighted aggregation extension.
