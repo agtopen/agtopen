@@ -37,24 +37,35 @@ is complete — see roadmap below.
 
 ### Static analysis — Slither
 
-Latest Slither run (`0.11.4`, detectors `98`, excluding
-`naming-convention` and `solc-version`) against `src/`:
+Latest Slither run (re-verified `2026-04-25`, detectors `101`,
+excluding `naming-convention` and `solc-version`) against `src/`:
 
 | Severity | Count | Notes |
 |---|---:|---|
-| **High** | 0 | 1 originally found (`encode-packed-collision` in `ZKHub._verifyAndRecord`) — **fixed** by switching to `abi.encode`. |
+| **High** | 0 | 1 originally found (`encode-packed-collision` in `ZKHub._verifyAndRecord`) — **fixed** by switching to `abi.encode`. Re-verified clean Apr 25. |
 | **Medium** | 7 | 3× `divide-before-multiply` + 4× `incorrect-equality` — accepted with rationale below. |
 | **Low** | 17 | 13× `timestamp`, 2× `events-maths`, 1× `missing-zero-check`, 1× `calls-loop`. |
 | **Informational** | 4 | Unindexed event-address parameters. |
+
+**ZKHub.sol specifically** (the contract that ingests on-chain
+prediction commitments) re-runs at **0 H / 0 M / 0 L / 16 I**. The
+post-fix audit trail is stable; further Medium findings on other
+contracts (`StakingVault.divideBeforeMultiply`,
+`DAOGovernor.incorrect-equality`) are unchanged from the original
+baseline and accepted with the rationale below.
 
 **Raw reports** (JSON + human-readable) are committed in the main
 Agentic Open repo under `contracts/audit/`. Re-running:
 
 ```bash
-pip install slither-analyzer
-cd contracts/
-slither . --filter-paths "lib/|test/|script/" \
-          --exclude naming-convention,solc-version
+# uvx ships Slither without polluting your global Python:
+uvx --from slither-analyzer slither contracts/src/ZKHub.sol \
+    --print human-summary
+
+# Or, full project:
+uvx --from slither-analyzer slither contracts/ \
+    --filter-paths "lib/|test/|script/" \
+    --exclude naming-convention,solc-version
 ```
 
 ### Accepted findings — rationale
