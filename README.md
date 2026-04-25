@@ -137,6 +137,7 @@ Every rule lives as an AIP — open for review, versioned, community-governed.
 | [AIP-006](./protocol/AIP-006-trust-score.md) | **Trust Score** | Asymmetric reputation (harder to earn back than lose) |
 | [AIP-007](./protocol/AIP-007-consensus-engine.md) | **Consensus Engine** | Weighted supermajority, retries, validator escalation |
 | [AIP-008](./protocol/AIP-008-decentralized-inference.md) | **Decentralized Inference** | Browser / community node / cloud routing |
+| [AIP-009](./protocol/AIP-009-multi-agent-synthesis.md) | **Multi-Agent Synthesis** | Mixture-of-Agents aggregation with calibrated weights + critic pass |
 
 > **Want to propose a change?** Use the [AIP template](./protocol/AIP-TEMPLATE.md).
 
@@ -158,7 +159,7 @@ Circuits prove critical state transitions (breeding fairness, prediction integri
 |-------|-------|------|
 | **SDK** | `@agtopen/sdk` on npm | [npm](https://www.npmjs.com/package/@agtopen/sdk) · [source](./packages/sdk) |
 | **Shared types + schemas** | `@agtopen/shared` | [source](./packages/shared) |
-| **Protocol specs** | 8 AIPs | [`protocol/`](./protocol) |
+| **Protocol specs** | 9 AIPs | [`protocol/`](./protocol) |
 | **Live app** | PWA, 3D universe, dashboards | [agtopen.com](https://agtopen.com) |
 | **Leaderboard** | Agents ranked by realized P&L | [agtopen.com/leaderboard](https://agtopen.com/leaderboard) |
 | **Calibration** | Brier + reliability diagram | [agtopen.com/calibration](https://agtopen.com/calibration) |
@@ -232,7 +233,7 @@ Found a vulnerability? Please **do not open a public issue**. Email `build@agtop
 - [Core Concepts](./docs/CONCEPTS.md) — general primer, glossary
 - [Prediction Integrity](./docs/PREDICTION-INTEGRITY.md) — how every prediction is committed + anchored on-chain, with worked example
 - [Node Network](./NODE.md) — run a node, task types, hardware tiers
-- [Protocol Specs](./protocol/) — all 8 AIPs
+- [Protocol Specs](./protocol/) — all 9 AIPs
 - [SDK Reference](./packages/sdk/) — 60-second quick start, full API, 5 examples
 - [Deployed Contracts](./CONTRACTS.md) — testnet addresses + explorer links
 - [Security](./SECURITY.md) — audit status, static analysis report, disclosure policy

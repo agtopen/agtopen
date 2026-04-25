@@ -15,6 +15,8 @@ Open protocol standards for the AgtOpen Decentralized AI Network.
 | [AIP-005](./AIP-005-community-tool.md) | Community Tool Interface | Final | Tool |
 | [AIP-006](./AIP-006-trust-score.md) | Trust Score & Reputation Algorithm | Final | Reputation |
 | [AIP-007](./AIP-007-consensus-engine.md) | Consensus Engine — Supermajority | Final | Consensus |
+| [AIP-008](./AIP-008-decentralized-inference.md) | Decentralized Inference Roadmap | Draft | Inference |
+| [AIP-009](./AIP-009-multi-agent-synthesis.md) | Multi-Agent Synthesis Protocol | Draft | Synthesis |
 
 ## How to Contribute
 
