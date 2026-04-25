@@ -83,6 +83,89 @@ describe('AgtOpenPredictions', () => {
   });
 });
 
+describe('AgtOpenPredictions commit-reveal', () => {
+  test('getReveal() hits /:id/reveal endpoint', async () => {
+    responseStub = { id: 'p1', circuitId: 'sha256_v1' };
+    const p = new AgtOpenPredictions({});
+    await p.getReveal('p1');
+    expect(capturedUrl).toContain('/predictions/p1/reveal');
+    expect(capturedMethod).toBe('GET');
+  });
+
+  // Known-answer vector computed with Web Crypto at test-write time.
+  // Hard-coded here so the test catches any drift in the SDK's
+  // canonicalisation logic (ordering, 6-decimal rounding, separator,
+  // nullable coalescing) — the moat is worthless if the server and
+  // client disagree by a single byte.
+  //
+  // Timestamp 2026-04-25T02:21:36.733Z → epoch ms 1777083696733.
+  // Preimage: sha256_v1|BTC/USD|LONG|0.720000|665.000000|637.300000|test reasoning|1777083696733|abc123
+  // SHA-256:  a61e3e42e1865da05bc8ea156a9ac31be8fe413e7808ad216ece21aab603bd02
+  const FIXED_REVEAL = {
+    id: 'p-fixture',
+    circuitId: 'sha256_v1' as const,
+    commitmentHash: 'a61e3e42e1865da05bc8ea156a9ac31be8fe413e7808ad216ece21aab603bd02',
+    nonce: 'abc123',
+    preimage: {
+      market: 'BTC/USD',
+      direction: 'LONG' as const,
+      confidence: 0.72,
+      targetPrice: 665,
+      currentPrice: 637.3,
+      reasoning: 'test reasoning',
+      timestamp: '2026-04-25T02:21:36.733Z',
+    },
+    canonicalPreimage: 'sha256_v1|BTC/USD|LONG|0.720000|665.000000|637.300000|test reasoning|1777083696733|abc123',
+    revealedAt: '2026-04-26T02:21:36.733Z',
+    verifyHowto: 'Compute SHA-256(canonicalPreimage) and compare to commitmentHash.',
+  };
+
+  test('verifyCommitment() returns true for a valid reveal', async () => {
+    const ok = await AgtOpenPredictions.verifyCommitment(FIXED_REVEAL);
+    expect(ok).toBe(true);
+  });
+
+  test('verifyCommitment() returns false if the nonce was swapped', async () => {
+    const tampered = { ...FIXED_REVEAL, nonce: 'xyz999' };
+    expect(await AgtOpenPredictions.verifyCommitment(tampered)).toBe(false);
+  });
+
+  test('verifyCommitment() returns false if any preimage field is tampered', async () => {
+    const tampered = {
+      ...FIXED_REVEAL,
+      preimage: { ...FIXED_REVEAL.preimage, direction: 'SHORT' as const },
+    };
+    expect(await AgtOpenPredictions.verifyCommitment(tampered)).toBe(false);
+  });
+
+  test('verifyCommitment() returns false for unknown circuitId (fail-safe)', async () => {
+    const future = { ...FIXED_REVEAL, circuitId: 'prediction_integrity_v2' };
+    expect(await AgtOpenPredictions.verifyCommitment(future)).toBe(false);
+  });
+
+  test('verifyCommitment() handles null targetPrice by coalescing to empty string', async () => {
+    // Canonicalisation: fixed6(null) → '' (empty). Known-answer:
+    //   preimage: sha256_v1|BTC/USD|NEUTRAL|0.500000||500.000000|sideways|1777083696733|nn
+    //   SHA-256:  7a896c374d02c835278cd92637f4e2104a824b5974fb2a0079b9033acff79043
+    const reveal = {
+      ...FIXED_REVEAL,
+      commitmentHash: '7a896c374d02c835278cd92637f4e2104a824b5974fb2a0079b9033acff79043',
+      nonce: 'nn',
+      preimage: {
+        market: 'BTC/USD',
+        direction: 'NEUTRAL' as const,
+        confidence: 0.5,
+        targetPrice: null,
+        currentPrice: 500,
+        reasoning: 'sideways',
+        timestamp: '2026-04-25T02:21:36.733Z',
+      },
+      canonicalPreimage: 'sha256_v1|BTC/USD|NEUTRAL|0.500000||500.000000|sideways|1777083696733|nn',
+    };
+    expect(await AgtOpenPredictions.verifyCommitment(reveal)).toBe(true);
+  });
+});
+
 describe('AgtOpenMarket', () => {
   test('spot() batches symbols into query', async () => {
     responseStub = { quotes: [] };

@@ -20,6 +20,7 @@ export type {
   PredictionHistory,
   PredictionHistoryRow,
   PredictionListParams,
+  PredictionReveal,
 } from './predictions.js';
 
 // Market / leaderboard / trades types

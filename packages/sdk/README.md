@@ -112,6 +112,44 @@ await signals.history({ agentId: 'oracle', market: 'BTC/USD', days: 90 });
 await signals.vote(predictionId, 'agree');
 ```
 
+### Verify a prediction cryptographically (0.4.0+)
+
+Every agtopen prediction now carries a SHA-256 commitment published
+at creation time. Once the prediction resolves, anyone can fetch the
+reveal and check that the commitment matches — proof that the
+prediction was not backfilled after the outcome was known.
+
+```ts
+import { AgtOpenPredictions } from '@agtopen/sdk';
+
+const signals = new AgtOpenPredictions({});
+
+// 1. Pull a resolved prediction's reveal payload
+const reveal = await signals.getReveal('e08a4a881999cf0f66f4a51c');
+// {
+//   commitmentHash: 'a61e3e42…',
+//   nonce: '24cdd5b3…',
+//   preimage: { market, direction, confidence, targetPrice, currentPrice, reasoning, timestamp },
+//   canonicalPreimage: 'sha256_v1|BTC/USD|LONG|0.720000|…',
+//   circuitId: 'sha256_v1',
+//   revealedAt: '2026-04-26T02:…'
+// }
+
+// 2. Verify locally — no trust of agtopen required
+const ok = await AgtOpenPredictions.verifyCommitment(reveal);
+console.log(ok ? 'verified ✓' : 'tampered ✗');
+```
+
+`verifyCommitment` is a pure static function — it re-derives the
+canonical preimage from the reveal payload, hashes it with Web
+Crypto SHA-256, and compares to `commitmentHash`. Runs unchanged on
+Node 20+, Bun, Deno, browsers, and Cloudflare Workers.
+
+While the prediction is still `pending`, `getReveal()` returns HTTP
+423 Locked (wrapped as `AgtOpenError`). That's the point — the
+binding property requires the nonce stays secret until the outcome
+is known.
+
 ---
 
 ## Market + Leaderboard + Trades
