@@ -15,6 +15,16 @@ export interface TierAccess {
   canAccessTerritory: boolean;
   canJoinProphecy: boolean;
   dataDelay: number;
+  /** Max active forge agents (not counting archived). Hard cap — user
+   *  cannot create beyond this without tier upgrade. -1 = unlimited. */
+  maxForgeAgents: number;
+  /** Max forge agent CREATIONS per 24 h. Separate from the active cap
+   *  because users can create + archive in a loop to circumvent the
+   *  active-cap alone. */
+  forgeCreatesPerDay: number;
+  /** Max manual /forge/:id/run triggers per hour. Stops one user from
+   *  spamming runs and burning through their atoms + our LLM bill. */
+  forgeRunsPerHour: number;
 }
 
 const TIER_HIERARCHY: Record<UserTier, number> = {
@@ -39,6 +49,11 @@ export const TIER_ACCESS: Record<UserTier, TierAccess> = {
     canAccessTerritory: false,
     canJoinProphecy: false,
     dataDelay: 60_000,
+    // 3 agents is enough to try the product + see the value loop;
+    // anyone running real workloads upgrades to Pro.
+    maxForgeAgents: 3,
+    forgeCreatesPerDay: 10,
+    forgeRunsPerHour: 20,
   },
   pro: {
     maxConsultMessages: 50,
@@ -55,6 +70,11 @@ export const TIER_ACCESS: Record<UserTier, TierAccess> = {
     canAccessTerritory: true,
     canJoinProphecy: true,
     dataDelay: 15_000,
+    // Pro covers the "power user with a handful of production agents"
+    // — enough headroom for an agency but not a bot farm.
+    maxForgeAgents: 25,
+    forgeCreatesPerDay: 100,
+    forgeRunsPerHour: 200,
   },
   sovereign: {
     maxConsultMessages: -1,
@@ -71,6 +91,11 @@ export const TIER_ACCESS: Record<UserTier, TierAccess> = {
     canAccessTerritory: true,
     canJoinProphecy: true,
     dataDelay: 0,
+    // Sovereign is the "API / platform" tier — big caps, not
+    // unlimited, so a single compromised key can't DoS the fleet.
+    maxForgeAgents: 200,
+    forgeCreatesPerDay: 1000,
+    forgeRunsPerHour: 2000,
   },
 } as const;
 
