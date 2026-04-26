@@ -5,10 +5,10 @@
 | AIP | 009 |
 | Title | Multi-Agent Synthesis Protocol |
 | Author | AgtOpen Core Team |
-| Status | Draft (Phase 1 + Phase 2 implemented) |
+| Status | Draft (Phases 1–3 implemented) |
 | Category | Synthesis |
 | Created | 2026-04-25 |
-| Updated | 2026-04-25 (v1.2 — Phase 2 status) |
+| Updated | 2026-04-25 (v1.3 — Phase 3 status) |
 | Requires | AIP-002, AIP-006, AIP-007 |
 
 ## Abstract
@@ -461,7 +461,7 @@ This in-context calibration loop is cheap to apply and tends to converge confide
 |-------|-------|--------|-----------|--------|
 | **1 — Signal schema + Oracle MoA** | Soft synthesis: collect last 4h of specialist `feedEvents`, weight per §4 (Bayesian-smoothed accuracy × log-volume × recency-decay), format as briefing block, inject into Oracle's prompt. Calibration hint baked in. Audit log via reused `prediction_ensemble_components` table with new `sourceType='genesis_specialist'`. | 2-3 days | +$8/month (longer Oracle prompt at gpt-5 rates) | **✅ Shipped 2026-04-25** |
 | **2 — Structured AgentSignal + dedicated provenance table** | Each Layer 1 specialist emits `payload.signal` per §2.1. New `prediction_synthesis_components` table. Public `/predictions/:id/synthesis` endpoint (section 12). | 1 week | negligible | **✅ Shipped 2026-04-25** (5 of 17 agents migrated; remaining 12 keep Phase 1 fallback and migrate incrementally) |
-| **3 — Critic pass** | Layer 3 Reflexion-style critic (DeepMind reviews Oracle predictions, ±0.20 confidence delta). | 3-5 days | +$3/month (Critic LLM call) | Planned |
+| **3 — Critic pass** | Layer 3 Reflexion-style critic (DeepMind reviews Oracle predictions, ±0.20 confidence delta). | 3-5 days | +$0.30/month (gpt-5-mini balanced tier × 6 calls/day) | **✅ Shipped 2026-04-25** |
 | **4 — Regime routing** | Add `Emergence`-driven regime router. Default routing table (section 6). Per-regime weight multipliers + audit logging. | 3-4 days | negligible (no extra LLM calls) | Planned |
 | **5 — Multi-round debate (daily flagships only)** | Implement debate phase for Athena + Prometheus daily synthesis. 3-agent × 2-round configuration. | 1 week | +$10/month (daily cost amortization) | Planned |
 | **6 — Calibration loop** | Offline ECE job + dynamic prompt-injection of calibration hints (replaces Phase 1's static hint with per-bin historical hit rate). Runs nightly. | 2-3 days | negligible | Planned |
@@ -523,6 +523,60 @@ apps/agent-engine/src/tick/scheduler.ts
 ```
 
 Each remaining specialist agent (Abyss, Cipher, Psyche, Specter, Muse, Meridian, Emergence, Nexus-7, Nova, DeepMind, Atlas, Epoch) keeps the Phase 1 fallback path until it gets its `payload.signal` block. Migration is independent per agent — the protocol works at every intermediate state.
+
+#### 11.3 Phase 3 Reference Implementation
+
+Phase 3 (Layer 3 critic pass) shipped on 2026-04-25. Adds:
+
+```
+packages/db/src/migrations/0027_synthesis_critic.sql
+    └── 4 nullable columns on predictions: critic_id, critic_delta,
+        critic_reasoning, pre_critic_confidence. CHECK constraint on
+        delta in [-0.20, +0.20]. Partial index on dampened predictions.
+
+packages/db/src/schema/predictions.ts
+    └── Drizzle field additions matching the migration.
+
+apps/agent-engine/src/intelligence/synthesis/critic.ts
+    └── runCriticPass(inputs): invokes DeepMind on gpt-5-mini
+        (balanced tier) with a constrained prompt that surfaces both
+        Oracle's pre-critic prediction AND the specialist signals
+        Oracle saw. Critic returns { delta, reasoning } as JSON.
+        Delta is clamped to [-0.20, +0.20] before use. Returns null
+        on LLM failure so the tick proceeds without the critic
+        rather than blocking commit.
+
+apps/agent-engine/src/tick/scheduler.ts
+    └── Oracle handler now: ensemble blend → critic pass → commit
+        chain hash → DB insert. CRITICAL: commit hash is computed
+        AFTER the critic so the on-chain anchor binds the
+        post-critic confidence. Reasoning column gets a "Critic
+        (deepmind): …" suffix when one runs.
+
+apps/api-core/src/routes/predictions.ts
+    └── /predictions/:id/synthesis returns criticId, criticDelta,
+        criticReasoning, preCriticConfidence, finalConfidence.
+        Predictions without a critic pass return all four critic
+        fields as null.
+
+packages/shared/src/types/synthesis.ts
+    └── SynthesisProvenance gains critic fields per §2.3
+        CritiquedPrediction shape (criticId, criticDelta,
+        criticReasoning, preCriticConfidence, finalConfidence).
+```
+
+Constraints in production match the spec exactly:
+
+- DeepMind cannot reverse Oracle's direction — the critic only
+  modulates confidence (§7.2 hard rule, enforced by the prompt and
+  by the `criticDelta` schema constraint).
+- DeepMind cannot critique itself — Phase 3 ships only one
+  synthesizer-critic pair (`oracle` ↔ `deepmind`); a defensive
+  guard in `runCriticPass` rejects any future config that would
+  pair an agent with itself.
+- DB CHECK constraint on `predictions.critic_delta` rejects any
+  out-of-band value at the storage layer, so even an LLM that
+  ignores the prompt can't sneak past ±0.20.
 
 ### 12. API Endpoints
 
