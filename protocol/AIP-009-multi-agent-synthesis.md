@@ -457,20 +457,20 @@ This in-context calibration loop is cheap to apply and tends to converge confide
 
 ### 11. Implementation Phases
 
-| Phase | Scope | Effort | Cost delta | Status |
-|-------|-------|--------|-----------|--------|
-| **1 — Signal schema + Oracle MoA** | Soft synthesis: collect last 4h of specialist `feedEvents`, weight per §4 (Bayesian-smoothed accuracy × log-volume × recency-decay), format as briefing block, inject into Oracle's prompt. Calibration hint baked in. Audit log via reused `prediction_ensemble_components` table with new `sourceType='genesis_specialist'`. | 2-3 days | +$8/month (longer Oracle prompt at gpt-5 rates) | **✅ Shipped 2026-04-25** |
-| **2 — Structured AgentSignal + dedicated provenance table** | Each Layer 1 specialist emits `payload.signal` per §2.1. New `prediction_synthesis_components` table. Public `/predictions/:id/synthesis` endpoint (section 12). | 1 week | negligible | **✅ Shipped 2026-04-25** (5 of 17 agents migrated; remaining 12 keep Phase 1 fallback and migrate incrementally) |
-| **3 — Critic pass** | Layer 3 Reflexion-style critic (DeepMind reviews Oracle predictions, ±0.20 confidence delta). | 3-5 days | +$0.30/month (gpt-5-mini balanced tier × 6 calls/day) | **✅ Shipped 2026-04-25** |
-| **4 — Regime routing** | Add `Emergence`-driven regime router. Default routing table (section 6). Per-regime weight multipliers + audit logging. | 3-4 days | negligible (no extra LLM calls) | Planned |
-| **5 — Multi-round debate (daily flagships only)** | Implement debate phase for Athena + Prometheus daily synthesis. 3-agent × 2-round configuration. | 1 week | +$10/month (daily cost amortization) | Planned |
-| **6 — Calibration loop** | Offline ECE job + dynamic prompt-injection of calibration hints (replaces Phase 1's static hint with per-bin historical hit rate). Runs nightly. | 2-3 days | negligible | Planned |
+| Phase | Scope | Status |
+|-------|-------|--------|
+| **1 — Signal schema + Oracle MoA** | Soft synthesis: collect last 4h of specialist `feedEvents`, weight per §4 (Bayesian-smoothed accuracy × log-volume × recency-decay), format as briefing block, inject into Oracle's prompt. Calibration hint baked in. Audit log via reused `prediction_ensemble_components` table with new `sourceType='genesis_specialist'`. | **✅ Shipped** |
+| **2 — Structured AgentSignal + dedicated provenance table** | Each Layer 1 specialist emits `payload.signal` per §2.1. New `prediction_synthesis_components` table. Public `/predictions/:id/synthesis` endpoint (section 12). | **✅ Shipped** (5 of 17 agents migrated; remaining 12 keep Phase 1 fallback and migrate incrementally) |
+| **3 — Critic pass** | Layer 3 Reflexion-style critic (DeepMind reviews Oracle predictions, ±0.20 confidence delta). | **✅ Shipped** |
+| **4 — Regime routing** | Add `Emergence`-driven regime router. Default routing table (section 6). Per-regime weight multipliers + audit logging. | Planned |
+| **5 — Multi-round debate (daily flagships only)** | Implement debate phase for Athena + Prometheus daily synthesis. 3-agent × 2-round configuration. | Planned |
+| **6 — Calibration loop** | Offline ECE job + dynamic prompt-injection of calibration hints (replaces Phase 1's static hint with per-bin historical hit rate). Runs nightly. | Planned |
 
 Phases are independent — Phases 3 and 4 don't depend on each other and can ship in either order. Phase 1 is the foundation; everything else extends it.
 
 #### 11.1 Phase 1 Reference Implementation
 
-Phase 1 shipped as commit [`fa0a625`](https://github.com/agtopen/agtopen-core/commit/fa0a625) on 2026-04-25. Key files:
+Phase 1 shipped as commit [`fa0a625`](https://github.com/agtopen/agtopen-core/commit/fa0a625). Key files:
 
 ```
 apps/agent-engine/src/intelligence/synthesis/
@@ -491,7 +491,7 @@ apps/agent-engine/src/tick/scheduler.ts
 
 #### 11.2 Phase 2 Reference Implementation
 
-Phase 2 shipped as commit [`25c3b4d`](https://github.com/agtopen/agtopen-core/commit/25c3b4d) on 2026-04-25. Adds:
+Phase 2 shipped as commit [`25c3b4d`](https://github.com/agtopen/agtopen-core/commit/25c3b4d). Adds:
 
 ```
 packages/db/src/migrations/0026_synthesis_components.sql
@@ -526,7 +526,7 @@ Each remaining specialist agent (Abyss, Cipher, Psyche, Specter, Muse, Meridian,
 
 #### 11.3 Phase 3 Reference Implementation
 
-Phase 3 (Layer 3 critic pass) shipped on 2026-04-25. Adds:
+Phase 3 (Layer 3 critic pass) shipped as commit [`ea95504`](https://github.com/agtopen/agtopen-core/commit/ea95504). Adds:
 
 ```
 packages/db/src/migrations/0027_synthesis_critic.sql
