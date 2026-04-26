@@ -5,10 +5,10 @@
 | AIP | 009 |
 | Title | Multi-Agent Synthesis Protocol |
 | Author | AgtOpen Core Team |
-| Status | Draft (Phases 1–3 implemented) |
+| Status | Draft (Phases 1–4 implemented) |
 | Category | Synthesis |
 | Created | 2026-04-25 |
-| Updated | 2026-04-25 (v1.3 — Phase 3 status) |
+| Updated | 2026-04-25 (v1.4 — Phase 4 status) |
 | Requires | AIP-002, AIP-006, AIP-007 |
 
 ## Abstract
@@ -462,7 +462,7 @@ This in-context calibration loop is cheap to apply and tends to converge confide
 | **1 — Signal schema + Oracle MoA** | Soft synthesis: collect last 4h of specialist `feedEvents`, weight per §4 (Bayesian-smoothed accuracy × log-volume × recency-decay), format as briefing block, inject into Oracle's prompt. Calibration hint baked in. Audit log via reused `prediction_ensemble_components` table with new `sourceType='genesis_specialist'`. | **✅ Shipped** |
 | **2 — Structured AgentSignal + dedicated provenance table** | Each Layer 1 specialist emits `payload.signal` per §2.1. New `prediction_synthesis_components` table. Public `/predictions/:id/synthesis` endpoint (section 12). | **✅ Shipped** (5 of 17 agents migrated; remaining 12 keep Phase 1 fallback and migrate incrementally) |
 | **3 — Critic pass** | Layer 3 Reflexion-style critic (DeepMind reviews Oracle predictions, ±0.20 confidence delta). | **✅ Shipped** |
-| **4 — Regime routing** | Add `Emergence`-driven regime router. Default routing table (section 6). Per-regime weight multipliers + audit logging. | Planned |
+| **4 — Regime routing** | Add `Emergence`-driven regime router. Default routing table (section 6). Per-regime weight multipliers + audit logging. | **✅ Shipped** (disabled by default per §6 — opt in via env var) |
 | **5 — Multi-round debate (daily flagships only)** | Implement debate phase for Athena + Prometheus daily synthesis. 3-agent × 2-round configuration. | Planned |
 | **6 — Calibration loop** | Offline ECE job + dynamic prompt-injection of calibration hints (replaces Phase 1's static hint with per-bin historical hit rate). Runs nightly. | Planned |
 
@@ -577,6 +577,53 @@ Constraints in production match the spec exactly:
 - DB CHECK constraint on `predictions.critic_delta` rejects any
   out-of-band value at the storage layer, so even an LLM that
   ignores the prompt can't sneak past ±0.20.
+
+#### 11.4 Phase 4 Reference Implementation
+
+Phase 4 (regime-aware expert routing) shipped as commit
+[`9ceebd0`](https://github.com/agtopen/agtopen-core/commit/9ceebd0)+. Adds:
+
+```
+apps/agent-engine/src/intelligence/synthesis/regime-router.ts
+    └── getCurrentRegime(db, marketData?): pulls latest Emergence
+        feedEvent within last 24h, maps payload.regimeState.current
+        to the AIP-009 regime taxonomy, disambiguates 'trending'
+        with BTC's 24h change. No-op when env var
+        SYNTHESIS_REGIME_ROUTING_ENABLED is not 'true'.
+    └── getRoutingMultiplier(regime, agentId): pure function returning
+        the §6 multiplier (1.5 / 0.7 / 1.0).
+
+apps/agent-engine/src/intelligence/synthesis/signal-collector.ts
+    └── gatherSpecialistSignals() gains optional `regime` parameter.
+        When supplied AND routing enabled, applies multipliers BEFORE
+        normalization so they affect RELATIVE weights, not just
+        absolute scale. SpecialistSignal type gains `routingMult`
+        field for audit.
+
+apps/agent-engine/src/intelligence/synthesis/recorder.ts
+    └── routingMult column populated from the actual signal value
+        instead of the Phase 2 placeholder (1.0).
+
+apps/agent-engine/src/tick/scheduler.ts
+    └── Oracle handler calls getCurrentRegime() before
+        gatherSpecialistSignals(). Log line surfaces the current
+        regime via describeRegimeContext() so operators can see at
+        a glance which routing was applied to a given tick.
+```
+
+Emergence → AIP-009 regime mapping (implemented in `mapEmergenceRegime`):
+
+| Emergence label | AIP-009 regime | Notes |
+|------|------|------|
+| `mean_reverting` | `sideways` | Direct map |
+| `chaotic` | `transition` | High-uncertainty regimes both lean toward "wait and watch" specialists |
+| `transitioning` | `transition` | Direct map |
+| `trending` + BTC 24h > +1.5% | `bull_market` | BTC change is the cheap-but-effective tiebreaker |
+| `trending` + BTC 24h < -1.5% | `bear_market` | Same tiebreaker, opposite side |
+| `trending` + BTC 24h flat | `transition` | Direction not yet clear |
+| (anything else / no recent data) | `unknown` | All multipliers = 1.0 |
+
+When env var `SYNTHESIS_REGIME_ROUTING_ENABLED` is unset or anything other than `'true'`, the router short-circuits with `routingApplied: false` — every multiplier stays 1.0 and the synthesis pipeline behaves exactly like Phases 1+2+3. This is the AIP-009 §6 default-disabled posture: regime classification is noisy, and an incorrect classification can actively harm prediction quality, so networks must opt in after validating the classifier on their own historical data.
 
 ### 12. API Endpoints
 
