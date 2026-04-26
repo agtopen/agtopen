@@ -5,10 +5,10 @@
 | AIP | 009 |
 | Title | Multi-Agent Synthesis Protocol |
 | Author | AgtOpen Core Team |
-| Status | Draft (Phases 1–4 implemented) |
+| Status | Draft (all 6 phases implemented) |
 | Category | Synthesis |
 | Created | 2026-04-25 |
-| Updated | 2026-04-25 (v1.4 — Phase 4 status) |
+| Updated | 2026-04-25 (v1.5 — Phases 5 + 6 status) |
 | Requires | AIP-002, AIP-006, AIP-007 |
 
 ## Abstract
@@ -463,8 +463,8 @@ This in-context calibration loop is cheap to apply and tends to converge confide
 | **2 — Structured AgentSignal + dedicated provenance table** | Each Layer 1 specialist emits `payload.signal` per §2.1. New `prediction_synthesis_components` table. Public `/predictions/:id/synthesis` endpoint (section 12). | **✅ Shipped** (5 of 17 agents migrated; remaining 12 keep Phase 1 fallback and migrate incrementally) |
 | **3 — Critic pass** | Layer 3 Reflexion-style critic (DeepMind reviews Oracle predictions, ±0.20 confidence delta). | **✅ Shipped** |
 | **4 — Regime routing** | Add `Emergence`-driven regime router. Default routing table (section 6). Per-regime weight multipliers + audit logging. | **✅ Shipped** (disabled by default per §6 — opt in via env var) |
-| **5 — Multi-round debate (daily flagships only)** | Implement debate phase for Athena + Prometheus daily synthesis. 3-agent × 2-round configuration. | Planned |
-| **6 — Calibration loop** | Offline ECE job + dynamic prompt-injection of calibration hints (replaces Phase 1's static hint with per-bin historical hit rate). Runs nightly. | Planned |
+| **5 — Multi-round debate (daily flagships only)** | Implement debate phase for Athena + Prometheus daily synthesis. 3-agent × 2-round configuration. | **✅ Shipped** (disabled by default — opt in via env var) |
+| **6 — Calibration loop** | Offline ECE job + dynamic prompt-injection of calibration hints (replaces Phase 1's static hint with per-bin historical hit rate). Runs nightly. | **✅ Shipped** (computed on-demand with 1h cache) |
 
 Phases are independent — Phases 3 and 4 don't depend on each other and can ship in either order. Phase 1 is the foundation; everything else extends it.
 
@@ -624,6 +624,77 @@ Emergence → AIP-009 regime mapping (implemented in `mapEmergenceRegime`):
 | (anything else / no recent data) | `unknown` | All multipliers = 1.0 |
 
 When env var `SYNTHESIS_REGIME_ROUTING_ENABLED` is unset or anything other than `'true'`, the router short-circuits with `routingApplied: false` — every multiplier stays 1.0 and the synthesis pipeline behaves exactly like Phases 1+2+3. This is the AIP-009 §6 default-disabled posture: regime classification is noisy, and an incorrect classification can actively harm prediction quality, so networks must opt in after validating the classifier on their own historical data.
+
+#### 11.5 Phase 5 Reference Implementation
+
+Phase 5 (multi-round debate for daily flagships per §8) shipped. Adds:
+
+```
+apps/agent-engine/src/intelligence/synthesis/debate.ts
+    └── runFlagshipDebate({leadAgentId, complementaryAgentIds,
+        topic, leadDraft, marketData}): runs Round 0 (complementary
+        agents in parallel produce 1-2 sentence takes via gpt-5-nano)
+        + Round 1 (lead agent on gpt-5 synthesizes a final revision
+        that cites or counters each take). Returns DebateRecord
+        attached to the agent's payload as `payload.debate`.
+    └── DEFAULT DISABLED. Opt in via SYNTHESIS_DEBATE_ENABLED=true.
+        When disabled, returns null and lead agent's normal output
+        is unchanged.
+
+apps/agent-engine/src/tick/scheduler.ts (Athena + Prometheus run() updates)
+    └── Athena pairs with [DeepMind, Atlas] — risk math + geo context
+        complement chart-pattern reads.
+    └── Prometheus pairs with [Epoch, Emergence] — historical cycle +
+        regime/cascade context complement strategic outlook.
+    └── When debate runs, the lead agent's `description` and
+        `signal.keyEvidence[1]` swap to the revised reasoning.
+        `payload.debate = {leadAgentId, complementaryAgentIds,
+        rounds, finalReasoning}` for full audit.
+```
+
+Cost when enabled: 2 cheap takes (~$0.0002 each) + the lead agent's already-paid call. Net add ≈ $0.50/month for both daily flagships at 30-day amortization.
+
+#### 11.6 Phase 6 Reference Implementation
+
+Phase 6 (calibration loop with Expected Calibration Error per §10) shipped. Adds:
+
+```
+apps/agent-engine/src/intelligence/synthesis/calibration.ts
+    └── computeCalibrationCurve(db, agentId): bins last 90d of
+        resolved predictions for agentId into 10 deciles by stated
+        confidence, computes hit rate per bucket, derives ECE as
+        weighted mean |predicted - actual|. Module-scoped Map cache
+        with 1-hour TTL (reasonable since Oracle cadence = 4h).
+        Returns null when fewer than 30 resolved predictions exist —
+        sample too small for ECE to be meaningful, caller falls back
+        to Phase-1 static hint.
+    └── formatCalibrationHint(curve): returns a dynamic hint string
+        when ECE > 0.10. Cites the worst-deviating bucket with at
+        least 5 samples, e.g. "Your past predictions in the 70-80%
+        confidence bucket resolved correct only 58% of the time
+        (n=14). When your reasoning would otherwise call for ~75%
+        confidence, check whether the supporting evidence really
+        justifies it — if not, state 58% instead."
+    └── snapshotForReport(curve): public-facing JSON shape for the
+        future /synthesis/calibration/:agentId endpoint (Phase 6.5
+        when ergonomic to surface).
+
+apps/agent-engine/src/tick/scheduler.ts (Oracle handler)
+    └── After formatSpecialistBriefing(), calls
+        computeCalibrationCurve('oracle') + formatCalibrationHint().
+        When the dynamic hint is non-null, appends it to the
+        briefing string before generatePrediction() runs. Phase-1
+        static hint inside the briefing template stays in place as
+        a baseline (Yang et al. 2024 finding); the Phase-6 dynamic
+        hint adds a data-driven bucket-specific instruction on top.
+```
+
+Behavior:
+- Cold start (< 30 resolved Oracle predictions): only the Phase-1 static hint is used. No data → no dynamic feedback.
+- ECE ≤ 0.10 (well-calibrated): static hint is enough; no dynamic hint appended.
+- ECE > 0.10 (mis-calibrated): dynamic hint appended. The model receives both general guidance and a concrete bucket-specific number to recalibrate against.
+
+Computation cost: one indexed query against `predictions` per Oracle synthesis (every 4h). Sub-millisecond. Cache TTL means at most 6 queries/day. No external API calls — pure DB work + arithmetic.
 
 ### 12. API Endpoints
 
